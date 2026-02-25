@@ -1,44 +1,16 @@
 {
   "schemaVersion": "1.0.0",
   "projectStateVersion": 3,
-  "summary": "CompTIA certification study app with a Study Materials page showing 8 certification cards. User has requested several UI standardization fixes to be built.",
-  "architectural_notes": [
-    "All cards should share the same fixed dimensions site-wide; only content changes per page"
-  ],
-  "known_issues": [
-    "CompTIA A+ card missing badge pill outline and has extra subtitle text not present on other cards"
-  ],
-  "isFixRequest": true,
+  "summary": "A project with a GUI that includes cards, a sun/moon theme toggle, and various UI elements. Currently implementing a full light/dark theme toggle that applies globally across the entire page.",
+  "architectural_notes": [],
+  "known_issues": [],
+  "isFixRequest": false,
   "existing_features": [
     {
-      "id": "feature-add-a-consistent-visible-border-outline-to-all-cards-across-the-dashboard-certifications-certificationselector-and-study-materials-pages-the-border-should-be-clearly-visible-in-both-light-and-dark-themes-and-applied-uniformly-to-every-card-component-on-every-page",
-      "title": "Add a consistent visible border/outline to all cards across the Dashboard, Certifications (CertificationSelector), and Study Materials pages. The border should be clearly visible in both light and dark themes and applied uniformly to every card component on every page.",
+      "id": "feature-implement-a-full-page-light-dark-theme-toggle-triggered-by-the-sun-moon-icon-in-the-header-when-dark-mode-is-active-apply-a-dark-color-scheme-globally-across-all-page-elements-backgrounds-text-cards-headers-navigation-and-all-ui-components-when-light-mode-is-active-restore-the-default-bright-light-appearance-persist-the-user-s-theme-preference-to-localstorage-so-it-survives-page-reloads-the-toggle-should-use-the-existing-css-custom-properties-defined-in-frontend-src-index-css-light-and-dark-theme-tokens-and-apply-the-dark-class-to-the-root-html-element-or-body-to-switch-themes",
+      "title": "Implement a full page light/dark theme toggle triggered by the sun/moon icon in the header. When dark mode is active, apply a dark color scheme globally across all page elements — backgrounds, text, cards, headers, navigation, and all UI components. When light mode is active, restore the default bright/light appearance. Persist the user's theme preference to localStorage so it survives page reloads. The toggle should use the existing CSS custom properties defined in frontend/src/index.css (light and dark theme tokens) and apply the dark class to the root HTML element or body to switch themes.",
       "reqIds": [
         "REQ-1"
-      ],
-      "version": 1
-    },
-    {
-      "id": "feature-replace-the-existing-dark-light-mode-toggle-in-the-layout-navbar-with-a-sun-moon-icon-based-switcher-when-in-light-mode-display-the-moon-icon-to-switch-to-dark-when-in-dark-mode-display-the-sun-icon-to-switch-to-light-the-toggle-must-be-positioned-in-the-same-area-as-the-current-toggle-in-the-sticky-header",
-      "title": "Replace the existing dark/light mode toggle in the Layout navbar with a sun ☀️ / moon 🌙 icon-based switcher. When in light mode, display the moon 🌙 icon to switch to dark; when in dark mode, display the sun ☀️ icon to switch to light. The toggle must be positioned in the same area as the current toggle in the sticky header.",
-      "reqIds": [
-        "REQ-2"
-      ],
-      "version": 1
-    },
-    {
-      "id": "feature-set-a-uniform-fixed-card-size-site-wide-for-all-certification-cards-across-dashboard-certifications-and-study-materials-pages-measure-the-largest-card-currently-rendered-based-on-the-study-materials-page-visible-in-the-screenshots-and-apply-that-as-the-standard-min-height-and-fixed-width-for-all-cards-so-card-dimensions-do-not-change-as-users-navigate-between-pages-only-the-card-content-changes",
-      "title": "Set a uniform fixed card size site-wide for all certification cards across Dashboard, Certifications, and Study Materials pages. Measure the largest card currently rendered (based on the Study Materials page visible in the screenshots) and apply that as the standard min-height and fixed width for all cards, so card dimensions do not change as users navigate between pages — only the card content changes.",
-      "reqIds": [
-        "REQ-3"
-      ],
-      "version": 1
-    },
-    {
-      "id": "feature-standardize-the-comptia-a-card-on-the-study-materials-page-to-match-the-layout-of-all-other-certification-cards-specifically-1-add-a-badge-pill-outline-to-the-a-label-in-the-card-header-matching-the-pill-style-used-on-security-network-linux-cloud-cysa-pentest-and-casp-cards-2-remove-the-extra-subtitle-text-core-1-220-1101-core-2-220-1102-from-the-card-so-it-matches-the-clean-header-layout-of-other-cards-apply-this-same-standardization-to-the-a-card-wherever-it-appears-across-all-pages-dashboard-certifications-study-materials",
-      "title": "Standardize the CompTIA A+ card on the Study Materials page to match the layout of all other certification cards. Specifically: (1) Add a badge pill outline to the 'A+' label in the card header, matching the pill style used on Security+, Network+, Linux+, Cloud+, CySA+, PenTest+, and CASP+ cards. (2) Remove the extra subtitle text 'Core 1 (220-1101) & Core 2 (220-1102)' from the card so it matches the clean header layout of other cards. Apply this same standardization to the A+ card wherever it appears across all pages (Dashboard, Certifications, Study Materials).",
-      "reqIds": [
-        "REQ-4"
       ],
       "version": 1
     }
@@ -46,25 +18,7 @@
   "new_feature_requests": [
     {
       "id": "AR-1",
-      "summary": "Add visible border/outline to all cards across the site",
-      "reqIds": [],
-      "status": "pending"
-    },
-    {
-      "id": "AR-2",
-      "summary": "Replace dark/light mode toggle with sun ☀️ / moon 🌙 icon switcher in navbar",
-      "reqIds": [],
-      "status": "pending"
-    },
-    {
-      "id": "AR-3",
-      "summary": "Set uniform card sizing site-wide based on largest card dimensions",
-      "reqIds": [],
-      "status": "pending"
-    },
-    {
-      "id": "AR-4",
-      "summary": "Standardize CompTIA A+ card: add badge pill outline and remove extra subtitle text to match other cards",
+      "summary": "Full page light/dark theme toggle using sun/moon icon, applying dark/light color scheme globally across backgrounds, text, cards, headers, and all UI elements",
       "reqIds": [],
       "status": "pending"
     }

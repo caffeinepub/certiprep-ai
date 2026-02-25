@@ -1,12 +1,13 @@
 # Specification
 
 ## Summary
-**Goal:** Standardize card appearance site-wide, fix the CompTIA A+ card, and replace the dark/light mode toggle with a sun/moon icon switcher.
+**Goal:** Implement a full-page light/dark theme toggle using the sun/moon icon in the header, applying the selected theme globally across all UI elements and persisting the preference in localStorage.
 
 **Planned changes:**
-- Add a consistent visible border/outline to all cards on the Dashboard, Certifications, and Study Materials pages, visible in both light and dark themes
-- Replace the current dark/light mode toggle in the navbar with a sun ☀️ / moon 🌙 icon button — moon shown in light mode, sun shown in dark mode
-- Apply a uniform fixed width and minimum height to all certification cards across all pages so card dimensions stay consistent during navigation
-- Fix the CompTIA A+ card everywhere it appears: add a bordered pill/badge to the "A+" label matching the style of other certification cards (Security+, Network+, etc.), and remove the subtitle text "Core 1 (220-1101) & Core 2 (220-1102)"
+- Update the theme toggle logic in `frontend/src/components/Layout.tsx` to apply a `dark` class to the root HTML element or body, enabling Tailwind `dark:` variants globally
+- Use the existing OKLCH-based CSS custom properties from `frontend/src/index.css` for light and dark color tokens
+- Persist the user's theme preference to localStorage and restore it on page reload
+- Ensure the sun/moon icon correctly reflects the current theme state
+- Verify all pages (Dashboard, Certifications, Study Materials, Flashcards, Practice Test, Q&A Practice, Study Mode) correctly reflect the active theme
 
-**User-visible outcome:** All cards across the site look uniform with visible borders and consistent sizing; the A+ card header matches all other certification cards; and the navbar has a clean sun/moon icon toggle for switching between light and dark mode.
+**User-visible outcome:** Clicking the sun/moon icon in the header switches the entire application between a bright light theme and a dark color scheme across all pages and UI elements, with the chosen preference remembered across page reloads.

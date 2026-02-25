@@ -1,99 +1,45 @@
 {
   "kind": "build_request",
-  "title": "Standardize cards, add borders, sun/moon toggle, and fix CompTIA A+ card",
+  "title": "Implement full page light/dark theme toggle with sun/moon icon",
   "projectName": "CertiPrep AI",
   "priority": "normal",
   "requirements": [
     {
       "id": "REQ-1",
-      "text": "Add a consistent visible border/outline to all cards across the Dashboard, Certifications (CertificationSelector), and Study Materials pages. The border should be clearly visible in both light and dark themes and applied uniformly to every card component on every page.",
+      "text": "Implement a full page light/dark theme toggle triggered by the sun/moon icon in the header. When dark mode is active, apply a dark color scheme globally across all page elements — backgrounds, text, cards, headers, navigation, and all UI components. When light mode is active, restore the default bright/light appearance. Persist the user's theme preference to localStorage so it survives page reloads. The toggle should use the existing CSS custom properties defined in frontend/src/index.css (light and dark theme tokens) and apply the dark class to the root HTML element or body to switch themes.",
       "target": "frontend",
       "source": {
         "messageIds": [
-          "msg-9",
-          "msg-11"
+          "msg-1",
+          "msg-2",
+          "msg-3"
         ],
         "quotes": [
-          "Card outlines — Add a visible border/outline to all cards on the dashboard so they read clearly as cards"
+          "the sun and moon icon was suppose to make the page its self light and dark. like the theme of the page",
+          "dark makes everything on the pages have a dark them",
+          "full page light/dark theme — light mode keeps everything bright and airy, while dark mode applies a dark color scheme across the entire page including backgrounds, text, cards, headers, and all UI elements"
         ]
       },
       "acceptanceCriteria": [
-        "All cards on the Dashboard page have a visible border in light and dark mode",
-        "All cards on the Certifications (CertificationSelector) page have a visible border in light and dark mode",
-        "All cards on the Study Materials page have a visible border in light and dark mode",
-        "Border style is consistent across all pages"
-      ]
-    },
-    {
-      "id": "REQ-2",
-      "text": "Replace the existing dark/light mode toggle in the Layout navbar with a sun ☀️ / moon 🌙 icon-based switcher. When in light mode, display the moon 🌙 icon to switch to dark; when in dark mode, display the sun ☀️ icon to switch to light. The toggle must be positioned in the same area as the current toggle in the sticky header.",
-      "target": "frontend",
-      "source": {
-        "messageIds": [
-          "msg-9",
-          "msg-11"
-        ],
-        "quotes": [
-          "Dark/light mode toggle — Replace the current toggle with a sun ☀️ / moon 🌙 icon switcher"
-        ]
-      },
-      "acceptanceCriteria": [
-        "The navbar contains a sun or moon icon button (not a text label or generic toggle)",
-        "Clicking the icon switches between light and dark mode",
-        "Sun icon is shown when in dark mode, moon icon is shown in light mode",
-        "Toggle is visible and accessible in the sticky header on all pages"
-      ]
-    },
-    {
-      "id": "REQ-3",
-      "text": "Set a uniform fixed card size site-wide for all certification cards across Dashboard, Certifications, and Study Materials pages. Measure the largest card currently rendered (based on the Study Materials page visible in the screenshots) and apply that as the standard min-height and fixed width for all cards, so card dimensions do not change as users navigate between pages — only the card content changes.",
-      "target": "frontend",
-      "source": {
-        "messageIds": [
-          "msg-9",
-          "msg-11"
-        ],
-        "quotes": [
-          "Uniform card sizes — Measure the largest card across all pages and set that as the standard size for every card site-wide, so only the content changes as you navigate"
-        ]
-      },
-      "acceptanceCriteria": [
-        "All certification cards on Dashboard, Certifications, and Study Materials pages share the same fixed width and minimum height",
-        "Card dimensions do not shift or reflow when navigating between pages",
-        "Content within cards remains properly laid out and does not overflow the fixed card size"
-      ]
-    },
-    {
-      "id": "REQ-4",
-      "text": "Standardize the CompTIA A+ card on the Study Materials page to match the layout of all other certification cards. Specifically: (1) Add a badge pill outline to the 'A+' label in the card header, matching the pill style used on Security+, Network+, Linux+, Cloud+, CySA+, PenTest+, and CASP+ cards. (2) Remove the extra subtitle text 'Core 1 (220-1101) & Core 2 (220-1102)' from the card so it matches the clean header layout of other cards. Apply this same standardization to the A+ card wherever it appears across all pages (Dashboard, Certifications, Study Materials).",
-      "target": "frontend",
-      "source": {
-        "messageIds": [
-          "msg-11",
-          "msg-13"
-        ],
-        "quotes": [
-          "yes please standardize across the web site",
-          "CompTIA A+ card fix — Add the badge pill outline/pill (matching the style of Security+, Network+, Linux+, etc.) and remove the extra subtitle text"
-        ]
-      },
-      "acceptanceCriteria": [
-        "The A+ label on all CompTIA A+ cards has a bordered pill/badge outline matching the style of other certification badge pills",
-        "The text 'Core 1 (220-1101) & Core 2 (220-1102)' is removed from the CompTIA A+ card header across all pages",
-        "The CompTIA A+ card header layout visually matches the header layout of Security+, Network+, and other certification cards"
+        "Clicking the sun icon switches the entire page to dark mode — all backgrounds, text, cards, headers, and UI elements adopt the dark color scheme",
+        "Clicking the moon icon switches the entire page back to light mode — all elements restore the bright/light appearance",
+        "The dark class (or equivalent) is applied to the root HTML element or body so Tailwind dark: variants take effect globally",
+        "All existing pages (Dashboard, Certifications, Study Materials, Flashcards, Practice Test, Q&A Practice, Study Mode) correctly reflect the active theme",
+        "The selected theme is persisted in localStorage and restored on page reload",
+        "The sun/moon icon correctly reflects the current theme state (sun shown in dark mode, moon shown in light mode, or vice versa consistently)"
       ]
     }
   ],
   "constraints": [
-    "Do not change any backend logic or data models",
     "Do not modify files under frontend/src/hooks/useInternetIdentity.ts, frontend/src/hooks/useActor.ts, frontend/src/main.tsx, or frontend/src/components/ui",
-    "All changes must work correctly in both light and dark themes"
+    "Use the existing OKLCH-based CSS custom properties already defined in frontend/src/index.css for light and dark theme tokens",
+    "The theme toggle logic already exists in frontend/src/components/Layout.tsx — update it in place rather than creating a new component"
   ],
   "nonGoals": [
-    "Adding new pages or routes",
-    "Changing certification data or exam content",
-    "Modifying the PDF viewer or study guide content",
-    "Any backend changes"
+    "Adding a system/OS preference detection (prefers-color-scheme) — user manual toggle only",
+    "Per-page or per-component theme overrides",
+    "Any backend changes",
+    "Adding new color tokens or redesigning the existing theme palette"
   ],
   "imageRequirements": {
     "required": [],

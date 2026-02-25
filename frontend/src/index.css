@@ -1,102 +1,123 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Fira+Code:wght@400;500&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 @layer base {
   :root {
-    --background: oklch(0.99 0.002 240);
-    --foreground: oklch(0.15 0.02 240);
+    /* Light mode - clean academic theme */
+    --background: 0.98 0.002 240;
+    --foreground: 0.15 0.02 240;
 
-    --card: oklch(1 0 0);
-    --card-foreground: oklch(0.15 0.02 240);
+    --card: 1 0 0;
+    --card-foreground: 0.15 0.02 240;
 
-    --popover: oklch(1 0 0);
-    --popover-foreground: oklch(0.15 0.02 240);
+    --popover: 1 0 0;
+    --popover-foreground: 0.15 0.02 240;
 
-    --primary: oklch(0.45 0.18 240);
-    --primary-foreground: oklch(0.98 0.005 240);
+    --primary: 0.45 0.18 250;
+    --primary-foreground: 0.98 0.002 240;
 
-    --secondary: oklch(0.94 0.01 240);
-    --secondary-foreground: oklch(0.25 0.03 240);
+    --secondary: 0.94 0.01 240;
+    --secondary-foreground: 0.25 0.04 240;
 
-    --muted: oklch(0.95 0.008 240);
-    --muted-foreground: oklch(0.52 0.02 240);
+    --muted: 0.94 0.01 240;
+    --muted-foreground: 0.55 0.02 240;
 
-    --accent: oklch(0.92 0.03 240);
-    --accent-foreground: oklch(0.25 0.03 240);
+    --accent: 0.94 0.01 240;
+    --accent-foreground: 0.25 0.04 240;
 
-    --destructive: oklch(0.55 0.22 25);
-    --destructive-foreground: oklch(0.98 0.005 25);
+    --destructive: 0.55 0.22 25;
+    --destructive-foreground: 0.98 0.002 240;
 
-    --border: oklch(0.82 0.015 240);
-    --input: oklch(0.82 0.015 240);
-    --ring: oklch(0.45 0.18 240);
+    --border: 0.88 0.01 240;
+    --input: 0.88 0.01 240;
+    --ring: 0.45 0.18 250;
 
-    --success: 0.55 0.18 145;
-    --success-foreground: oklch(0.98 0.005 145);
+    --success: 0.55 0.15 145;
+    --warning: 0.65 0.18 65;
 
     --radius: 0.5rem;
   }
 
   .dark {
-    --background: oklch(0.13 0.02 240);
-    --foreground: oklch(0.93 0.01 240);
+    /* Dark mode - deep dark academic theme */
+    --background: 0.12 0.015 240;
+    --foreground: 0.92 0.008 240;
 
-    --card: oklch(0.18 0.025 240);
-    --card-foreground: oklch(0.93 0.01 240);
+    --card: 0.17 0.018 240;
+    --card-foreground: 0.92 0.008 240;
 
-    --popover: oklch(0.18 0.025 240);
-    --popover-foreground: oklch(0.93 0.01 240);
+    --popover: 0.17 0.018 240;
+    --popover-foreground: 0.92 0.008 240;
 
-    --primary: oklch(0.65 0.18 240);
-    --primary-foreground: oklch(0.1 0.02 240);
+    --primary: 0.62 0.18 250;
+    --primary-foreground: 0.12 0.015 240;
 
-    --secondary: oklch(0.25 0.03 240);
-    --secondary-foreground: oklch(0.88 0.01 240);
+    --secondary: 0.22 0.02 240;
+    --secondary-foreground: 0.85 0.008 240;
 
-    --muted: oklch(0.22 0.025 240);
-    --muted-foreground: oklch(0.62 0.02 240);
+    --muted: 0.22 0.02 240;
+    --muted-foreground: 0.60 0.015 240;
 
-    --accent: oklch(0.28 0.04 240);
-    --accent-foreground: oklch(0.88 0.01 240);
+    --accent: 0.22 0.02 240;
+    --accent-foreground: 0.85 0.008 240;
 
-    --destructive: oklch(0.55 0.22 25);
-    --destructive-foreground: oklch(0.98 0.005 25);
+    --destructive: 0.60 0.22 25;
+    --destructive-foreground: 0.98 0.002 240;
 
-    --border: oklch(0.32 0.03 240);
-    --input: oklch(0.32 0.03 240);
-    --ring: oklch(0.65 0.18 240);
+    --border: 0.28 0.02 240;
+    --input: 0.28 0.02 240;
+    --ring: 0.62 0.18 250;
 
-    --success: 0.55 0.18 145;
-    --success-foreground: oklch(0.98 0.005 145);
+    --success: 0.62 0.15 145;
+    --warning: 0.72 0.18 65;
   }
-}
 
-@layer base {
   * {
     @apply border-border;
   }
+
   body {
     @apply bg-background text-foreground;
+    font-family: 'Inter', system-ui, sans-serif;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+
+  code, pre, .font-mono {
+    font-family: 'Fira Code', 'Cascadia Code', monospace;
   }
 }
 
 @layer components {
-  /* Standard certification card size — uniform across all pages */
   .cert-card {
     min-height: 280px;
   }
 
-  /* Badge color variants using plain CSS (avoids @apply with custom opacity modifiers) */
-  .badge-green {
-    background-color: oklch(0.55 0.18 145 / 0.15);
-    color: oklch(0.45 0.18 145);
-    border-color: oklch(0.55 0.18 145 / 0.4);
+  /* Badge color helpers */
+  .badge-aplus {
+    @apply bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-400;
   }
-
-  .badge-red {
-    background-color: oklch(0.55 0.22 25 / 0.15);
-    color: oklch(0.45 0.22 25);
-    border-color: oklch(0.55 0.22 25 / 0.4);
+  .badge-network {
+    @apply bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-400;
+  }
+  .badge-security {
+    @apply bg-purple-100 text-purple-700 dark:bg-purple-900/30 dark:text-purple-400;
+  }
+  .badge-cloud {
+    @apply bg-sky-100 text-sky-700 dark:bg-sky-900/30 dark:text-sky-400;
+  }
+  .badge-linux {
+    @apply bg-orange-100 text-orange-700 dark:bg-orange-900/30 dark:text-orange-400;
+  }
+  .badge-cysa {
+    @apply bg-indigo-100 text-indigo-700 dark:bg-indigo-900/30 dark:text-indigo-400;
+  }
+  .badge-pentest {
+    @apply bg-rose-100 text-rose-700 dark:bg-rose-900/30 dark:text-rose-400;
+  }
+  .badge-casp {
+    @apply bg-emerald-100 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-400;
   }
 }

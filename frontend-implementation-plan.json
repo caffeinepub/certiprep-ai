@@ -1,111 +1,84 @@
 {
   "kind": "implementation_plan",
   "version": "1.0",
-  "title": "Standardize cards, add borders, sun/moon toggle, and fix CompTIA A+ card",
+  "title": "Implement full page light/dark theme toggle with sun/moon icon",
   "requirements": [
     {
       "id": "REQ-1",
-      "summary": "Add consistent visible border to all cards across Dashboard, Certifications, and Study Materials pages in both light and dark themes",
+      "summary": "Implement a full page light/dark theme toggle using the existing sun/moon icon in the header. Apply the dark class to the root HTML element to enable Tailwind dark: variants globally, affecting all backgrounds, text, cards, headers, navigation, and UI components. Persist the user's theme preference to localStorage and restore it on page reload.",
       "acceptanceCriteria": [
-        "All cards on the Dashboard page have a visible border in light and dark mode",
-        "All cards on the Certifications (CertificationSelector) page have a visible border in light and dark mode",
-        "All cards on the Study Materials page have a visible border in light and dark mode",
-        "Border style is consistent across all pages"
-      ],
-      "file_operations": [
-        {
-          "path": "frontend/src/index.css",
-          "operation": "modify",
-          "description": "Add a global CSS utility class for card borders that works in both light and dark themes, using the existing OKLCH color system. The border should be clearly visible with appropriate contrast in both themes (e.g., using border-color with a semi-transparent value or a dedicated border custom property)."
-        },
-        {
-          "path": "frontend/src/pages/StudyMaterials.tsx",
-          "operation": "modify",
-          "description": "Apply the new consistent border class to all certification card elements in the Study Materials page. Each card currently uses rounded-lg and other styling; add the border utility to make card boundaries clearly visible."
-        },
-        {
-          "path": "frontend/src/pages/Dashboard.tsx",
-          "operation": "modify",
-          "description": "Apply the consistent border class to all certification card elements on the Dashboard page, ensuring the border is visible around each card and its progress indicator."
-        },
-        {
-          "path": "frontend/src/pages/CertificationSelector.tsx",
-          "operation": "modify",
-          "description": "Apply the consistent border class to all certification card elements on the Certifications (CertificationSelector) page to match the styling applied to Dashboard and Study Materials cards."
-        }
-      ]
-    },
-    {
-      "id": "REQ-2",
-      "summary": "Replace dark/light mode toggle with sun ☀️ / moon 🌙 icon-based switcher in the navbar",
-      "acceptanceCriteria": [
-        "The navbar contains a sun or moon icon button (not a text label or generic toggle)",
-        "Clicking the icon switches between light and dark mode",
-        "Sun icon is shown when in dark mode, moon icon is shown in light mode",
-        "Toggle is visible and accessible in the sticky header on all pages"
+        "Clicking the sun icon switches the entire page to dark mode — all backgrounds, text, cards, headers, and UI elements adopt the dark color scheme",
+        "Clicking the moon icon switches the entire page back to light mode — all elements restore the bright/light appearance",
+        "The dark class (or equivalent) is applied to the root HTML element or body so Tailwind dark: variants take effect globally",
+        "All existing pages (Dashboard, Certifications, Study Materials, Flashcards, Practice Test, Q&A Practice, Study Mode) correctly reflect the active theme",
+        "The selected theme is persisted in localStorage and restored on page reload",
+        "The sun/moon icon correctly reflects the current theme state (sun shown in dark mode, moon shown in light mode, or vice versa consistently)"
       ],
       "file_operations": [
         {
           "path": "frontend/src/components/Layout.tsx",
           "operation": "modify",
-          "description": "Replace the existing dark/light mode toggle button in the Layout navbar with an icon-based button. When the app is in light mode, display a moon 🌙 icon (to indicate switching to dark); when in dark mode, display a sun ☀️ icon (to indicate switching to light). Use the same theme state and toggle logic, but render Unicode emoji icons or SVG icons instead of text. Position the icon button in the same area of the sticky header where the current toggle exists."
-        }
-      ]
-    },
-    {
-      "id": "REQ-3",
-      "summary": "Set uniform fixed card size site-wide for all certification cards based on the largest card dimensions",
-      "acceptanceCriteria": [
-        "All certification cards on Dashboard, Certifications, and Study Materials pages share the same fixed width and minimum height",
-        "Card dimensions do not shift or reflow when navigating between pages",
-        "Content within cards remains properly laid out and does not overflow the fixed card size"
-      ],
-      "file_operations": [
+          "description": "Update the existing theme toggle logic to apply the 'dark' class to the document root element (document.documentElement) instead of only toggling icon state. On theme change, call document.documentElement.classList.toggle('dark', isDark) to enable Tailwind's dark mode globally. Ensure the theme state is read from localStorage on mount ('theme' key) and persisted on every toggle. Update the sun/moon icon rendering to correctly reflect the current theme (show sun in dark mode, moon in light mode, or vice versa based on design preference)."
+        },
         {
           "path": "frontend/src/index.css",
           "operation": "modify",
-          "description": "Add a global utility class for certification card dimensions (e.g., .cert-card-standard) that defines a fixed width and min-height based on the largest card visible on the Study Materials page. Measure the card dimensions from the current layout and apply them as fixed values so all cards maintain consistent size across all pages."
+          "description": "Ensure that all existing OKLCH-based CSS custom properties have corresponding dark mode variants defined under a .dark selector or :root.dark scope. Verify that variables like --background, --foreground, --card, --border, --primary, --secondary, etc., have dark mode overrides that apply when the 'dark' class is present on the root element. Do not add new color tokens; only ensure the existing tokens are correctly scoped for both light and dark themes."
         },
         {
-          "path": "frontend/src/pages/StudyMaterials.tsx",
+          "path": "frontend/tailwind.config.js",
           "operation": "modify",
-          "description": "Apply the uniform card size utility class to all certification cards on the Study Materials page. Ensure content layout (badge, title, description, button) remains properly aligned within the fixed card dimensions."
-        },
-        {
-          "path": "frontend/src/pages/Dashboard.tsx",
-          "operation": "modify",
-          "description": "Apply the uniform card size utility class to all certification cards on the Dashboard page, ensuring that progress bars and action links fit within the fixed card size without overflow."
-        },
-        {
-          "path": "frontend/src/pages/CertificationSelector.tsx",
-          "operation": "modify",
-          "description": "Apply the uniform card size utility class to all certification cards on the Certifications page, ensuring domain previews and exam details fit properly within the standardized card dimensions."
-        }
-      ]
-    },
-    {
-      "id": "REQ-4",
-      "summary": "Standardize CompTIA A+ card header to match other certification cards by adding badge pill outline and removing extra subtitle text",
-      "acceptanceCriteria": [
-        "The A+ label on all CompTIA A+ cards has a bordered pill/badge outline matching the style of other certification badge pills",
-        "The text 'Core 1 (220-1101) & Core 2 (220-1102)' is removed from the CompTIA A+ card header across all pages",
-        "The CompTIA A+ card header layout visually matches the header layout of Security+, Network+, and other certification cards"
-      ],
-      "file_operations": [
-        {
-          "path": "frontend/src/pages/StudyMaterials.tsx",
-          "operation": "modify",
-          "description": "Update the CompTIA A+ card to add a badge pill outline around the 'A+' label matching the visual style of Security+, Network+, Linux+, and other certification badges. Remove the subtitle text 'Core 1 (220-1101) & Core 2 (220-1102)' from the card header so the A+ card layout matches the clean header style of other certifications."
+          "description": "Verify that darkMode is set to 'class' (not 'media') so that Tailwind's dark: variants are activated by the presence of the 'dark' class on the root element. Ensure all custom color tokens reference CSS variables that have dark mode overrides in index.css. No new theme colors should be added; this is a verification-only step."
         },
         {
           "path": "frontend/src/pages/Dashboard.tsx",
           "operation": "modify",
-          "description": "Update the CompTIA A+ card on the Dashboard to add a badge pill outline around the 'A+' label and remove the subtitle text 'Core 1 (220-1101) & Core 2 (220-1102)', ensuring consistency with the Study Materials page and other certification cards."
+          "description": "Add Tailwind dark: variant classes to all backgrounds, text, cards, and UI elements to ensure they respond to the global dark mode toggle. For example, apply dark:bg-gray-900, dark:text-white, dark:border-gray-700 to container divs, cards, and text elements. Ensure certification cards and score displays adopt the dark theme when the 'dark' class is present on the root element."
         },
         {
           "path": "frontend/src/pages/CertificationSelector.tsx",
           "operation": "modify",
-          "description": "Update the CompTIA A+ card on the Certifications (CertificationSelector) page to add a badge pill outline around the 'A+' label and remove the subtitle text 'Core 1 (220-1101) & Core 2 (220-1102)', ensuring the card header matches the standardized layout applied on other pages."
+          "description": "Add Tailwind dark: variant classes to all certification card backgrounds, borders, text elements, and badges. Ensure that when the 'dark' class is active on the root element, all cards display with dark backgrounds, light text, and appropriate border colors (e.g., dark:bg-gray-800, dark:text-white, dark:border-gray-600)."
+        },
+        {
+          "path": "frontend/src/pages/StudyMaterials.tsx",
+          "operation": "modify",
+          "description": "Add Tailwind dark: variant classes to the study materials grid, card backgrounds, progress indicators, and text elements. Ensure reading progress bars and card overlays adopt dark-themed colors when the 'dark' class is present (e.g., dark:bg-gray-800, dark:text-gray-100)."
+        },
+        {
+          "path": "frontend/src/pages/Flashcards.tsx",
+          "operation": "modify",
+          "description": "Add Tailwind dark: variant classes to all flashcard setup, study, and review phase UI elements. Apply dark mode styles to buttons, input fields, card containers, and result summaries (e.g., dark:bg-gray-900, dark:text-white, dark:border-gray-700)."
+        },
+        {
+          "path": "frontend/src/pages/PracticeTest.tsx",
+          "operation": "modify",
+          "description": "Add Tailwind dark: variant classes to the practice test interface, including the timer, question cards, answer options, and results review screen. Ensure all interactive elements (buttons, radio buttons, submit button) respond to the global dark mode (e.g., dark:bg-gray-800, dark:text-white, dark:hover:bg-gray-700)."
+        },
+        {
+          "path": "frontend/src/pages/QAPractice.tsx",
+          "operation": "modify",
+          "description": "Add Tailwind dark: variant classes to the Q&A practice quiz interface, including domain filters, question cards, feedback displays, and the final review summary. Ensure all text, backgrounds, and borders adopt dark mode colors when the 'dark' class is active (e.g., dark:bg-gray-900, dark:text-gray-100, dark:border-gray-600)."
+        },
+        {
+          "path": "frontend/src/pages/StudyMode.tsx",
+          "operation": "modify",
+          "description": "Add Tailwind dark: variant classes to the chat-based study mode interface, including message bubbles, input fields, voice control buttons, and the domain selector. Ensure the chat container, messages, and controls adopt dark backgrounds and light text when the 'dark' class is present (e.g., dark:bg-gray-800, dark:text-white)."
+        },
+        {
+          "path": "frontend/src/components/FlashcardDeck.tsx",
+          "operation": "modify",
+          "description": "Add Tailwind dark: variant classes to the flashcard front/back display and action buttons (correct/incorrect). Ensure the flip animation container and button states respond to the global dark mode (e.g., dark:bg-gray-800, dark:text-white, dark:border-gray-600)."
+        },
+        {
+          "path": "frontend/src/components/PDFViewer.tsx",
+          "operation": "modify",
+          "description": "Add Tailwind dark: variant classes to the modal PDF/HTML viewer, including the modal backdrop, close button, progress indicator, and the iframe/content container. Ensure all overlays and controls adopt dark mode styling when the 'dark' class is active (e.g., dark:bg-gray-900, dark:border-gray-700)."
+        },
+        {
+          "path": "frontend/src/components/VoiceControls.tsx",
+          "operation": "modify",
+          "description": "Add Tailwind dark: variant classes to the voice controls UI, including the mic toggle button, speaking/listening status indicators, and the collapsible settings panel. Ensure all buttons, sliders, and labels respond to the global dark mode (e.g., dark:bg-gray-800, dark:text-white, dark:border-gray-600)."
         }
       ]
     }

@@ -1,6 +1,14 @@
-import { Link, useLocation } from '@tanstack/react-router';
-import { BookOpen, LayoutDashboard, Award, Sun, Moon } from 'lucide-react';
 import { useState, useEffect } from 'react';
+import { Link, useLocation } from '@tanstack/react-router';
+import { Sun, Moon, Menu, X, BookOpen, GraduationCap } from 'lucide-react';
+
+const navLinks = [
+  { label: 'Dashboard', path: '/' },
+  { label: 'Certifications', path: '/certifications' },
+  { label: 'Study Materials', path: '/study-materials' },
+  { label: 'Flashcards', path: '/flashcards' },
+  { label: 'Practice Test', path: '/practice-test' },
+];
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -8,13 +16,19 @@ interface LayoutProps {
 
 export default function Layout({ children }: LayoutProps) {
   const location = useLocation();
-  const [isDark, setIsDark] = useState(() => {
-    if (typeof window !== 'undefined') {
-      return document.documentElement.classList.contains('dark');
-    }
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+  // Initialize theme from localStorage, defaulting to light
+  const [isDark, setIsDark] = useState<boolean>(() => {
+    try {
+      const stored = localStorage.getItem('theme');
+      if (stored === 'dark') return true;
+      if (stored === 'light') return false;
+    } catch {}
     return false;
   });
 
+  // Apply dark class to document root whenever isDark changes
   useEffect(() => {
     if (isDark) {
       document.documentElement.classList.add('dark');
@@ -25,109 +39,102 @@ export default function Layout({ children }: LayoutProps) {
     }
   }, [isDark]);
 
-  // Initialize theme from localStorage on mount
+  // On mount, ensure the DOM matches the stored preference
   useEffect(() => {
-    const saved = localStorage.getItem('theme');
-    if (saved === 'dark') {
-      setIsDark(true);
+    const stored = localStorage.getItem('theme');
+    if (stored === 'dark') {
       document.documentElement.classList.add('dark');
-    } else if (saved === 'light') {
-      setIsDark(false);
-      document.documentElement.classList.remove('dark');
     } else {
-      // System preference
-      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-      setIsDark(prefersDark);
-      if (prefersDark) document.documentElement.classList.add('dark');
+      document.documentElement.classList.remove('dark');
     }
   }, []);
 
-  const navLinks = [
-    { to: '/', label: 'Dashboard', icon: LayoutDashboard },
-    { to: '/certifications', label: 'Certifications', icon: Award },
-    { to: '/study-materials', label: 'Study Materials', icon: BookOpen },
-  ];
+  const toggleTheme = () => setIsDark((prev) => !prev);
+
+  const isActive = (path: string) => location.pathname === path;
 
   return (
     <div className="min-h-screen bg-background text-foreground flex flex-col">
-      {/* Sticky Header */}
+      {/* Header */}
       <header className="sticky top-0 z-50 bg-background/95 backdrop-blur border-b border-border shadow-sm">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
             {/* Logo */}
-            <Link to="/" className="flex items-center gap-2 shrink-0">
-              <img
-                src="/assets/generated/certiprep-logo.dim_320x80.png"
-                alt="CertiPrep"
-                className="h-10 w-auto"
-              />
+            <Link to="/" className="flex items-center gap-2 group">
+              <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center shadow-sm group-hover:shadow-md transition-shadow">
+                <GraduationCap className="w-5 h-5 text-primary-foreground" />
+              </div>
+              <span className="font-bold text-xl text-foreground tracking-tight">
+                CertiPrep
+              </span>
             </Link>
 
-            {/* Nav Links */}
+            {/* Desktop Nav */}
             <nav className="hidden md:flex items-center gap-1">
-              {navLinks.map(({ to, label, icon: Icon }) => {
-                const isActive = location.pathname === to;
-                return (
-                  <Link
-                    key={to}
-                    to={to}
-                    className={`flex items-center gap-2 px-4 py-2 rounded-md text-sm font-medium transition-colors ${
-                      isActive
-                        ? 'bg-primary/10 text-primary'
-                        : 'text-muted-foreground hover:text-foreground hover:bg-muted'
-                    }`}
-                  >
-                    <Icon className="w-4 h-4" />
-                    {label}
-                  </Link>
-                );
-              })}
+              {navLinks.map((link) => (
+                <Link
+                  key={link.path}
+                  to={link.path}
+                  className={`px-3 py-2 rounded-md text-sm font-medium transition-colors ${
+                    isActive(link.path)
+                      ? 'bg-primary text-primary-foreground'
+                      : 'text-muted-foreground hover:text-foreground hover:bg-accent'
+                  }`}
+                >
+                  {link.label}
+                </Link>
+              ))}
             </nav>
 
-            {/* Right side: theme toggle + auth */}
-            <div className="flex items-center gap-3">
-              {/* Sun/Moon Toggle */}
+            {/* Right side controls */}
+            <div className="flex items-center gap-2">
+              {/* Theme Toggle */}
               <button
-                onClick={() => setIsDark(!isDark)}
-                className="p-2 rounded-md text-muted-foreground hover:text-foreground hover:bg-muted transition-colors"
+                onClick={toggleTheme}
+                className="p-2 rounded-md text-muted-foreground hover:text-foreground hover:bg-accent transition-colors"
                 aria-label={isDark ? 'Switch to light mode' : 'Switch to dark mode'}
                 title={isDark ? 'Switch to light mode' : 'Switch to dark mode'}
               >
                 {isDark ? (
-                  <Sun className="w-5 h-5 text-amber-400" />
+                  <Sun className="w-5 h-5 text-yellow-500" />
                 ) : (
                   <Moon className="w-5 h-5" />
                 )}
               </button>
 
-              {/* Auth button placeholder — rendered by App if needed */}
-              <div id="auth-slot" />
+              {/* Mobile menu toggle */}
+              <button
+                onClick={() => setMobileMenuOpen((prev) => !prev)}
+                className="md:hidden p-2 rounded-md text-muted-foreground hover:text-foreground hover:bg-accent transition-colors"
+                aria-label="Toggle mobile menu"
+              >
+                {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+              </button>
             </div>
           </div>
         </div>
 
-        {/* Mobile nav */}
-        <div className="md:hidden border-t border-border">
-          <div className="flex items-center justify-around px-2 py-1">
-            {navLinks.map(({ to, label, icon: Icon }) => {
-              const isActive = location.pathname === to;
-              return (
+        {/* Mobile Nav */}
+        {mobileMenuOpen && (
+          <div className="md:hidden border-t border-border bg-background">
+            <nav className="px-4 py-3 flex flex-col gap-1">
+              {navLinks.map((link) => (
                 <Link
-                  key={to}
-                  to={to}
-                  className={`flex flex-col items-center gap-0.5 px-3 py-2 rounded-md text-xs font-medium transition-colors ${
-                    isActive
-                      ? 'text-primary'
-                      : 'text-muted-foreground hover:text-foreground'
+                  key={link.path}
+                  to={link.path}
+                  onClick={() => setMobileMenuOpen(false)}
+                  className={`px-3 py-2 rounded-md text-sm font-medium transition-colors ${
+                    isActive(link.path)
+                      ? 'bg-primary text-primary-foreground'
+                      : 'text-muted-foreground hover:text-foreground hover:bg-accent'
                   }`}
                 >
-                  <Icon className="w-4 h-4" />
-                  {label}
+                  {link.label}
                 </Link>
-              );
-            })}
+              ))}
+            </nav>
           </div>
-        </div>
+        )}
       </header>
 
       {/* Main Content */}
@@ -136,20 +143,32 @@ export default function Layout({ children }: LayoutProps) {
       </main>
 
       {/* Footer */}
-      <footer className="border-t border-border bg-muted/30 py-6 mt-auto">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-sm text-muted-foreground">
-          <p>
-            © {new Date().getFullYear()} CertiPrep. Built with{' '}
-            <span className="text-red-500">♥</span> using{' '}
-            <a
-              href={`https://caffeine.ai/?utm_source=Caffeine-footer&utm_medium=referral&utm_content=${encodeURIComponent(typeof window !== 'undefined' ? window.location.hostname : 'certiprep')}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-primary hover:underline"
-            >
-              caffeine.ai
-            </a>
-          </p>
+      <footer className="border-t border-border bg-background mt-auto">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+          <div className="flex flex-col md:flex-row items-center justify-between gap-4">
+            <div className="flex items-center gap-2">
+              <div className="w-6 h-6 bg-primary rounded flex items-center justify-center">
+                <BookOpen className="w-4 h-4 text-primary-foreground" />
+              </div>
+              <span className="font-semibold text-foreground">CertiPrep</span>
+              <span className="text-muted-foreground text-sm">
+                © {new Date().getFullYear()} All rights reserved.
+              </span>
+            </div>
+            <p className="text-muted-foreground text-sm flex items-center gap-1">
+              Built with{' '}
+              <span className="text-red-500">♥</span>{' '}
+              using{' '}
+              <a
+                href={`https://caffeine.ai/?utm_source=Caffeine-footer&utm_medium=referral&utm_content=${encodeURIComponent(window.location.hostname || 'certiprep')}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-primary hover:underline font-medium"
+              >
+                caffeine.ai
+              </a>
+            </p>
+          </div>
         </div>
       </footer>
     </div>
