@@ -1,88 +1,71 @@
 {
   "schemaVersion": "1.0.0",
   "projectStateVersion": 3,
-  "summary": "Web project with dashboard and multi-page card UI, light/dark mode toggle, and ongoing UI refinements.",
+  "summary": "CompTIA certification study app with a Study Materials page showing 8 certification cards. User has requested several UI standardization fixes to be built.",
   "architectural_notes": [
-    "All cards site-wide must share a uniform size based on the largest card; only card content should vary across pages.",
-    "Light/dark mode toggle uses sun/moon icons."
+    "All cards should share the same fixed dimensions site-wide; only content changes per page"
   ],
   "known_issues": [
-    "Dashboard cards lack visible outline/border.",
-    "Dark/light mode toggle missing sun/moon icons."
+    "CompTIA A+ card missing badge pill outline and has extra subtitle text not present on other cards"
   ],
   "isFixRequest": true,
-  "existing_features": [],
+  "existing_features": [
+    {
+      "id": "feature-add-a-consistent-visible-border-outline-to-all-cards-across-the-dashboard-certifications-certificationselector-and-study-materials-pages-the-border-should-be-clearly-visible-in-both-light-and-dark-themes-and-applied-uniformly-to-every-card-component-on-every-page",
+      "title": "Add a consistent visible border/outline to all cards across the Dashboard, Certifications (CertificationSelector), and Study Materials pages. The border should be clearly visible in both light and dark themes and applied uniformly to every card component on every page.",
+      "reqIds": [
+        "REQ-1"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-replace-the-existing-dark-light-mode-toggle-in-the-layout-navbar-with-a-sun-moon-icon-based-switcher-when-in-light-mode-display-the-moon-icon-to-switch-to-dark-when-in-dark-mode-display-the-sun-icon-to-switch-to-light-the-toggle-must-be-positioned-in-the-same-area-as-the-current-toggle-in-the-sticky-header",
+      "title": "Replace the existing dark/light mode toggle in the Layout navbar with a sun ☀️ / moon 🌙 icon-based switcher. When in light mode, display the moon 🌙 icon to switch to dark; when in dark mode, display the sun ☀️ icon to switch to light. The toggle must be positioned in the same area as the current toggle in the sticky header.",
+      "reqIds": [
+        "REQ-2"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-set-a-uniform-fixed-card-size-site-wide-for-all-certification-cards-across-dashboard-certifications-and-study-materials-pages-measure-the-largest-card-currently-rendered-based-on-the-study-materials-page-visible-in-the-screenshots-and-apply-that-as-the-standard-min-height-and-fixed-width-for-all-cards-so-card-dimensions-do-not-change-as-users-navigate-between-pages-only-the-card-content-changes",
+      "title": "Set a uniform fixed card size site-wide for all certification cards across Dashboard, Certifications, and Study Materials pages. Measure the largest card currently rendered (based on the Study Materials page visible in the screenshots) and apply that as the standard min-height and fixed width for all cards, so card dimensions do not change as users navigate between pages — only the card content changes.",
+      "reqIds": [
+        "REQ-3"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-standardize-the-comptia-a-card-on-the-study-materials-page-to-match-the-layout-of-all-other-certification-cards-specifically-1-add-a-badge-pill-outline-to-the-a-label-in-the-card-header-matching-the-pill-style-used-on-security-network-linux-cloud-cysa-pentest-and-casp-cards-2-remove-the-extra-subtitle-text-core-1-220-1101-core-2-220-1102-from-the-card-so-it-matches-the-clean-header-layout-of-other-cards-apply-this-same-standardization-to-the-a-card-wherever-it-appears-across-all-pages-dashboard-certifications-study-materials",
+      "title": "Standardize the CompTIA A+ card on the Study Materials page to match the layout of all other certification cards. Specifically: (1) Add a badge pill outline to the 'A+' label in the card header, matching the pill style used on Security+, Network+, Linux+, Cloud+, CySA+, PenTest+, and CASP+ cards. (2) Remove the extra subtitle text 'Core 1 (220-1101) & Core 2 (220-1102)' from the card so it matches the clean header layout of other cards. Apply this same standardization to the A+ card wherever it appears across all pages (Dashboard, Certifications, Study Materials).",
+      "reqIds": [
+        "REQ-4"
+      ],
+      "version": 1
+    }
+  ],
   "new_feature_requests": [
     {
       "id": "AR-1",
-      "summary": "Add visible border/outline to dashboard cards",
+      "summary": "Add visible border/outline to all cards across the site",
       "reqIds": [],
       "status": "pending"
     },
     {
       "id": "AR-2",
-      "summary": "Replace dark/light toggle with sun/moon icon switcher",
+      "summary": "Replace dark/light mode toggle with sun ☀️ / moon 🌙 icon switcher in navbar",
       "reqIds": [],
       "status": "pending"
     },
     {
       "id": "AR-3",
-      "summary": "Uniform card sizes across all pages (use largest card as standard)",
+      "summary": "Set uniform card sizing site-wide based on largest card dimensions",
       "reqIds": [],
       "status": "pending"
     },
     {
       "id": "AR-4",
-      "summary": "Code review, security audit, and GUI consistency check",
+      "summary": "Standardize CompTIA A+ card: add badge pill outline and remove extra subtitle text to match other cards",
       "reqIds": [],
-      "status": "pending"
-    },
-    {
-      "id": "AR-5",
-      "summary": "Add a visible border/outline to all dashboard cards in Dashboard.tsx so each card is clearly delineated. Use a consistent border style (e.g., 1px solid using the app's border color token) that works in both light and dark mode.",
-      "reqIds": [
-        "REQ-1"
-      ],
-      "status": "pending"
-    },
-    {
-      "id": "AR-6",
-      "summary": "Replace the existing dark/light mode toggle in Layout.tsx with a sun ☀️ / moon 🌙 icon switcher. In light mode display the moon icon (clicking switches to dark); in dark mode display the sun icon (clicking switches to light). The icon must be accessible with an aria-label.",
-      "reqIds": [
-        "REQ-2"
-      ],
-      "status": "pending"
-    },
-    {
-      "id": "AR-7",
-      "summary": "Standardize card dimensions across all pages (Dashboard, CertificationSelector, StudyMaterials, Flashcards, PracticeTest, QAPractice). Identify the largest card footprint used anywhere in the app and apply that fixed width and minimum height to every card across all pages, so navigating between pages changes only the card content, not the card size.",
-      "reqIds": [
-        "REQ-3"
-      ],
-      "status": "pending"
-    },
-    {
-      "id": "AR-8",
-      "summary": "Perform a thorough security audit of backend/main.mo. Check for: missing or insufficient access control on state-mutating functions, unguarded caller validation, potential for unauthorized data reads/writes across users, integer overflow risks, and any public API surface that should be restricted. Apply all necessary fixes.",
-      "reqIds": [
-        "REQ-4"
-      ],
-      "status": "pending"
-    },
-    {
-      "id": "AR-9",
-      "summary": "Perform a frontend code review and security audit covering: input sanitization before any data is sent to the backend, safe rendering of user-supplied or AI-generated content (no dangerouslySetInnerHTML without sanitization), consistent error handling in all React Query hooks in useQueries.ts, and removal of any console.log statements exposing sensitive data. Apply all necessary fixes.",
-      "reqIds": [
-        "REQ-5"
-      ],
-      "status": "pending"
-    },
-    {
-      "id": "AR-10",
-      "summary": "Conduct a GUI consistency audit across all pages. Ensure: typography scale (headings, body, labels) is uniform, spacing/padding is consistent using Tailwind spacing tokens, button styles are consistent across pages, color usage adheres to the defined light/dark theme tokens, and no orphaned or broken layout elements exist. Fix all inconsistencies found.",
-      "reqIds": [
-        "REQ-6"
-      ],
       "status": "pending"
     }
   ],

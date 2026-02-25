@@ -1,227 +1,111 @@
 {
   "kind": "implementation_plan",
   "version": "1.0",
-  "title": "Card outlines, sun/moon toggle, uniform card sizes, code review & security audit",
+  "title": "Standardize cards, add borders, sun/moon toggle, and fix CompTIA A+ card",
   "requirements": [
     {
       "id": "REQ-1",
-      "summary": "Add visible borders to all dashboard cards for clear delineation in both light and dark mode",
+      "summary": "Add consistent visible border to all cards across Dashboard, Certifications, and Study Materials pages in both light and dark themes",
       "acceptanceCriteria": [
-        "All cards on the Dashboard page have a visible border/outline in both light and dark mode.",
-        "The border uses a design token consistent with the app's color palette."
+        "All cards on the Dashboard page have a visible border in light and dark mode",
+        "All cards on the Certifications (CertificationSelector) page have a visible border in light and dark mode",
+        "All cards on the Study Materials page have a visible border in light and dark mode",
+        "Border style is consistent across all pages"
       ],
       "file_operations": [
         {
+          "path": "frontend/src/index.css",
+          "operation": "modify",
+          "description": "Add a global CSS utility class for card borders that works in both light and dark themes, using the existing OKLCH color system. The border should be clearly visible with appropriate contrast in both themes (e.g., using border-color with a semi-transparent value or a dedicated border custom property)."
+        },
+        {
+          "path": "frontend/src/pages/StudyMaterials.tsx",
+          "operation": "modify",
+          "description": "Apply the new consistent border class to all certification card elements in the Study Materials page. Each card currently uses rounded-lg and other styling; add the border utility to make card boundaries clearly visible."
+        },
+        {
           "path": "frontend/src/pages/Dashboard.tsx",
           "operation": "modify",
-          "description": "Add consistent border styling to all certification cards using Tailwind's border utilities (e.g., border border-border) that work in both light and dark mode via the app's CSS custom properties."
+          "description": "Apply the consistent border class to all certification card elements on the Dashboard page, ensuring the border is visible around each card and its progress indicator."
+        },
+        {
+          "path": "frontend/src/pages/CertificationSelector.tsx",
+          "operation": "modify",
+          "description": "Apply the consistent border class to all certification card elements on the Certifications (CertificationSelector) page to match the styling applied to Dashboard and Study Materials cards."
         }
       ]
     },
     {
       "id": "REQ-2",
-      "summary": "Replace dark/light mode toggle with accessible sun/moon icon switcher",
+      "summary": "Replace dark/light mode toggle with sun ☀️ / moon 🌙 icon-based switcher in the navbar",
       "acceptanceCriteria": [
-        "A sun icon is shown when the app is in dark mode; clicking it switches to light mode.",
-        "A moon icon is shown when the app is in light mode; clicking it switches to dark mode.",
-        "The toggle has an appropriate aria-label for accessibility.",
-        "Theme preference persists across page reloads."
+        "The navbar contains a sun or moon icon button (not a text label or generic toggle)",
+        "Clicking the icon switches between light and dark mode",
+        "Sun icon is shown when in dark mode, moon icon is shown in light mode",
+        "Toggle is visible and accessible in the sticky header on all pages"
       ],
       "file_operations": [
         {
           "path": "frontend/src/components/Layout.tsx",
           "operation": "modify",
-          "description": "Replace the existing theme toggle control with a sun (☀️) / moon (🌙) icon button. Display the moon icon in light mode (clicking switches to dark) and the sun icon in dark mode (clicking switches to light). Add aria-label for accessibility. Ensure the existing theme persistence mechanism (localStorage or CSS class) continues to work."
+          "description": "Replace the existing dark/light mode toggle button in the Layout navbar with an icon-based button. When the app is in light mode, display a moon 🌙 icon (to indicate switching to dark); when in dark mode, display a sun ☀️ icon (to indicate switching to light). Use the same theme state and toggle logic, but render Unicode emoji icons or SVG icons instead of text. Position the icon button in the same area of the sticky header where the current toggle exists."
         }
       ]
     },
     {
       "id": "REQ-3",
-      "summary": "Standardize card dimensions across all pages so only content changes, not card size",
+      "summary": "Set uniform fixed card size site-wide for all certification cards based on the largest card dimensions",
       "acceptanceCriteria": [
-        "Cards on Dashboard, CertificationSelector, StudyMaterials, and other pages share the same fixed dimensions.",
-        "Card size does not visually change when navigating between pages.",
-        "Content inside smaller cards uses internal spacing/alignment rather than resizing the card."
+        "All certification cards on Dashboard, Certifications, and Study Materials pages share the same fixed width and minimum height",
+        "Card dimensions do not shift or reflow when navigating between pages",
+        "Content within cards remains properly laid out and does not overflow the fixed card size"
       ],
       "file_operations": [
         {
-          "path": "frontend/src/pages/Dashboard.tsx",
+          "path": "frontend/src/index.css",
           "operation": "modify",
-          "description": "Apply a shared Tailwind class (e.g., w-80 min-h-96 or a custom class defined in index.css) to all certification cards to enforce uniform width and minimum height. Ensure internal content uses flex or padding for alignment instead of resizing the card."
-        },
-        {
-          "path": "frontend/src/pages/CertificationSelector.tsx",
-          "operation": "modify",
-          "description": "Apply the same uniform card dimensions (width and min-height) as Dashboard to all certification cards so navigating between Dashboard and CertificationSelector shows consistent card sizes."
+          "description": "Add a global utility class for certification card dimensions (e.g., .cert-card-standard) that defines a fixed width and min-height based on the largest card visible on the Study Materials page. Measure the card dimensions from the current layout and apply them as fixed values so all cards maintain consistent size across all pages."
         },
         {
           "path": "frontend/src/pages/StudyMaterials.tsx",
           "operation": "modify",
-          "description": "Apply the uniform card dimensions to all study material cards to match Dashboard and CertificationSelector, ensuring consistent card footprint across pages."
+          "description": "Apply the uniform card size utility class to all certification cards on the Study Materials page. Ensure content layout (badge, title, description, button) remains properly aligned within the fixed card dimensions."
         },
         {
-          "path": "frontend/src/pages/Flashcards.tsx",
+          "path": "frontend/src/pages/Dashboard.tsx",
           "operation": "modify",
-          "description": "If Flashcards page uses card layouts for navigation or instructions, apply the same uniform card dimensions. If FlashcardDeck cards are displayed differently (centered large card), ensure any surrounding UI cards match the standard dimensions."
+          "description": "Apply the uniform card size utility class to all certification cards on the Dashboard page, ensuring that progress bars and action links fit within the fixed card size without overflow."
         },
         {
-          "path": "frontend/src/pages/PracticeTest.tsx",
+          "path": "frontend/src/pages/CertificationSelector.tsx",
           "operation": "modify",
-          "description": "If PracticeTest page displays question cards or result cards, apply the uniform card dimensions to match the rest of the app."
-        },
-        {
-          "path": "frontend/src/pages/QAPractice.tsx",
-          "operation": "modify",
-          "description": "If QAPractice page uses card layouts for question display or results, apply the uniform card dimensions to ensure consistency with other pages."
-        },
-        {
-          "path": "frontend/src/index.css",
-          "operation": "modify",
-          "description": "Define a custom CSS class (e.g., .card-standard) with fixed width and min-height based on the largest card footprint identified across the app. This class will be used consistently across all pages. Alternatively, document the Tailwind utility classes to be used site-wide for card dimensions."
+          "description": "Apply the uniform card size utility class to all certification cards on the Certifications page, ensuring domain previews and exam details fit properly within the standardized card dimensions."
         }
       ]
     },
     {
-      "id": "REQ-5",
-      "summary": "Perform frontend code review and security audit: input sanitization, safe rendering, error handling, and console.log cleanup",
+      "id": "REQ-4",
+      "summary": "Standardize CompTIA A+ card header to match other certification cards by adding badge pill outline and removing extra subtitle text",
       "acceptanceCriteria": [
-        "No unsanitized user input is rendered as raw HTML.",
-        "All React Query error states are handled gracefully with user-facing feedback.",
-        "No console.log statements leak authentication tokens, principal IDs, or raw backend responses.",
-        "Input fields that submit to the backend perform length/type validation before submission."
+        "The A+ label on all CompTIA A+ cards has a bordered pill/badge outline matching the style of other certification badge pills",
+        "The text 'Core 1 (220-1101) & Core 2 (220-1102)' is removed from the CompTIA A+ card header across all pages",
+        "The CompTIA A+ card header layout visually matches the header layout of Security+, Network+, and other certification cards"
       ],
       "file_operations": [
         {
-          "path": "frontend/src/hooks/useQueries.ts",
+          "path": "frontend/src/pages/StudyMaterials.tsx",
           "operation": "modify",
-          "description": "Audit all React Query hooks (useGetFlashcards, useAddFlashcard, useGetQuestions, useAddQuestion, useSubmitTestResult, useSaveOrUpdateProgress, etc.) to ensure every hook includes proper error handling with user-facing error messages. Remove any console.log statements that expose sensitive data (principal IDs, raw backend responses, tokens). Ensure mutations include onError callbacks with user notifications."
-        },
-        {
-          "path": "frontend/src/pages/Flashcards.tsx",
-          "operation": "modify",
-          "description": "Audit for input sanitization: ensure user-generated flashcard front/back text is never rendered via dangerouslySetInnerHTML. Validate input length and type before calling addFlashcard mutation. Check error handling for all query/mutation states and display user-facing error messages. Remove any console.log statements exposing sensitive data."
-        },
-        {
-          "path": "frontend/src/pages/QAPractice.tsx",
-          "operation": "modify",
-          "description": "Audit for input sanitization: ensure user-submitted answers or question text are never rendered as raw HTML. Validate inputs before submission. Check all query/mutation error handling and ensure graceful user feedback. Remove any console.log statements leaking sensitive information."
-        },
-        {
-          "path": "frontend/src/pages/PracticeTest.tsx",
-          "operation": "modify",
-          "description": "Audit for input sanitization and safe rendering: ensure question text and answer options are rendered safely without dangerouslySetInnerHTML. Check error handling for test submission and question fetching. Remove console.log statements that might expose principal IDs or backend data."
-        },
-        {
-          "path": "frontend/src/pages/StudyMode.tsx",
-          "operation": "modify",
-          "description": "Audit for input sanitization: ensure AI-generated or user-submitted study content is rendered safely (no dangerouslySetInnerHTML without sanitization). Validate any user inputs before backend submission. Check error handling for queries and remove sensitive console.log statements."
+          "description": "Update the CompTIA A+ card to add a badge pill outline around the 'A+' label matching the visual style of Security+, Network+, Linux+, and other certification badges. Remove the subtitle text 'Core 1 (220-1101) & Core 2 (220-1102)' from the card header so the A+ card layout matches the clean header style of other certifications."
         },
         {
           "path": "frontend/src/pages/Dashboard.tsx",
           "operation": "modify",
-          "description": "Audit for safe rendering of test scores and user data. Ensure all query error states are handled gracefully with user-facing feedback. Remove any console.log statements exposing principal IDs or backend responses."
+          "description": "Update the CompTIA A+ card on the Dashboard to add a badge pill outline around the 'A+' label and remove the subtitle text 'Core 1 (220-1101) & Core 2 (220-1102)', ensuring consistency with the Study Materials page and other certification cards."
         },
         {
           "path": "frontend/src/pages/CertificationSelector.tsx",
           "operation": "modify",
-          "description": "Audit for safe rendering of certification data and error handling. Remove any console.log statements that might leak sensitive data or backend details."
-        },
-        {
-          "path": "frontend/src/pages/StudyMaterials.tsx",
-          "operation": "modify",
-          "description": "Audit for safe rendering of study material data and progress. Ensure error handling for progress-saving mutations is present with user feedback. Remove console.log statements exposing principal IDs or backend responses."
-        },
-        {
-          "path": "frontend/src/components/PDFViewer.tsx",
-          "operation": "modify",
-          "description": "Audit for safe rendering of PDF/HTML content and progress tracking. Ensure error handling for progress mutations and remove any console.log statements leaking sensitive data."
-        },
-        {
-          "path": "frontend/src/components/Layout.tsx",
-          "operation": "modify",
-          "description": "Audit for safe rendering and error handling. Remove any console.log statements that might expose authentication state or principal IDs."
-        },
-        {
-          "path": "frontend/src/App.tsx",
-          "operation": "modify",
-          "description": "Audit for safe rendering and error handling in routing logic. Remove any console.log statements exposing sensitive data or routing state."
-        }
-      ]
-    },
-    {
-      "id": "REQ-6",
-      "summary": "Conduct GUI consistency audit: typography, spacing, button styles, color usage, and layout integrity",
-      "acceptanceCriteria": [
-        "Heading and body text sizes are consistent across Dashboard, CertificationSelector, StudyMaterials, Flashcards, PracticeTest, QAPractice, and StudyMode pages.",
-        "Buttons use the same variant styles (primary, secondary, ghost) site-wide.",
-        "No layout elements overflow or appear broken in light or dark mode.",
-        "Spacing between cards and page sections is uniform across all pages."
-      ],
-      "file_operations": [
-        {
-          "path": "frontend/src/pages/Dashboard.tsx",
-          "operation": "modify",
-          "description": "Audit typography (headings use text-2xl/text-3xl consistently, body text uses text-base), spacing (consistent padding/margin using Tailwind spacing tokens like p-6, gap-4), button styles (use shadcn/ui Button variants consistently), and color usage (adhere to theme tokens). Fix any inconsistencies found."
-        },
-        {
-          "path": "frontend/src/pages/CertificationSelector.tsx",
-          "operation": "modify",
-          "description": "Audit typography scale, spacing tokens, button variants, and color usage to match Dashboard standards. Ensure no layout overflow in light or dark mode. Fix inconsistencies."
-        },
-        {
-          "path": "frontend/src/pages/StudyMaterials.tsx",
-          "operation": "modify",
-          "description": "Audit typography, spacing, button styles, and color usage for consistency with other pages. Ensure uniform card spacing and no broken layouts in either theme. Fix inconsistencies."
-        },
-        {
-          "path": "frontend/src/pages/Flashcards.tsx",
-          "operation": "modify",
-          "description": "Audit typography (heading sizes, button labels), spacing (padding, margins, gaps), button styles (use consistent shadcn/ui variants), and color usage. Ensure no layout overflow or broken elements. Fix inconsistencies."
-        },
-        {
-          "path": "frontend/src/pages/PracticeTest.tsx",
-          "operation": "modify",
-          "description": "Audit typography (question text, answer options, headings), spacing (consistent padding/gaps), button styles (submit, next, review buttons use consistent variants), and color usage. Ensure layout integrity in both themes. Fix inconsistencies."
-        },
-        {
-          "path": "frontend/src/pages/QAPractice.tsx",
-          "operation": "modify",
-          "description": "Audit typography, spacing, button styles, and color usage for consistency with other quiz/test pages. Ensure no layout overflow or broken UI elements. Fix inconsistencies."
-        },
-        {
-          "path": "frontend/src/pages/StudyMode.tsx",
-          "operation": "modify",
-          "description": "Audit typography (chat messages, headings), spacing (message padding, section gaps), button/control styles, and color usage. Ensure consistent UI with other pages and no broken layouts. Fix inconsistencies."
-        },
-        {
-          "path": "frontend/src/components/Layout.tsx",
-          "operation": "modify",
-          "description": "Audit header typography, navigation link styles, spacing, and color usage for consistency. Ensure the layout component provides uniform padding/margin structure to all child pages."
-        },
-        {
-          "path": "frontend/src/components/FlashcardDeck.tsx",
-          "operation": "modify",
-          "description": "Audit typography (question/answer text), spacing (card padding, button spacing), button styles (Correct/Incorrect buttons use consistent variants), and color usage. Ensure consistency with the rest of the app."
-        },
-        {
-          "path": "frontend/src/components/PDFViewer.tsx",
-          "operation": "modify",
-          "description": "Audit modal/viewer typography, spacing, button styles, and color usage for consistency with the app's design system. Ensure no layout issues in light or dark mode."
-        },
-        {
-          "path": "frontend/src/components/VoiceControls.tsx",
-          "operation": "modify",
-          "description": "Audit typography (labels, transcript text), spacing (control padding, gaps), button/control styles, and color usage for consistency. Ensure the component integrates visually with the rest of the app."
-        },
-        {
-          "path": "frontend/src/index.css",
-          "operation": "modify",
-          "description": "Review global styles for typography scale (ensure h1, h2, h3, body classes are defined consistently), spacing utilities, and color usage. Document any additional global classes needed for consistency (e.g., .page-heading, .section-spacing). Ensure all custom CSS respects light/dark theme tokens."
-        },
-        {
-          "path": "frontend/tailwind.config.js",
-          "operation": "modify",
-          "description": "Review Tailwind config for typography scale, spacing scale, color palette consistency, and border/shadow utilities. Ensure all pages can reference the same design tokens. Document any adjustments made for consistency."
+          "description": "Update the CompTIA A+ card on the Certifications (CertificationSelector) page to add a badge pill outline around the 'A+' label and remove the subtitle text 'Core 1 (220-1101) & Core 2 (220-1102)', ensuring the card header matches the standardized layout applied on other pages."
         }
       ]
     }

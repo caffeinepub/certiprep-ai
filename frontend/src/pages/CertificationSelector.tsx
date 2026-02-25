@@ -1,124 +1,241 @@
 import { Link } from '@tanstack/react-router';
-import { BookOpen, Layers, FlaskConical, GraduationCap } from 'lucide-react';
-import { CERTIFICATIONS } from '@/data/certifications';
+import { BookOpen, Brain, ClipboardList, ChevronRight } from 'lucide-react';
 
-const difficultyColors: Record<string, string> = {
-  Beginner: 'bg-success/20 text-success border-success/30',
-  Intermediate: 'bg-accent/20 text-accent border-accent/30',
-  Advanced: 'bg-primary/20 text-primary border-primary/30',
-  Expert: 'bg-destructive/20 text-destructive border-destructive/30',
+const CERTIFICATIONS = [
+  {
+    id: 'comptia-aplus',
+    name: 'CompTIA A+',
+    badge: 'A+',
+    badgeColor: 'gray',
+    examCode: '220-1101',
+    difficulty: 'Beginner',
+    difficultyColor: 'green',
+    description: 'Core hardware and software fundamentals for IT support professionals.',
+    domains: ['Mobile Devices', 'Networking', 'Hardware', 'Virtualization', 'Security'],
+    questions: 90,
+    passingScore: '675',
+  },
+  {
+    id: 'comptia-securityplus',
+    name: 'CompTIA Security+',
+    badge: 'Security+',
+    badgeColor: 'blue',
+    examCode: 'SY0-701',
+    difficulty: 'Intermediate',
+    difficultyColor: 'yellow',
+    description: 'Cybersecurity fundamentals, threat detection, and risk management.',
+    domains: ['Threats & Attacks', 'Architecture', 'Implementation', 'Operations', 'Governance'],
+    questions: 90,
+    passingScore: '750',
+  },
+  {
+    id: 'comptia-networkplus',
+    name: 'CompTIA Network+',
+    badge: 'Network+',
+    badgeColor: 'purple',
+    examCode: 'N10-009',
+    difficulty: 'Intermediate',
+    difficultyColor: 'yellow',
+    description: 'Networking concepts, infrastructure, and troubleshooting skills.',
+    domains: ['Networking Concepts', 'Infrastructure', 'Operations', 'Security', 'Troubleshooting'],
+    questions: 90,
+    passingScore: '720',
+  },
+  {
+    id: 'comptia-linuxplus',
+    name: 'CompTIA Linux+',
+    badge: 'Linux+',
+    badgeColor: 'amber',
+    examCode: 'XK0-005',
+    difficulty: 'Intermediate',
+    difficultyColor: 'yellow',
+    description: 'Linux administration, scripting, and system management.',
+    domains: ['System Management', 'Security', 'Scripting', 'Containers', 'Automation'],
+    questions: 90,
+    passingScore: '720',
+  },
+  {
+    id: 'comptia-cloudplus',
+    name: 'CompTIA Cloud+',
+    badge: 'Cloud+',
+    badgeColor: 'cyan',
+    examCode: 'CV0-004',
+    difficulty: 'Intermediate',
+    difficultyColor: 'yellow',
+    description: 'Cloud computing deployment, management, and security.',
+    domains: ['Cloud Architecture', 'Security', 'Deployment', 'Operations', 'Troubleshooting'],
+    questions: 90,
+    passingScore: '750',
+  },
+  {
+    id: 'comptia-cysaplus',
+    name: 'CompTIA CySA+',
+    badge: 'CySA+',
+    badgeColor: 'indigo',
+    examCode: 'CS0-003',
+    difficulty: 'Advanced',
+    difficultyColor: 'orange',
+    description: 'Cybersecurity analyst skills, threat intelligence, and incident response.',
+    domains: ['Threat Intelligence', 'Vulnerability Mgmt', 'Incident Response', 'Reporting', 'Communication'],
+    questions: 85,
+    passingScore: '750',
+  },
+  {
+    id: 'comptia-pentestplus',
+    name: 'CompTIA PenTest+',
+    badge: 'PenTest+',
+    badgeColor: 'green',
+    examCode: 'PT0-003',
+    difficulty: 'Advanced',
+    difficultyColor: 'orange',
+    description: 'Penetration testing, vulnerability assessment, and ethical hacking.',
+    domains: ['Planning', 'Reconnaissance', 'Attacks', 'Reporting', 'Tools'],
+    questions: 85,
+    passingScore: '750',
+  },
+  {
+    id: 'comptia-caspplus',
+    name: 'CompTIA CASP+',
+    badge: 'CASP+',
+    badgeColor: 'red',
+    examCode: 'CAS-004',
+    difficulty: 'Expert',
+    difficultyColor: 'red',
+    description: 'Advanced security architecture, engineering, and enterprise risk management.',
+    domains: ['Security Architecture', 'Security Operations', 'Engineering', 'Cryptography', 'Governance'],
+    questions: 90,
+    passingScore: 'Pass/Fail',
+  },
+];
+
+const badgeColorMap: Record<string, string> = {
+  gray: 'border border-gray-400 text-gray-600 dark:border-gray-400 dark:text-gray-300',
+  blue: 'border border-blue-500 text-blue-600 dark:border-blue-400 dark:text-blue-300',
+  purple: 'border border-purple-500 text-purple-600 dark:border-purple-400 dark:text-purple-300',
+  amber: 'border border-amber-500 text-amber-600 dark:border-amber-400 dark:text-amber-300',
+  cyan: 'border border-cyan-500 text-cyan-600 dark:border-cyan-400 dark:text-cyan-300',
+  indigo: 'border border-indigo-500 text-indigo-600 dark:border-indigo-400 dark:text-indigo-300',
+  green: 'border border-green-500 text-green-600 dark:border-green-400 dark:text-green-300',
+  red: 'border border-red-500 text-red-600 dark:border-red-400 dark:text-red-300',
+};
+
+const difficultyColorMap: Record<string, string> = {
+  green: 'text-green-600 dark:text-green-400',
+  yellow: 'text-yellow-600 dark:text-yellow-400',
+  orange: 'text-orange-600 dark:text-orange-400',
+  red: 'text-red-600 dark:text-red-400',
 };
 
 export default function CertificationSelector() {
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      {/* Cards Grid — first section */}
+      <div className="mb-10">
+        <div className="flex items-center justify-between mb-6">
+          <h1 className="text-3xl font-bold text-foreground">Certifications</h1>
+          <span className="text-sm text-muted-foreground">8 CompTIA Certifications</span>
+        </div>
 
-      {/* Certification cards — top of page */}
-      <div className="grid md:grid-cols-2 gap-6 mb-12">
-        {CERTIFICATIONS.map(cert => (
-          <div
-            key={cert.id}
-            className="bg-card border border-border rounded-2xl p-6 hover:border-primary/40 transition-all duration-200 hover:shadow-card group"
-          >
-            {/* Header */}
-            <div className="flex items-start justify-between mb-4">
-              <div className="flex-1">
-                <div className="flex items-center gap-2 mb-2 flex-wrap">
-                  <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium border ${difficultyColors[cert.difficulty]}`}>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+          {CERTIFICATIONS.map((cert) => (
+            <div
+              key={cert.id}
+              className="cert-card flex flex-col justify-between rounded-xl border-2 border-border bg-card shadow-sm hover:shadow-md hover:border-primary/40 transition-all duration-200"
+            >
+              {/* Card Header */}
+              <div className="p-4 flex-1">
+                <div className="flex items-start justify-between mb-3">
+                  <div className="flex items-center gap-2 flex-wrap">
+                    <span
+                      className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold bg-transparent ${badgeColorMap[cert.badgeColor]}`}
+                    >
+                      {cert.badge}
+                    </span>
+                    <span className="text-xs text-muted-foreground font-mono">{cert.examCode}</span>
+                  </div>
+                  <span className={`text-xs font-medium ${difficultyColorMap[cert.difficultyColor]}`}>
                     {cert.difficulty}
                   </span>
-                  <span className="text-xs font-mono text-muted-foreground bg-secondary px-2 py-0.5 rounded">
-                    {cert.examCode}
-                  </span>
                 </div>
-                <h2 className="font-display text-xl font-bold text-foreground group-hover:text-primary transition-colors">
-                  {cert.name}
-                </h2>
-                <p className="text-sm text-muted-foreground mt-1">{cert.description}</p>
-              </div>
-              <div className="w-12 h-12 rounded-xl gradient-amber flex items-center justify-center shrink-0 ml-4 glow-amber">
-                <GraduationCap className="w-6 h-6 text-primary-foreground" />
-              </div>
-            </div>
 
-            {/* Exam details */}
-            <div className="grid grid-cols-3 gap-3 mb-4 p-3 bg-secondary/50 rounded-xl">
-              <div className="text-center">
-                <div className="text-xs text-muted-foreground mb-0.5">Passing Score</div>
-                <div className="text-xs font-medium text-foreground">{cert.passingScore.split(' ')[0]}</div>
-              </div>
-              <div className="text-center border-x border-border">
-                <div className="text-xs text-muted-foreground mb-0.5">Questions</div>
-                <div className="text-xs font-medium text-foreground">{cert.questionCount}</div>
-              </div>
-              <div className="text-center">
-                <div className="text-xs text-muted-foreground mb-0.5">Duration</div>
-                <div className="text-xs font-medium text-foreground">{cert.duration}</div>
-              </div>
-            </div>
+                <h3 className="text-base font-bold text-foreground mb-1">{cert.name}</h3>
+                <p className="text-xs text-muted-foreground mb-3 leading-relaxed">{cert.description}</p>
 
-            {/* Domains preview */}
-            <div className="mb-4">
-              <div className="text-xs font-medium text-muted-foreground mb-2">
-                {cert.domains.length} Domains Covered
-              </div>
-              <div className="flex flex-wrap gap-1.5">
-                {cert.domains.slice(0, 4).map(d => (
-                  <span key={d.name} className="text-[10px] bg-secondary text-muted-foreground px-2 py-0.5 rounded-full border border-border">
-                    {d.name.split('(')[0].trim()}
-                  </span>
-                ))}
-                {cert.domains.length > 4 && (
-                  <span className="text-[10px] text-muted-foreground px-2 py-0.5">
-                    +{cert.domains.length - 4} more
-                  </span>
-                )}
-              </div>
-            </div>
+                {/* Domain preview */}
+                <div className="flex flex-wrap gap-1 mb-3">
+                  {cert.domains.slice(0, 3).map((domain) => (
+                    <span
+                      key={domain}
+                      className="text-xs px-2 py-0.5 rounded-md bg-muted text-muted-foreground"
+                    >
+                      {domain}
+                    </span>
+                  ))}
+                  {cert.domains.length > 3 && (
+                    <span className="text-xs px-2 py-0.5 rounded-md bg-muted text-muted-foreground">
+                      +{cert.domains.length - 3} more
+                    </span>
+                  )}
+                </div>
 
-            {/* Prerequisites */}
-            <div className="text-xs text-muted-foreground mb-5 italic">
-              Prerequisites: {cert.prerequisites}
-            </div>
+                {/* Exam details */}
+                <div className="text-xs text-muted-foreground space-y-0.5">
+                  <div className="flex justify-between">
+                    <span>Questions</span>
+                    <span className="font-medium text-foreground">{cert.questions}</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span>Passing Score</span>
+                    <span className="font-medium text-foreground">{cert.passingScore}</span>
+                  </div>
+                </div>
+              </div>
 
-            {/* Action buttons */}
-            <div className="grid grid-cols-3 gap-2">
-              <Link
-                to="/study/$certificationId"
-                params={{ certificationId: cert.id }}
-                className="flex items-center justify-center gap-1.5 px-3 py-2.5 rounded-lg bg-accent/15 text-accent hover:bg-accent/25 transition-colors text-xs font-medium border border-accent/20"
-              >
-                <BookOpen className="w-3.5 h-3.5" />
-                Study
-              </Link>
-              <Link
-                to="/flashcards/$certificationId"
-                params={{ certificationId: cert.id }}
-                className="flex items-center justify-center gap-1.5 px-3 py-2.5 rounded-lg bg-primary/15 text-primary hover:bg-primary/25 transition-colors text-xs font-medium border border-primary/20"
-              >
-                <Layers className="w-3.5 h-3.5" />
-                Cards
-              </Link>
-              <Link
-                to="/test/$certificationId"
-                params={{ certificationId: cert.id }}
-                className="flex items-center justify-center gap-1.5 px-3 py-2.5 rounded-lg bg-success/15 text-success hover:bg-success/25 transition-colors text-xs font-medium border border-success/20"
-              >
-                <FlaskConical className="w-3.5 h-3.5" />
-                Test
-              </Link>
+              {/* Action Buttons — use correct existing routes with certificationId param */}
+              <div className="px-4 pb-4 grid grid-cols-3 gap-1.5">
+                <Link
+                  to="/study/$certificationId"
+                  params={{ certificationId: cert.id }}
+                  className="flex flex-col items-center gap-1 py-2 rounded-lg border border-border bg-background hover:bg-muted text-xs font-medium text-foreground transition-colors"
+                  title="Study"
+                >
+                  <BookOpen className="w-3.5 h-3.5" />
+                  Study
+                </Link>
+                <Link
+                  to="/flashcards/$certificationId"
+                  params={{ certificationId: cert.id }}
+                  className="flex flex-col items-center gap-1 py-2 rounded-lg border border-border bg-background hover:bg-muted text-xs font-medium text-foreground transition-colors"
+                  title="Flashcards"
+                >
+                  <Brain className="w-3.5 h-3.5" />
+                  Cards
+                </Link>
+                <Link
+                  to="/test/$certificationId"
+                  params={{ certificationId: cert.id }}
+                  className="flex flex-col items-center gap-1 py-2 rounded-lg border border-border bg-background hover:bg-muted text-xs font-medium text-foreground transition-colors"
+                  title="Practice Test"
+                >
+                  <ClipboardList className="w-3.5 h-3.5" />
+                  Test
+                </Link>
+              </div>
             </div>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
 
-      {/* Page intro — below cards */}
-      <div className="mb-8">
-        <h1 className="font-display text-3xl font-bold text-foreground mb-2">
-          Choose Your <span className="text-gradient-amber">Certification</span>
-        </h1>
-        <p className="text-muted-foreground">
-          Select a CompTIA certification to begin studying. Each cert includes comprehensive domain coverage, AI-guided study sessions, flashcards, and practice tests.
+      {/* Page description */}
+      <div className="rounded-xl border-2 border-border bg-card p-6">
+        <div className="flex items-center gap-2 mb-2">
+          <ChevronRight className="w-5 h-5 text-primary" />
+          <h2 className="text-lg font-bold text-foreground">Choose Your Path</h2>
+        </div>
+        <p className="text-muted-foreground text-sm leading-relaxed max-w-2xl">
+          Select any certification above to access study guides, flashcard decks, practice tests,
+          and Q&A sessions. Each certification includes full exam domain coverage with detailed
+          explanations and exam tips.
         </p>
       </div>
     </div>

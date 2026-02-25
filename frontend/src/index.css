@@ -1,61 +1,75 @@
-@import url('https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;1,400&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap');
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --background: oklch(0.13 0.03 240);
-  --foreground: oklch(0.92 0.02 80);
-  --card: oklch(0.17 0.03 240);
-  --card-foreground: oklch(0.92 0.02 80);
-  --popover: oklch(0.17 0.03 240);
-  --popover-foreground: oklch(0.92 0.02 80);
-  --primary: oklch(0.75 0.15 60);
-  --primary-foreground: oklch(0.13 0.03 240);
-  --secondary: oklch(0.22 0.04 240);
-  --secondary-foreground: oklch(0.85 0.03 80);
-  --muted: oklch(0.22 0.04 240);
-  --muted-foreground: oklch(0.60 0.03 240);
-  --accent: oklch(0.65 0.18 220);
-  --accent-foreground: oklch(0.13 0.03 240);
-  --destructive: oklch(0.55 0.22 25);
-  --destructive-foreground: oklch(0.95 0.01 80);
-  --border: oklch(0.28 0.04 240);
-  --input: oklch(0.22 0.04 240);
-  --ring: oklch(0.75 0.15 60);
-  --radius: 0.5rem;
-  --success: 0.65 0.18 145;
-  --success-foreground: oklch(0.13 0.03 240);
-  --chart-1: oklch(0.75 0.15 60);
-  --chart-2: oklch(0.65 0.18 220);
-  --chart-3: oklch(0.65 0.18 145);
-  --chart-4: oklch(0.65 0.18 300);
-  --chart-5: oklch(0.65 0.18 25);
-}
+@layer base {
+  :root {
+    --background: oklch(0.99 0.002 240);
+    --foreground: oklch(0.15 0.02 240);
 
-.light {
-  --background: oklch(0.97 0.01 80);
-  --foreground: oklch(0.18 0.03 240);
-  --card: oklch(1.0 0.0 0);
-  --card-foreground: oklch(0.18 0.03 240);
-  --popover: oklch(1.0 0.0 0);
-  --popover-foreground: oklch(0.18 0.03 240);
-  --primary: oklch(0.60 0.15 60);
-  --primary-foreground: oklch(0.97 0.01 80);
-  --secondary: oklch(0.92 0.02 80);
-  --secondary-foreground: oklch(0.18 0.03 240);
-  --muted: oklch(0.92 0.02 80);
-  --muted-foreground: oklch(0.50 0.03 240);
-  --accent: oklch(0.55 0.18 220);
-  --accent-foreground: oklch(0.97 0.01 80);
-  --destructive: oklch(0.55 0.22 25);
-  --destructive-foreground: oklch(0.97 0.01 80);
-  --border: oklch(0.85 0.02 80);
-  --input: oklch(0.92 0.02 80);
-  --ring: oklch(0.60 0.15 60);
-  --success: 0.55 0.18 145;
-  --success-foreground: oklch(0.97 0.01 80);
+    --card: oklch(1 0 0);
+    --card-foreground: oklch(0.15 0.02 240);
+
+    --popover: oklch(1 0 0);
+    --popover-foreground: oklch(0.15 0.02 240);
+
+    --primary: oklch(0.45 0.18 240);
+    --primary-foreground: oklch(0.98 0.005 240);
+
+    --secondary: oklch(0.94 0.01 240);
+    --secondary-foreground: oklch(0.25 0.03 240);
+
+    --muted: oklch(0.95 0.008 240);
+    --muted-foreground: oklch(0.52 0.02 240);
+
+    --accent: oklch(0.92 0.03 240);
+    --accent-foreground: oklch(0.25 0.03 240);
+
+    --destructive: oklch(0.55 0.22 25);
+    --destructive-foreground: oklch(0.98 0.005 25);
+
+    --border: oklch(0.82 0.015 240);
+    --input: oklch(0.82 0.015 240);
+    --ring: oklch(0.45 0.18 240);
+
+    --success: 0.55 0.18 145;
+    --success-foreground: oklch(0.98 0.005 145);
+
+    --radius: 0.5rem;
+  }
+
+  .dark {
+    --background: oklch(0.13 0.02 240);
+    --foreground: oklch(0.93 0.01 240);
+
+    --card: oklch(0.18 0.025 240);
+    --card-foreground: oklch(0.93 0.01 240);
+
+    --popover: oklch(0.18 0.025 240);
+    --popover-foreground: oklch(0.93 0.01 240);
+
+    --primary: oklch(0.65 0.18 240);
+    --primary-foreground: oklch(0.1 0.02 240);
+
+    --secondary: oklch(0.25 0.03 240);
+    --secondary-foreground: oklch(0.88 0.01 240);
+
+    --muted: oklch(0.22 0.025 240);
+    --muted-foreground: oklch(0.62 0.02 240);
+
+    --accent: oklch(0.28 0.04 240);
+    --accent-foreground: oklch(0.88 0.01 240);
+
+    --destructive: oklch(0.55 0.22 25);
+    --destructive-foreground: oklch(0.98 0.005 25);
+
+    --border: oklch(0.32 0.03 240);
+    --input: oklch(0.32 0.03 240);
+    --ring: oklch(0.65 0.18 240);
+
+    --success: 0.55 0.18 145;
+    --success-foreground: oklch(0.98 0.005 145);
+  }
 }
 
 @layer base {
@@ -64,112 +78,25 @@
   }
   body {
     @apply bg-background text-foreground;
-    font-family: 'EB Garamond', 'Crimson Text', Georgia, serif;
-  }
-  code, pre, kbd, samp {
-    font-family: 'JetBrains Mono', 'Courier New', monospace;
   }
 }
 
 @layer components {
+  /* Standard certification card size — uniform across all pages */
+  .cert-card {
+    min-height: 280px;
+  }
+
+  /* Badge color variants using plain CSS (avoids @apply with custom opacity modifiers) */
   .badge-green {
-    display: inline-flex;
-    align-items: center;
-    border-radius: 9999px;
-    padding: 0.125rem 0.625rem;
-    font-size: 0.75rem;
-    font-weight: 500;
-    background-color: oklch(0.65 0.18 145 / 0.15);
-    color: oklch(0.65 0.18 145);
-    border: 1px solid oklch(0.65 0.18 145 / 0.3);
+    background-color: oklch(0.55 0.18 145 / 0.15);
+    color: oklch(0.45 0.18 145);
+    border-color: oklch(0.55 0.18 145 / 0.4);
   }
+
   .badge-red {
-    display: inline-flex;
-    align-items: center;
-    border-radius: 9999px;
-    padding: 0.125rem 0.625rem;
-    font-size: 0.75rem;
-    font-weight: 500;
     background-color: oklch(0.55 0.22 25 / 0.15);
-    color: oklch(0.65 0.18 25);
-    border: 1px solid oklch(0.55 0.22 25 / 0.3);
+    color: oklch(0.45 0.22 25);
+    border-color: oklch(0.55 0.22 25 / 0.4);
   }
-}
-
-/* ============================================================
-   STUDY GUIDE HTML CONTENT STYLES
-   Applied to content rendered inside the PDFViewer iframe
-   ============================================================ */
-
-/* These styles are injected into the study guide HTML files directly */
-
-/* Global study guide body styles */
-body.study-guide {
-  background-color: #0a1628;
-  color: #e8dcc8;
-  font-family: 'EB Garamond', 'Crimson Text', Georgia, serif;
-  font-size: 16px;
-  line-height: 1.7;
-  margin: 0;
-  padding: 0;
-}
-
-/* Exam tip callout box */
-.exam-tip {
-  border-left: 4px solid #f59e0b;
-  background-color: rgba(245, 158, 11, 0.08);
-  padding: 1rem 1.25rem;
-  margin: 1.25rem 0;
-  border-radius: 0 6px 6px 0;
-}
-
-.exam-tip::before {
-  content: "📝 Exam Tip";
-  display: block;
-  font-weight: 700;
-  color: #f59e0b;
-  margin-bottom: 0.5rem;
-  font-size: 0.9rem;
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
-}
-
-/* Memory aid callout box */
-.memory-aid {
-  border-left: 4px solid #3b82f6;
-  background-color: rgba(59, 130, 246, 0.08);
-  padding: 1rem 1.25rem;
-  margin: 1.25rem 0;
-  border-radius: 0 6px 6px 0;
-}
-
-.memory-aid::before {
-  content: "🧠 Memory Aid";
-  display: block;
-  font-weight: 700;
-  color: #3b82f6;
-  margin-bottom: 0.5rem;
-  font-size: 0.9rem;
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
-}
-
-/* Warning/note callout */
-.note {
-  border-left: 4px solid #8b5cf6;
-  background-color: rgba(139, 92, 246, 0.08);
-  padding: 1rem 1.25rem;
-  margin: 1.25rem 0;
-  border-radius: 0 6px 6px 0;
-}
-
-.note::before {
-  content: "ℹ️ Note";
-  display: block;
-  font-weight: 700;
-  color: #8b5cf6;
-  margin-bottom: 0.5rem;
-  font-size: 0.9rem;
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
 }

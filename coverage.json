@@ -1,106 +1,87 @@
 {
   "kind": "coverage_report",
   "version": "1.0",
-  "generatedAt": "2026-02-25T20:34:28.872Z",
+  "generatedAt": "2026-02-25T21:08:11.030Z",
   "sources": {
     "buildRequest": true,
     "implementationPlan": true
   },
   "requirements": {
-    "total": 6,
-    "implemented": 0,
+    "total": 4,
+    "implemented": 4,
     "items": [
       {
         "id": "REQ-1",
-        "summary": "Add a visible border/outline to all dashboard cards in Dashboard.tsx so each card is clearly delineated. Use a consistent border style (e.g., 1px solid using the app's border color token) that works in both light and dark mode.",
-        "status": "missing",
+        "summary": "Add a consistent visible border/outline to all cards across the Dashboard, Certifications (CertificationSelector), and Study Materials pages. The border should be clearly visible in both light and dark themes and applied uniformly to every card component on every page.",
+        "status": "implemented",
         "plannedFiles": [
-          "frontend/src/pages/Dashboard.tsx"
+          "frontend/src/index.css",
+          "frontend/src/pages/StudyMaterials.tsx",
+          "frontend/src/pages/Dashboard.tsx",
+          "frontend/src/pages/CertificationSelector.tsx"
         ],
-        "matchedFiles": []
+        "matchedFiles": [
+          "frontend/src/index.css",
+          "frontend/src/pages/StudyMaterials.tsx",
+          "frontend/src/pages/Dashboard.tsx",
+          "frontend/src/pages/CertificationSelector.tsx"
+        ]
       },
       {
         "id": "REQ-2",
-        "summary": "Replace the existing dark/light mode toggle in Layout.tsx with a sun ☀️ / moon 🌙 icon switcher. In light mode display the moon icon (clicking switches to dark); in dark mode display the sun icon (clicking switches to light). The icon must be accessible with an aria-label.",
-        "status": "missing",
+        "summary": "Replace the existing dark/light mode toggle in the Layout navbar with a sun ☀️ / moon 🌙 icon-based switcher. When in light mode, display the moon 🌙 icon to switch to dark; when in dark mode, display the sun ☀️ icon to switch to light. The toggle must be positioned in the same area as the current toggle in the sticky header.",
+        "status": "implemented",
         "plannedFiles": [
           "frontend/src/components/Layout.tsx"
         ],
-        "matchedFiles": []
+        "matchedFiles": [
+          "frontend/src/components/Layout.tsx"
+        ]
       },
       {
         "id": "REQ-3",
-        "summary": "Standardize card dimensions across all pages (Dashboard, CertificationSelector, StudyMaterials, Flashcards, PracticeTest, QAPractice). Identify the largest card footprint used anywhere in the app and apply that fixed width and minimum height to every card across all pages, so navigating between pages changes only the card content, not the card size.",
-        "status": "missing",
+        "summary": "Set a uniform fixed card size site-wide for all certification cards across Dashboard, Certifications, and Study Materials pages. Measure the largest card currently rendered (based on the Study Materials page visible in the screenshots) and apply that as the standard min-height and fixed width for all cards, so card dimensions do not change as users navigate between pages — only the card content changes.",
+        "status": "implemented",
         "plannedFiles": [
-          "frontend/src/pages/Dashboard.tsx",
-          "frontend/src/pages/CertificationSelector.tsx",
+          "frontend/src/index.css",
           "frontend/src/pages/StudyMaterials.tsx",
-          "frontend/src/pages/Flashcards.tsx",
-          "frontend/src/pages/PracticeTest.tsx",
-          "frontend/src/pages/QAPractice.tsx",
-          "frontend/src/index.css"
+          "frontend/src/pages/Dashboard.tsx",
+          "frontend/src/pages/CertificationSelector.tsx"
         ],
-        "matchedFiles": []
+        "matchedFiles": [
+          "frontend/src/index.css",
+          "frontend/src/pages/StudyMaterials.tsx",
+          "frontend/src/pages/Dashboard.tsx",
+          "frontend/src/pages/CertificationSelector.tsx"
+        ]
       },
       {
         "id": "REQ-4",
-        "summary": "Perform a thorough security audit of backend/main.mo. Check for: missing or insufficient access control on state-mutating functions, unguarded caller validation, potential for unauthorized data reads/writes across users, integer overflow risks, and any public API surface that should be restricted. Apply all necessary fixes.",
-        "status": "unknown",
-        "plannedFiles": [],
-        "matchedFiles": []
-      },
-      {
-        "id": "REQ-5",
-        "summary": "Perform a frontend code review and security audit covering: input sanitization before any data is sent to the backend, safe rendering of user-supplied or AI-generated content (no dangerouslySetInnerHTML without sanitization), consistent error handling in all React Query hooks in useQueries.ts, and removal of any console.log statements exposing sensitive data. Apply all necessary fixes.",
-        "status": "missing",
+        "summary": "Standardize the CompTIA A+ card on the Study Materials page to match the layout of all other certification cards. Specifically: (1) Add a badge pill outline to the 'A+' label in the card header, matching the pill style used on Security+, Network+, Linux+, Cloud+, CySA+, PenTest+, and CASP+ cards. (2) Remove the extra subtitle text 'Core 1 (220-1101) & Core 2 (220-1102)' from the card so it matches the clean header layout of other cards. Apply this same standardization to the A+ card wherever it appears across all pages (Dashboard, Certifications, Study Materials).",
+        "status": "implemented",
         "plannedFiles": [
-          "frontend/src/hooks/useQueries.ts",
-          "frontend/src/pages/Flashcards.tsx",
-          "frontend/src/pages/QAPractice.tsx",
-          "frontend/src/pages/PracticeTest.tsx",
-          "frontend/src/pages/StudyMode.tsx",
-          "frontend/src/pages/Dashboard.tsx",
-          "frontend/src/pages/CertificationSelector.tsx",
           "frontend/src/pages/StudyMaterials.tsx",
-          "frontend/src/components/PDFViewer.tsx",
-          "frontend/src/components/Layout.tsx",
-          "frontend/src/App.tsx"
-        ],
-        "matchedFiles": []
-      },
-      {
-        "id": "REQ-6",
-        "summary": "Conduct a GUI consistency audit across all pages. Ensure: typography scale (headings, body, labels) is uniform, spacing/padding is consistent using Tailwind spacing tokens, button styles are consistent across pages, color usage adheres to the defined light/dark theme tokens, and no orphaned or broken layout elements exist. Fix all inconsistencies found.",
-        "status": "missing",
-        "plannedFiles": [
           "frontend/src/pages/Dashboard.tsx",
-          "frontend/src/pages/CertificationSelector.tsx",
-          "frontend/src/pages/StudyMaterials.tsx",
-          "frontend/src/pages/Flashcards.tsx",
-          "frontend/src/pages/PracticeTest.tsx",
-          "frontend/src/pages/QAPractice.tsx",
-          "frontend/src/pages/StudyMode.tsx",
-          "frontend/src/components/Layout.tsx",
-          "frontend/src/components/FlashcardDeck.tsx",
-          "frontend/src/components/PDFViewer.tsx",
-          "frontend/src/components/VoiceControls.tsx",
-          "frontend/src/index.css",
-          "frontend/tailwind.config.js"
+          "frontend/src/pages/CertificationSelector.tsx"
         ],
-        "matchedFiles": []
+        "matchedFiles": [
+          "frontend/src/pages/StudyMaterials.tsx",
+          "frontend/src/pages/Dashboard.tsx",
+          "frontend/src/pages/CertificationSelector.tsx"
+        ]
       }
     ]
   },
   "changedFiles": [
-    "backend/main.mo",
     "build-request.json",
     "feature_evidence.json",
+    "frontend-file-summaries.txt",
     "frontend-implementation-plan.json",
-    "frontend/src/backend.d.ts",
-    "frontend/src/backend.ts",
-    "frontend/src/declarations/backend.did.d.ts",
-    "frontend/src/declarations/backend.did.js",
+    "frontend/src/components/Layout.tsx",
+    "frontend/src/index.css",
+    "frontend/src/pages/CertificationSelector.tsx",
+    "frontend/src/pages/Dashboard.tsx",
+    "frontend/src/pages/StudyMaterials.tsx",
     "project_state.json",
     "scratch/component-selection.json",
     "spec.md",
