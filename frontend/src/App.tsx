@@ -1,4 +1,4 @@
-import { createRouter, RouterProvider, createRoute, createRootRoute, Outlet, redirect } from '@tanstack/react-router';
+import { createRouter, RouterProvider, createRoute, createRootRoute, Outlet } from '@tanstack/react-router';
 import Layout from './components/Layout';
 import Dashboard from './pages/Dashboard';
 import CertificationSelector from './pages/CertificationSelector';
@@ -6,6 +6,7 @@ import StudyMode from './pages/StudyMode';
 import QAPractice from './pages/QAPractice';
 import Flashcards from './pages/Flashcards';
 import PracticeTest from './pages/PracticeTest';
+import StudyMaterials from './pages/StudyMaterials';
 
 // Root route with layout
 const rootRoute = createRootRoute({
@@ -52,6 +53,12 @@ const testRoute = createRoute({
   component: PracticeTest,
 });
 
+const studyMaterialsRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: '/study-materials',
+  component: StudyMaterials,
+});
+
 const routeTree = rootRoute.addChildren([
   indexRoute,
   certificationsRoute,
@@ -59,6 +66,7 @@ const routeTree = rootRoute.addChildren([
   practiceRoute,
   flashcardsRoute,
   testRoute,
+  studyMaterialsRoute,
 ]);
 
 const router = createRouter({ routeTree });

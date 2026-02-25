@@ -1,6 +1,6 @@
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { useActor } from './useActor';
-import type { Flashcard, Question, TestResult } from '../backend';
+import type { Flashcard, Question, TestResult, PDFProgressRecord } from '../backend';
 
 // ─── Flashcards ───────────────────────────────────────────────────────────────
 
@@ -118,6 +118,46 @@ export function useSubmitTestResult() {
     },
     onSuccess: (_, variables) => {
       queryClient.invalidateQueries({ queryKey: ['testResults', variables.certificationId] });
+    },
+  });
+}
+
+// ─── Reading Progress ─────────────────────────────────────────────────────────
+
+export function useReadingProgress() {
+  const { actor, isFetching } = useActor();
+
+  return useQuery<PDFProgressRecord[]>({
+    queryKey: ['readingProgress'],
+    queryFn: async () => {
+      if (!actor) return [];
+      try {
+        return await actor.getMyPdfProgressRecords();
+      } catch {
+        return [];
+      }
+    },
+    enabled: !!actor && !isFetching,
+  });
+}
+
+export function useSaveReadingProgress() {
+  const { actor } = useActor();
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: async ({
+      certificationId,
+      percentage,
+    }: {
+      certificationId: string;
+      percentage: number;
+    }) => {
+      if (!actor) throw new Error('Actor not initialized');
+      return actor.saveOrUpdateProgress(certificationId, BigInt(Math.round(percentage)));
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['readingProgress'] });
     },
   });
 }

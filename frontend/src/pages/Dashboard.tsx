@@ -1,8 +1,8 @@
 import { Link } from '@tanstack/react-router';
-import { BookOpen, Layers, FlaskConical, GraduationCap, TrendingUp, Award, Target, Clock } from 'lucide-react';
+import { BookOpen, Layers, FlaskConical, GraduationCap, Target, Award } from 'lucide-react';
 import { CERTIFICATIONS } from '@/data/certifications';
 import { useGetTestResults } from '@/hooks/useQueries';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Card, CardContent } from '@/components/ui/card';
 import { Progress } from '@/components/ui/progress';
 import { Skeleton } from '@/components/ui/skeleton';
 
@@ -91,6 +91,24 @@ function CertCard({ cert }: { cert: typeof CERTIFICATIONS[0] }) {
 export default function Dashboard() {
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+
+      {/* Certifications grid — top of page */}
+      <div className="mb-6 flex items-center justify-between">
+        <h2 className="font-display text-2xl font-bold text-foreground">Your Certifications</h2>
+        <Link
+          to="/certifications"
+          className="text-sm text-primary hover:text-primary/80 font-medium transition-colors"
+        >
+          View all →
+        </Link>
+      </div>
+
+      <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 mb-12">
+        {CERTIFICATIONS.map(cert => (
+          <CertCard key={cert.id} cert={cert} />
+        ))}
+      </div>
+
       {/* Hero */}
       <div className="mb-10">
         <div className="flex items-center gap-3 mb-3">
@@ -128,7 +146,7 @@ export default function Dashboard() {
       </div>
 
       {/* Study modes banner */}
-      <div className="grid md:grid-cols-3 gap-4 mb-10">
+      <div className="grid md:grid-cols-3 gap-4">
         <div className="bg-gradient-to-br from-primary/20 to-primary/5 border border-primary/30 rounded-xl p-5">
           <BookOpen className="w-8 h-8 text-primary mb-3" />
           <h3 className="font-display font-semibold text-foreground mb-1">AI Study Mode</h3>
@@ -144,23 +162,6 @@ export default function Dashboard() {
           <h3 className="font-display font-semibold text-foreground mb-1">Practice Tests</h3>
           <p className="text-sm text-muted-foreground">Full mock exams with grading, detailed review, and progress tracking across all attempts.</p>
         </div>
-      </div>
-
-      {/* Certifications grid */}
-      <div className="mb-6 flex items-center justify-between">
-        <h2 className="font-display text-2xl font-bold text-foreground">Your Certifications</h2>
-        <Link
-          to="/certifications"
-          className="text-sm text-primary hover:text-primary/80 font-medium transition-colors"
-        >
-          View all →
-        </Link>
-      </div>
-
-      <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
-        {CERTIFICATIONS.map(cert => (
-          <CertCard key={cert.id} cert={cert} />
-        ))}
       </div>
     </div>
   );

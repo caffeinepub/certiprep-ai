@@ -1,4 +1,62 @@
 {
   "kind": "feature_evidence_report",
-  "features": []
+  "features": [
+    {
+      "featureId": "feature-on-the-dashboard-page-frontend-src-pages-dashboard-tsx-move-the-8-comptia-certification-cards-showing-difficulty-badge-exam-code-cert-name-description-test-score-progress-info-and-study-flashcards-test-quick-access-icon-buttons-so-they-appear-as-the-very-first-content-section-immediately-below-the-page-header-before-the-your-certifications-heading-and-any-other-statistics-or-informational-content-the-cards-must-retain-their-existing-4-column-grid-layout-dark-card-styles-amber-blue-accent-colors-and-all-interactive-functionality",
+      "featureTitle": "On the Dashboard page (`frontend/src/pages/Dashboard.tsx`), move the 8 CompTIA certification cards (showing difficulty badge, exam code, cert name, description, test score/progress info, and Study/Flashcards/Test quick-access icon buttons) so they appear as the very first content section immediately below the page header — before the 'Your Certifications' heading and any other statistics or informational content. The cards must retain their existing 4-column grid layout, dark card styles, amber/blue accent colors, and all interactive functionality.",
+      "files": [
+        "frontend/src/pages/Dashboard.tsx"
+      ],
+      "components": [
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0",
+        "authorization@4.0.0"
+      ],
+      "testIds": [
+        "REQ-30"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-on-the-certification-selector-page-frontend-src-pages-certificationselector-tsx-move-the-8-comptia-certification-cards-with-difficulty-badge-exam-code-cert-name-description-domain-overview-and-study-flashcards-test-quick-access-buttons-so-they-appear-as-the-very-first-content-section-immediately-below-the-page-header-any-introductory-text-domain-detail-sections-or-descriptive-informational-content-must-flow-beneath-the-card-grid",
+      "featureTitle": "On the Certification Selector page (`frontend/src/pages/CertificationSelector.tsx`), move the 8 CompTIA certification cards (with difficulty badge, exam code, cert name, description, domain overview, and Study/Flashcards/Test quick-access buttons) so they appear as the very first content section immediately below the page header. Any introductory text, domain detail sections, or descriptive informational content must flow beneath the card grid.",
+      "files": [
+        "frontend/src/pages/CertificationSelector.tsx"
+      ],
+      "components": [
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0",
+        "authorization@4.0.0"
+      ],
+      "testIds": [
+        "REQ-31"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-on-the-study-materials-page-frontend-src-pages-studymaterials-tsx-move-the-8-comptia-certification-cards-with-cert-name-exam-code-study-guide-links-open-actions-and-reading-progress-bar-so-they-appear-as-the-very-first-content-section-immediately-below-the-page-header-reading-progress-bars-and-read-labels-may-remain-on-each-card-but-the-cards-themselves-must-lead-the-page-layout",
+      "featureTitle": "On the Study Materials page (`frontend/src/pages/StudyMaterials.tsx`), move the 8 CompTIA certification cards (with cert name, exam code, study guide links/open actions, and reading progress bar) so they appear as the very first content section immediately below the page header. Reading progress bars and '% read' labels may remain on each card but the cards themselves must lead the page layout.",
+      "files": [
+        "frontend/src/pages/StudyMaterials.tsx"
+      ],
+      "components": [
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0",
+        "authorization@4.0.0"
+      ],
+      "testIds": [
+        "REQ-32"
+      ],
+      "confidence": "high"
+    }
+  ]
 }

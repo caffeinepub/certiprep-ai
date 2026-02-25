@@ -89,6 +89,11 @@ export class ExternalBlob {
         return this;
     }
 }
+export interface KeyTerm {
+    id: KeyTermId;
+    term: string;
+    definition: string;
+}
 export type Time = bigint;
 export type TestId = bigint;
 export type QuestionId = bigint;
@@ -106,7 +111,11 @@ export interface Domain {
     subdomains: Array<string>;
     description: string;
 }
-export type CertificationId = string;
+export interface PDFProgressRecord {
+    userId: Principal;
+    certificationId: CertificationId;
+    percentage: bigint;
+}
 export interface TestResult {
     certificationId: CertificationId;
     score: bigint;
@@ -118,6 +127,7 @@ export type KeyTermId = bigint;
 export type ProtocolId = bigint;
 export type ObjectiveId = bigint;
 export type FlashcardId = bigint;
+export type CertificationId = string;
 export type DomainId = bigint;
 export interface Flashcard {
     id: FlashcardId;
@@ -146,12 +156,16 @@ export interface Protocol {
     port?: bigint;
     description: string;
 }
-export interface KeyTerm {
-    id: KeyTermId;
-    term: string;
-    definition: string;
+export interface UserProfile {
+    name: string;
+}
+export enum UserRole {
+    admin = "admin",
+    user = "user",
+    guest = "guest"
 }
 export interface backendInterface {
+    _initializeAccessControlWithSecret(userSecret: string): Promise<void>;
     addDomain(certName: string, name: string, description: string, subdomains: Array<string>): Promise<DomainId>;
     addFlashcard(certificationId: CertificationId, front: string, back: string): Promise<void>;
     addKeyTerm(term: string, definition: string): Promise<KeyTermId>;
@@ -159,20 +173,43 @@ export interface backendInterface {
     addPort(portNumber: bigint, protocol: string, service: string, description: string): Promise<PortId>;
     addProtocol(name: string, description: string, port: bigint | null): Promise<ProtocolId>;
     addQuestion(certificationId: CertificationId, domain: string, questionText: string, correctAnswer: string): Promise<QuestionId>;
+    assignCallerUserRole(user: Principal, role: UserRole): Promise<void>;
+    getAllPdfProgressRecords(): Promise<Array<PDFProgressRecord>>;
+    getCallerUserProfile(): Promise<UserProfile | null>;
+    getCallerUserRole(): Promise<UserRole>;
     getCertifications(): Promise<Array<string>>;
     getDomains(certificationId: CertificationId): Promise<Array<Domain>>;
     getFlashcards(certificationId: CertificationId): Promise<Array<Flashcard>>;
     getKeyTerms(): Promise<Array<KeyTerm>>;
+    getMyPdfProgressRecords(): Promise<Array<PDFProgressRecord>>;
     getObjectives(domainId: DomainId): Promise<Array<Objective>>;
     getPorts(): Promise<Array<Port>>;
     getProtocols(): Promise<Array<Protocol>>;
     getQuestionsForCertification(certificationId: CertificationId): Promise<Array<Question>>;
     getTestResultsForCertification(certificationId: CertificationId): Promise<Array<TestResult>>;
+    getUserProfile(user: Principal): Promise<UserProfile | null>;
+    isCallerAdmin(): Promise<boolean>;
+    saveCallerUserProfile(profile: UserProfile): Promise<void>;
+    saveOrUpdateProgress(certificationId: CertificationId, percentage: bigint): Promise<void>;
     submitTestResult(certificationId: CertificationId, score: bigint, totalQuestions: bigint): Promise<TestId>;
 }
-import type { Protocol as _Protocol, ProtocolId as _ProtocolId } from "./declarations/backend.did.d.ts";
+import type { Protocol as _Protocol, ProtocolId as _ProtocolId, UserProfile as _UserProfile, UserRole as _UserRole } from "./declarations/backend.did.d.ts";
 export class Backend implements backendInterface {
     constructor(private actor: ActorSubclass<_SERVICE>, private _uploadFile: (file: ExternalBlob) => Promise<Uint8Array>, private _downloadFile: (file: Uint8Array) => Promise<ExternalBlob>, private processError?: (error: unknown) => never){}
+    async _initializeAccessControlWithSecret(arg0: string): Promise<void> {
+        if (this.processError) {
+            try {
+                const result = await this.actor._initializeAccessControlWithSecret(arg0);
+                return result;
+            } catch (e) {
+                this.processError(e);
+                throw new Error("unreachable");
+            }
+        } else {
+            const result = await this.actor._initializeAccessControlWithSecret(arg0);
+            return result;
+        }
+    }
     async addDomain(arg0: string, arg1: string, arg2: string, arg3: Array<string>): Promise<DomainId> {
         if (this.processError) {
             try {
@@ -271,6 +308,62 @@ export class Backend implements backendInterface {
             return result;
         }
     }
+    async assignCallerUserRole(arg0: Principal, arg1: UserRole): Promise<void> {
+        if (this.processError) {
+            try {
+                const result = await this.actor.assignCallerUserRole(arg0, to_candid_UserRole_n2(this._uploadFile, this._downloadFile, arg1));
+                return result;
+            } catch (e) {
+                this.processError(e);
+                throw new Error("unreachable");
+            }
+        } else {
+            const result = await this.actor.assignCallerUserRole(arg0, to_candid_UserRole_n2(this._uploadFile, this._downloadFile, arg1));
+            return result;
+        }
+    }
+    async getAllPdfProgressRecords(): Promise<Array<PDFProgressRecord>> {
+        if (this.processError) {
+            try {
+                const result = await this.actor.getAllPdfProgressRecords();
+                return result;
+            } catch (e) {
+                this.processError(e);
+                throw new Error("unreachable");
+            }
+        } else {
+            const result = await this.actor.getAllPdfProgressRecords();
+            return result;
+        }
+    }
+    async getCallerUserProfile(): Promise<UserProfile | null> {
+        if (this.processError) {
+            try {
+                const result = await this.actor.getCallerUserProfile();
+                return from_candid_opt_n4(this._uploadFile, this._downloadFile, result);
+            } catch (e) {
+                this.processError(e);
+                throw new Error("unreachable");
+            }
+        } else {
+            const result = await this.actor.getCallerUserProfile();
+            return from_candid_opt_n4(this._uploadFile, this._downloadFile, result);
+        }
+    }
+    async getCallerUserRole(): Promise<UserRole> {
+        if (this.processError) {
+            try {
+                const result = await this.actor.getCallerUserRole();
+                return from_candid_UserRole_n5(this._uploadFile, this._downloadFile, result);
+            } catch (e) {
+                this.processError(e);
+                throw new Error("unreachable");
+            }
+        } else {
+            const result = await this.actor.getCallerUserRole();
+            return from_candid_UserRole_n5(this._uploadFile, this._downloadFile, result);
+        }
+    }
     async getCertifications(): Promise<Array<string>> {
         if (this.processError) {
             try {
@@ -327,6 +420,20 @@ export class Backend implements backendInterface {
             return result;
         }
     }
+    async getMyPdfProgressRecords(): Promise<Array<PDFProgressRecord>> {
+        if (this.processError) {
+            try {
+                const result = await this.actor.getMyPdfProgressRecords();
+                return result;
+            } catch (e) {
+                this.processError(e);
+                throw new Error("unreachable");
+            }
+        } else {
+            const result = await this.actor.getMyPdfProgressRecords();
+            return result;
+        }
+    }
     async getObjectives(arg0: DomainId): Promise<Array<Objective>> {
         if (this.processError) {
             try {
@@ -359,14 +466,14 @@ export class Backend implements backendInterface {
         if (this.processError) {
             try {
                 const result = await this.actor.getProtocols();
-                return from_candid_vec_n2(this._uploadFile, this._downloadFile, result);
+                return from_candid_vec_n7(this._uploadFile, this._downloadFile, result);
             } catch (e) {
                 this.processError(e);
                 throw new Error("unreachable");
             }
         } else {
             const result = await this.actor.getProtocols();
-            return from_candid_vec_n2(this._uploadFile, this._downloadFile, result);
+            return from_candid_vec_n7(this._uploadFile, this._downloadFile, result);
         }
     }
     async getQuestionsForCertification(arg0: CertificationId): Promise<Array<Question>> {
@@ -397,6 +504,62 @@ export class Backend implements backendInterface {
             return result;
         }
     }
+    async getUserProfile(arg0: Principal): Promise<UserProfile | null> {
+        if (this.processError) {
+            try {
+                const result = await this.actor.getUserProfile(arg0);
+                return from_candid_opt_n4(this._uploadFile, this._downloadFile, result);
+            } catch (e) {
+                this.processError(e);
+                throw new Error("unreachable");
+            }
+        } else {
+            const result = await this.actor.getUserProfile(arg0);
+            return from_candid_opt_n4(this._uploadFile, this._downloadFile, result);
+        }
+    }
+    async isCallerAdmin(): Promise<boolean> {
+        if (this.processError) {
+            try {
+                const result = await this.actor.isCallerAdmin();
+                return result;
+            } catch (e) {
+                this.processError(e);
+                throw new Error("unreachable");
+            }
+        } else {
+            const result = await this.actor.isCallerAdmin();
+            return result;
+        }
+    }
+    async saveCallerUserProfile(arg0: UserProfile): Promise<void> {
+        if (this.processError) {
+            try {
+                const result = await this.actor.saveCallerUserProfile(arg0);
+                return result;
+            } catch (e) {
+                this.processError(e);
+                throw new Error("unreachable");
+            }
+        } else {
+            const result = await this.actor.saveCallerUserProfile(arg0);
+            return result;
+        }
+    }
+    async saveOrUpdateProgress(arg0: CertificationId, arg1: bigint): Promise<void> {
+        if (this.processError) {
+            try {
+                const result = await this.actor.saveOrUpdateProgress(arg0, arg1);
+                return result;
+            } catch (e) {
+                this.processError(e);
+                throw new Error("unreachable");
+            }
+        } else {
+            const result = await this.actor.saveOrUpdateProgress(arg0, arg1);
+            return result;
+        }
+    }
     async submitTestResult(arg0: CertificationId, arg1: bigint, arg2: bigint): Promise<TestId> {
         if (this.processError) {
             try {
@@ -412,13 +575,19 @@ export class Backend implements backendInterface {
         }
     }
 }
-function from_candid_Protocol_n3(_uploadFile: (file: ExternalBlob) => Promise<Uint8Array>, _downloadFile: (file: Uint8Array) => Promise<ExternalBlob>, value: _Protocol): Protocol {
-    return from_candid_record_n4(_uploadFile, _downloadFile, value);
+function from_candid_Protocol_n8(_uploadFile: (file: ExternalBlob) => Promise<Uint8Array>, _downloadFile: (file: Uint8Array) => Promise<ExternalBlob>, value: _Protocol): Protocol {
+    return from_candid_record_n9(_uploadFile, _downloadFile, value);
 }
-function from_candid_opt_n5(_uploadFile: (file: ExternalBlob) => Promise<Uint8Array>, _downloadFile: (file: Uint8Array) => Promise<ExternalBlob>, value: [] | [bigint]): bigint | null {
+function from_candid_UserRole_n5(_uploadFile: (file: ExternalBlob) => Promise<Uint8Array>, _downloadFile: (file: Uint8Array) => Promise<ExternalBlob>, value: _UserRole): UserRole {
+    return from_candid_variant_n6(_uploadFile, _downloadFile, value);
+}
+function from_candid_opt_n10(_uploadFile: (file: ExternalBlob) => Promise<Uint8Array>, _downloadFile: (file: Uint8Array) => Promise<ExternalBlob>, value: [] | [bigint]): bigint | null {
     return value.length === 0 ? null : value[0];
 }
-function from_candid_record_n4(_uploadFile: (file: ExternalBlob) => Promise<Uint8Array>, _downloadFile: (file: Uint8Array) => Promise<ExternalBlob>, value: {
+function from_candid_opt_n4(_uploadFile: (file: ExternalBlob) => Promise<Uint8Array>, _downloadFile: (file: Uint8Array) => Promise<ExternalBlob>, value: [] | [_UserProfile]): UserProfile | null {
+    return value.length === 0 ? null : value[0];
+}
+function from_candid_record_n9(_uploadFile: (file: ExternalBlob) => Promise<Uint8Array>, _downloadFile: (file: Uint8Array) => Promise<ExternalBlob>, value: {
     id: _ProtocolId;
     name: string;
     port: [] | [bigint];
@@ -432,15 +601,42 @@ function from_candid_record_n4(_uploadFile: (file: ExternalBlob) => Promise<Uint
     return {
         id: value.id,
         name: value.name,
-        port: record_opt_to_undefined(from_candid_opt_n5(_uploadFile, _downloadFile, value.port)),
+        port: record_opt_to_undefined(from_candid_opt_n10(_uploadFile, _downloadFile, value.port)),
         description: value.description
     };
 }
-function from_candid_vec_n2(_uploadFile: (file: ExternalBlob) => Promise<Uint8Array>, _downloadFile: (file: Uint8Array) => Promise<ExternalBlob>, value: Array<_Protocol>): Array<Protocol> {
-    return value.map((x)=>from_candid_Protocol_n3(_uploadFile, _downloadFile, x));
+function from_candid_variant_n6(_uploadFile: (file: ExternalBlob) => Promise<Uint8Array>, _downloadFile: (file: Uint8Array) => Promise<ExternalBlob>, value: {
+    admin: null;
+} | {
+    user: null;
+} | {
+    guest: null;
+}): UserRole {
+    return "admin" in value ? UserRole.admin : "user" in value ? UserRole.user : "guest" in value ? UserRole.guest : value;
+}
+function from_candid_vec_n7(_uploadFile: (file: ExternalBlob) => Promise<Uint8Array>, _downloadFile: (file: Uint8Array) => Promise<ExternalBlob>, value: Array<_Protocol>): Array<Protocol> {
+    return value.map((x)=>from_candid_Protocol_n8(_uploadFile, _downloadFile, x));
+}
+function to_candid_UserRole_n2(_uploadFile: (file: ExternalBlob) => Promise<Uint8Array>, _downloadFile: (file: Uint8Array) => Promise<ExternalBlob>, value: UserRole): _UserRole {
+    return to_candid_variant_n3(_uploadFile, _downloadFile, value);
 }
 function to_candid_opt_n1(_uploadFile: (file: ExternalBlob) => Promise<Uint8Array>, _downloadFile: (file: Uint8Array) => Promise<ExternalBlob>, value: bigint | null): [] | [bigint] {
     return value === null ? candid_none() : candid_some(value);
+}
+function to_candid_variant_n3(_uploadFile: (file: ExternalBlob) => Promise<Uint8Array>, _downloadFile: (file: Uint8Array) => Promise<ExternalBlob>, value: UserRole): {
+    admin: null;
+} | {
+    user: null;
+} | {
+    guest: null;
+} {
+    return value == UserRole.admin ? {
+        admin: null
+    } : value == UserRole.user ? {
+        user: null
+    } : value == UserRole.guest ? {
+        guest: null
+    } : value;
 }
 export interface CreateActorOptions {
     agent?: Agent;

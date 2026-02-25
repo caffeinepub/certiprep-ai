@@ -1,11 +1,12 @@
 # Specification
 
 ## Summary
-**Goal:** Expand the certification content library to exhaustive coverage for all 8 CompTIA certifications and strengthen the AI instructor persona to act as an authoritative professor across all study modes.
+**Goal:** Move the 8 CompTIA certification quick-access cards to the top of the Dashboard, Certification Selector, and Study Materials pages so they appear immediately below the page header.
 
 **Planned changes:**
-- Expand `frontend/src/data/certifications.ts` to include fully exhaustive content for all 8 certifications (A+, Security+, Network+, Linux+, Cloud+, CySA+, PenTest+, CASP+): all official exam domains and sub-domains, objectives, port numbers, CLI commands and tools, protocols with OSI context, acronyms with definitions, key concepts, exam tips, and mnemonics
-- Update the AI system prompt in `frontend/src/pages/StudyMode.tsx` and all other locations where AI prompts are constructed (QAPractice, Flashcards, PracticeTest review) to establish the AI as an expert CompTIA professor that proactively teaches all domain content, cites exam objectives/ports/commands/acronyms/protocols, provides exam tips and memory aids, and ensures exam readiness
-- Audit and complete `backend/main.mo` to support storage and retrieval of all expanded certification content, question attempts, flashcard decks, and test results with full per-question breakdowns using stable variables
+- On `Dashboard.tsx`, reorder content so the 8 certification cards (4-column grid) appear first, directly below the page header, with the "Your Certifications" heading and all other stats/content moved below the card grid.
+- On `CertificationSelector.tsx`, reorder content so the 8 certification cards appear first, directly below the page header, with introductory text and domain detail sections moved below the card grid.
+- On `StudyMaterials.tsx`, reorder content so the 8 certification study material cards appear first, directly below the page header, with any introductory or secondary content moved below the card grid.
+- All card designs, styles, animations, grid layouts, and interactive functionality remain unchanged on all three pages.
 
-**User-visible outcome:** Students can rely entirely on CertiPrep AI to prepare for any of the 8 listed CompTIA exams — the AI will teach comprehensively like a professor, referencing real exam objectives, ports, commands, and acronyms, while all study data is fully persisted in the backend.
+**User-visible outcome:** Users immediately see all 8 certification quick-access cards at the top of the Dashboard, Certification Selector, and Study Materials pages without scrolling past introductory content.

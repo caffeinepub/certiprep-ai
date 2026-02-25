@@ -1,6 +1,6 @@
 {
   "schemaVersion": "1.0.0",
-  "projectStateVersion": 5,
+  "projectStateVersion": 13,
   "summary": "CertiPrep AI is a hosted CompTIA certification study app with AI-driven Q&A, voice instruction (natural voice with picker, speed/pitch controls), flashcards, graded practice tests, and progress tracking. Features smart review of failed questions with explanations, and deep comprehensive content for 8 CompTIA certs (A+, Security+, Network+, Linux+, Cloud+, CySA+, PenTest+, CASP+) covering ALL domains, sub-topics, ports, commands, protocols, acronyms, and exam objectives. The AI acts as an authoritative professor instructing students with complete certification knowledge — the goal is a one-stop site where any student can pass any listed CompTIA exam.",
   "architectural_notes": [
     "Entities: Certification, StudySession, QuestionAttempt, FlashcardDeck, TestResult",
@@ -8,7 +8,8 @@
     "Voice system uses smart voice selection (Google Neural > Microsoft Neural > macOS Samantha), speed/pitch sliders, markdown-stripped TTS output",
     "AI instructor, flashcard generator, and practice test all pull from rich per-cert knowledge base",
     "Design: dark academic theme — deep navy/slate backgrounds, electric blue accents, clean white cards",
-    "AI instructor must be prompted with a professor/expert persona and instructed to use ALL available cert content when teaching — proactive instruction, not just Q&A responses"
+    "AI instructor must be prompted with a professor/expert persona and instructed to use ALL available cert content when teaching — proactive instruction, not just Q&A responses",
+    "Layout order: pinned header → interactive cards → informational content → sticky footer (applied globally across all pages)"
   ],
   "known_issues": [
     "Certification content library completeness is unverified — needs audit to ensure all domains, objectives, ports, commands, acronyms, and exam tips are fully covered for all 8 certs"
@@ -86,6 +87,78 @@
         "REQ-11"
       ],
       "version": 1
+    },
+    {
+      "id": "feature-create-a-study-materials-pdf-library-page-accessible-from-the-main-navigation-the-page-displays-a-card-grid-one-card-per-comptia-certification-a-security-network-linux-cloud-cysa-pentest-casp-each-card-shows-the-certification-name-exam-code-and-a-list-of-available-study-guide-pdfs-or-reference-documents-for-that-cert-users-can-open-view-the-pdf-inline-embedded-viewer-or-download-it-directly",
+      "title": "Create a Study Materials / PDF Library page accessible from the main navigation. The page displays a card grid — one card per CompTIA certification (A+, Security+, Network+, Linux+, Cloud+, CySA+, PenTest+, CASP+). Each card shows the certification name, exam code, and a list of available study guide PDFs or reference documents for that cert. Users can open/view the PDF inline (embedded viewer) or download it directly.",
+      "reqIds": [
+        "REQ-15"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-serve-the-comptia-study-guide-pdfs-as-static-assets-under-frontend-public-assets-pdfs-create-one-well-structured-comprehensive-pdf-study-guide-per-certification-a-security-network-linux-cloud-cysa-pentest-casp-or-if-binary-pdf-generation-is-not-feasible-create-rich-html-based-study-guide-pages-rendered-inside-the-app-that-cover-all-exam-domains-objectives-key-terms-port-numbers-commands-protocols-and-acronyms-for-each-certification-each-guide-must-be-complete-enough-that-a-student-can-use-it-alone-to-prepare-for-the-real-exam",
+      "title": "Serve the CompTIA study guide PDFs as static assets under `frontend/public/assets/pdfs/`. Create one well-structured, comprehensive PDF study guide per certification (A+, Security+, Network+, Linux+, Cloud+, CySA+, PenTest+, CASP+) — or, if binary PDF generation is not feasible, create rich HTML-based study guide pages rendered inside the app that cover all exam domains, objectives, key terms, port numbers, commands, protocols, and acronyms for each certification. Each guide must be complete enough that a student can use it alone to prepare for the real exam.",
+      "reqIds": [
+        "REQ-16"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-a-route-for-the-study-materials-page-in-frontend-src-app-tsx-e-g-study-materials-and-include-it-in-the-layout-tsx-navigation-alongside-dashboard-certifications-study-flashcards-and-practice-test-links",
+      "title": "Add a route for the Study Materials page in `frontend/src/App.tsx` (e.g., `/study-materials`) and include it in the `Layout.tsx` navigation alongside Dashboard, Certifications, Study, Flashcards, and Practice Test links.",
+      "reqIds": [
+        "REQ-17"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-in-the-pdfviewer-component-track-scroll-position-within-the-embedded-study-guide-and-compute-a-reading-progress-percentage-scrolled-portion-of-total-content-height-persist-this-percentage-to-the-backend-via-savereadingprogress-whenever-the-user-scrolls-debounced-to-avoid-excessive-calls-on-open-load-the-previously-saved-percentage-and-restore-the-scroll-position",
+      "title": "In the PDFViewer component, track scroll position within the embedded study guide and compute a reading progress percentage (scrolled portion of total content height). Persist this percentage to the backend via saveReadingProgress whenever the user scrolls, debounced to avoid excessive calls. On open, load the previously saved percentage and restore the scroll position.",
+      "reqIds": [
+        "REQ-19"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-on-the-study-materials-page-frontend-src-pages-studymaterials-tsx-display-each-certification-s-reading-progress-percentage-on-its-card-show-a-progress-bar-and-a-label-such-as-45-read-beneath-each-guide-listing-fetch-reading-progress-from-the-backend-on-page-load-using-react-query-and-update-the-display-whenever-a-pdf-session-ends",
+      "title": "On the Study Materials page (frontend/src/pages/StudyMaterials.tsx), display each certification's reading progress percentage on its card. Show a progress bar and a label such as '45% read' beneath each guide listing. Fetch reading progress from the backend on page load using React Query and update the display whenever a PDF session ends.",
+      "reqIds": [
+        "REQ-20"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-a-usereadingprogress-react-query-hook-in-frontend-src-hooks-usequeries-ts-that-wraps-the-backend-getreadingprogress-and-savereadingprogress-calls-following-the-existing-mutation-query-patterns-in-that-file",
+      "title": "Add a useReadingProgress React Query hook in frontend/src/hooks/useQueries.ts that wraps the backend getReadingProgress and saveReadingProgress calls, following the existing mutation/query patterns in that file.",
+      "reqIds": [
+        "REQ-21"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-on-the-dashboard-page-frontend-src-pages-dashboard-tsx-move-the-8-comptia-certification-cards-showing-difficulty-badge-exam-code-cert-name-description-test-score-progress-info-and-study-flashcards-test-quick-access-icon-buttons-so-they-appear-as-the-very-first-content-section-immediately-below-the-page-header-before-the-your-certifications-heading-and-any-other-statistics-or-informational-content-the-cards-must-retain-their-existing-4-column-grid-layout-dark-card-styles-amber-blue-accent-colors-and-all-interactive-functionality",
+      "title": "On the Dashboard page (`frontend/src/pages/Dashboard.tsx`), move the 8 CompTIA certification cards (showing difficulty badge, exam code, cert name, description, test score/progress info, and Study/Flashcards/Test quick-access icon buttons) so they appear as the very first content section immediately below the page header — before the 'Your Certifications' heading and any other statistics or informational content. The cards must retain their existing 4-column grid layout, dark card styles, amber/blue accent colors, and all interactive functionality.",
+      "reqIds": [
+        "REQ-30"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-on-the-certification-selector-page-frontend-src-pages-certificationselector-tsx-move-the-8-comptia-certification-cards-with-difficulty-badge-exam-code-cert-name-description-domain-overview-and-study-flashcards-test-quick-access-buttons-so-they-appear-as-the-very-first-content-section-immediately-below-the-page-header-any-introductory-text-domain-detail-sections-or-descriptive-informational-content-must-flow-beneath-the-card-grid",
+      "title": "On the Certification Selector page (`frontend/src/pages/CertificationSelector.tsx`), move the 8 CompTIA certification cards (with difficulty badge, exam code, cert name, description, domain overview, and Study/Flashcards/Test quick-access buttons) so they appear as the very first content section immediately below the page header. Any introductory text, domain detail sections, or descriptive informational content must flow beneath the card grid.",
+      "reqIds": [
+        "REQ-31"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-on-the-study-materials-page-frontend-src-pages-studymaterials-tsx-move-the-8-comptia-certification-cards-with-cert-name-exam-code-study-guide-links-open-actions-and-reading-progress-bar-so-they-appear-as-the-very-first-content-section-immediately-below-the-page-header-reading-progress-bars-and-read-labels-may-remain-on-each-card-but-the-cards-themselves-must-lead-the-page-layout",
+      "title": "On the Study Materials page (`frontend/src/pages/StudyMaterials.tsx`), move the 8 CompTIA certification cards (with cert name, exam code, study guide links/open actions, and reading progress bar) so they appear as the very first content section immediately below the page header. Reading progress bars and '% read' labels may remain on each card but the cards themselves must lead the page layout.",
+      "reqIds": [
+        "REQ-32"
+      ],
+      "version": 1
     }
   ],
   "new_feature_requests": [
@@ -141,6 +214,96 @@
       "summary": "Audit and complete the backend data model in `backend/main.mo` to ensure it can store and retrieve the full expanded certification content (domains, sub-domains, objectives, key terms, ports, commands, protocols, acronyms, exam tips) as structured records. Ensure the backend can persist question attempts, flashcard decks, and test results with all required fields, and that any missing storage functions (add, get, update, delete) are implemented for all data types.",
       "reqIds": [
         "REQ-14"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-8",
+      "summary": "Add a Study Materials / PDF Library section where users can access downloadable or in-app PDF study books/guides for each CompTIA certification, covering all exam content for use alongside the AI instructor.",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-9",
+      "summary": "Track study progress for PDF study materials by percentage of each PDF/guide read. Display per-certification reading progress (e.g., '45% read') on the Study Materials page so students can see how much of each guide they've covered.",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-10",
+      "summary": "Add a backend data model and storage for PDF reading progress: store per-user, per-certification reading progress as a percentage (0–100). Expose functions to save/update the reading percentage for a given certification and to retrieve all stored reading progress records.",
+      "reqIds": [
+        "REQ-18"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-11",
+      "summary": "Global layout restructure: header pinned at top, interactive cards (quick-access buttons, certification selectors, mode launchers) placed just below the header, informational content (stats, progress bars, summaries) flows beneath interactive cards, and footer becomes a sticky footer fixed to the bottom of the viewport. Same card styles, spacing, and dark academia theme preserved throughout all pages.",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-12",
+      "summary": "In `frontend/src/components/Layout.tsx`, ensure the header remains pinned at the very top of the viewport (position sticky or fixed, full width) and convert the footer into a sticky footer fixed to the bottom of the viewport. The main content area between header and footer must scroll independently. Preserve all existing header content (logo, nav links, AI Ready indicator) and footer content.",
+      "reqIds": [
+        "REQ-22"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-13",
+      "summary": "On the Dashboard page (`frontend/src/pages/Dashboard.tsx`), reorder the page content so that the interactive cards (quick-access buttons: Study, Flashcards, Practice Test per certification) appear immediately below the header, followed by informational/statistical content (test score progress bars, pass rate summaries, stats). Maintain the existing card grid layout, styles, and spacing.",
+      "reqIds": [
+        "REQ-23"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-14",
+      "summary": "On the Certification Selector page (`frontend/src/pages/CertificationSelector.tsx`), reorder the page content so that the interactive certification cards (clickable selectors that lead to study/flashcard/test routes) appear immediately below the header, with any descriptive or informational text/domain overviews flowing beneath them. Maintain existing card grid layout, styles, and spacing.",
+      "reqIds": [
+        "REQ-24"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-15",
+      "summary": "On the Study Materials page (`frontend/src/pages/StudyMaterials.tsx`), reorder the page content so that the interactive certification cards (cards with open/download PDF actions) appear immediately below the header, and reading progress indicators (progress bars, '% read' labels) appear beneath each card or in a secondary informational section below. Maintain existing card grid layout, styles, and spacing.",
+      "reqIds": [
+        "REQ-25"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-16",
+      "summary": "On the Flashcards page (`frontend/src/pages/Flashcards.tsx`), reorder the page content so that the interactive controls (certification selector, Generate Flashcards button, card flip actions, correct/incorrect buttons) appear at the top of the content area immediately below the header, with summary/results and explanatory informational content flowing beneath. Maintain existing layout and component structure.",
+      "reqIds": [
+        "REQ-26"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-17",
+      "summary": "On the Practice Test page (`frontend/src/pages/PracticeTest.tsx`), reorder the page content so that the interactive elements (question display, answer options, timer, submit button) appear at the top of the content area immediately below the header, with results/score summaries, pass/fail indicators, and per-question review sections flowing beneath. Maintain existing layout and functionality.",
+      "reqIds": [
+        "REQ-27"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-18",
+      "summary": "On the Q&A Practice page (`frontend/src/pages/QAPractice.tsx`), reorder the page content so that the interactive elements (domain filter, question display, answer input/buttons) appear at the top of the content area immediately below the header, with pass/fail feedback and review sections flowing beneath. Maintain existing layout and functionality.",
+      "reqIds": [
+        "REQ-28"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-19",
+      "summary": "On the Study Mode page (`frontend/src/pages/StudyMode.tsx`), reorder the page content so that the interactive elements (domain selector, chat/question input, voice controls, send button) appear at the top of the content area immediately below the header, with the AI conversation/response display and speaking indicator flowing beneath. Maintain existing layout and functionality.",
+      "reqIds": [
+        "REQ-29"
       ],
       "status": "pending"
     }

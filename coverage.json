@@ -1,56 +1,58 @@
 {
   "kind": "coverage_report",
   "version": "1.0",
-  "generatedAt": "2026-02-25T00:00:17.569Z",
+  "generatedAt": "2026-02-25T01:53:25.039Z",
   "sources": {
     "buildRequest": true,
     "implementationPlan": true
   },
   "requirements": {
     "total": 3,
-    "implemented": 0,
+    "implemented": 3,
     "items": [
       {
-        "id": "REQ-12",
-        "summary": "Expand the certification content data in `frontend/src/data/certifications.ts` to be fully exhaustive for all 8 CompTIA certifications (A+, Security+, Network+, Linux+, Cloud+, CySA+, PenTest+, CASP+). Every certification entry must include: all official exam domains and sub-domains, every exam objective and sub-objective as listed in the official CompTIA exam objectives documents, all relevant port numbers and their associated protocols/services, all CLI commands and tools students must know, all key protocols (OSI layer, function, exam context), all acronyms and their full definitions, all key concepts and technologies per domain, common exam scenario tips, and memory aids or mnemonics where applicable. The content must be thorough enough that a student using only this app can pass the real exam.",
-        "status": "missing",
+        "id": "REQ-30",
+        "summary": "On the Dashboard page (`frontend/src/pages/Dashboard.tsx`), move the 8 CompTIA certification cards (showing difficulty badge, exam code, cert name, description, test score/progress info, and Study/Flashcards/Test quick-access icon buttons) so they appear as the very first content section immediately below the page header — before the 'Your Certifications' heading and any other statistics or informational content. The cards must retain their existing 4-column grid layout, dark card styles, amber/blue accent colors, and all interactive functionality.",
+        "status": "implemented",
         "plannedFiles": [
-          "frontend/src/data/certifications.ts"
+          "frontend/src/pages/Dashboard.tsx"
         ],
-        "matchedFiles": []
+        "matchedFiles": [
+          "frontend/src/pages/Dashboard.tsx"
+        ]
       },
       {
-        "id": "REQ-13",
-        "summary": "Update the AI instructor system prompt and response logic in `frontend/src/pages/StudyMode.tsx` (and anywhere else AI prompts are constructed, such as QAPractice and Flashcards) to explicitly establish the AI as an authoritative CompTIA professor. The system prompt must: (1) instruct the AI that its role is an expert CompTIA professor and exam instructor, (2) direct it to proactively teach ALL content for the selected domain/certification — not merely answer questions but deliver structured, comprehensive instruction as a professor would in a classroom, (3) require it to cite specific exam objectives, port numbers, commands, acronyms, protocols, and tools when relevant, (4) require it to provide exam tips, common pitfalls, and memory aids, (5) instruct it to use all available certification data as its knowledge base, and (6) instruct it to ensure the student is exam-ready by the end of any study session.",
-        "status": "missing",
+        "id": "REQ-31",
+        "summary": "On the Certification Selector page (`frontend/src/pages/CertificationSelector.tsx`), move the 8 CompTIA certification cards (with difficulty badge, exam code, cert name, description, domain overview, and Study/Flashcards/Test quick-access buttons) so they appear as the very first content section immediately below the page header. Any introductory text, domain detail sections, or descriptive informational content must flow beneath the card grid.",
+        "status": "implemented",
         "plannedFiles": [
-          "frontend/src/pages/StudyMode.tsx",
-          "frontend/src/pages/QAPractice.tsx",
-          "frontend/src/pages/Flashcards.tsx",
-          "frontend/src/pages/PracticeTest.tsx"
+          "frontend/src/pages/CertificationSelector.tsx"
         ],
-        "matchedFiles": []
+        "matchedFiles": [
+          "frontend/src/pages/CertificationSelector.tsx"
+        ]
       },
       {
-        "id": "REQ-14",
-        "summary": "Audit and complete the backend data model in `backend/main.mo` to ensure it can store and retrieve the full expanded certification content (domains, sub-domains, objectives, key terms, ports, commands, protocols, acronyms, exam tips) as structured records. Ensure the backend can persist question attempts, flashcard decks, and test results with all required fields, and that any missing storage functions (add, get, update, delete) are implemented for all data types.",
-        "status": "unknown",
-        "plannedFiles": [],
-        "matchedFiles": []
+        "id": "REQ-32",
+        "summary": "On the Study Materials page (`frontend/src/pages/StudyMaterials.tsx`), move the 8 CompTIA certification cards (with cert name, exam code, study guide links/open actions, and reading progress bar) so they appear as the very first content section immediately below the page header. Reading progress bars and '% read' labels may remain on each card but the cards themselves must lead the page layout.",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/src/pages/StudyMaterials.tsx"
+        ],
+        "matchedFiles": [
+          "frontend/src/pages/StudyMaterials.tsx"
+        ]
       }
     ]
   },
   "changedFiles": [
-    "backend/main.mo",
-    "backend/migration.mo",
     "build-request.json",
-    "build-template/README.md",
     "feature_evidence.json",
+    "frontend-file-summaries.txt",
     "frontend-implementation-plan.json",
-    "frontend/src/backend.d.ts",
-    "frontend/src/backend.ts",
-    "frontend/src/declarations/backend.did.d.ts",
-    "frontend/src/declarations/backend.did.js",
+    "frontend/src/pages/CertificationSelector.tsx",
+    "frontend/src/pages/Dashboard.tsx",
+    "frontend/src/pages/StudyMaterials.tsx",
     "project_state.json",
     "scratch/component-selection.json",
     "spec.md",

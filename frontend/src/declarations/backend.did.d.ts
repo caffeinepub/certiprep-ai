@@ -40,6 +40,11 @@ export interface Objective {
   'objectiveId' : ObjectiveId,
 }
 export type ObjectiveId = bigint;
+export interface PDFProgressRecord {
+  'userId' : Principal,
+  'certificationId' : CertificationId,
+  'percentage' : bigint,
+}
 export interface Port {
   'id' : PortId,
   'protocol' : string,
@@ -72,7 +77,12 @@ export interface TestResult {
   'testId' : TestId,
 }
 export type Time = bigint;
+export interface UserProfile { 'name' : string }
+export type UserRole = { 'admin' : null } |
+  { 'user' : null } |
+  { 'guest' : null };
 export interface _SERVICE {
+  '_initializeAccessControlWithSecret' : ActorMethod<[string], undefined>,
   'addDomain' : ActorMethod<[string, string, string, Array<string>], DomainId>,
   'addFlashcard' : ActorMethod<[CertificationId, string, string], undefined>,
   'addKeyTerm' : ActorMethod<[string, string], KeyTermId>,
@@ -83,10 +93,15 @@ export interface _SERVICE {
     [CertificationId, string, string, string],
     QuestionId
   >,
+  'assignCallerUserRole' : ActorMethod<[Principal, UserRole], undefined>,
+  'getAllPdfProgressRecords' : ActorMethod<[], Array<PDFProgressRecord>>,
+  'getCallerUserProfile' : ActorMethod<[], [] | [UserProfile]>,
+  'getCallerUserRole' : ActorMethod<[], UserRole>,
   'getCertifications' : ActorMethod<[], Array<string>>,
   'getDomains' : ActorMethod<[CertificationId], Array<Domain>>,
   'getFlashcards' : ActorMethod<[CertificationId], Array<Flashcard>>,
   'getKeyTerms' : ActorMethod<[], Array<KeyTerm>>,
+  'getMyPdfProgressRecords' : ActorMethod<[], Array<PDFProgressRecord>>,
   'getObjectives' : ActorMethod<[DomainId], Array<Objective>>,
   'getPorts' : ActorMethod<[], Array<Port>>,
   'getProtocols' : ActorMethod<[], Array<Protocol>>,
@@ -98,6 +113,10 @@ export interface _SERVICE {
     [CertificationId],
     Array<TestResult>
   >,
+  'getUserProfile' : ActorMethod<[Principal], [] | [UserProfile]>,
+  'isCallerAdmin' : ActorMethod<[], boolean>,
+  'saveCallerUserProfile' : ActorMethod<[UserProfile], undefined>,
+  'saveOrUpdateProgress' : ActorMethod<[CertificationId, bigint], undefined>,
   'submitTestResult' : ActorMethod<[CertificationId, bigint, bigint], TestId>,
 }
 export declare const idlService: IDL.ServiceClass;

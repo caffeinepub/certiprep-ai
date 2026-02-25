@@ -1,7 +1,6 @@
 import { Link } from '@tanstack/react-router';
-import { BookOpen, Layers, FlaskConical, GraduationCap, ChevronRight, Clock, Target } from 'lucide-react';
+import { BookOpen, Layers, FlaskConical, GraduationCap } from 'lucide-react';
 import { CERTIFICATIONS } from '@/data/certifications';
-import { Badge } from '@/components/ui/badge';
 
 const difficultyColors: Record<string, string> = {
   Beginner: 'bg-success/20 text-success border-success/30',
@@ -13,16 +12,9 @@ const difficultyColors: Record<string, string> = {
 export default function CertificationSelector() {
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
-      <div className="mb-8">
-        <h1 className="font-display text-3xl font-bold text-foreground mb-2">
-          Choose Your <span className="text-gradient-amber">Certification</span>
-        </h1>
-        <p className="text-muted-foreground">
-          Select a CompTIA certification to begin studying. Each cert includes comprehensive domain coverage, AI-guided study sessions, flashcards, and practice tests.
-        </p>
-      </div>
 
-      <div className="grid md:grid-cols-2 gap-6">
+      {/* Certification cards — top of page */}
+      <div className="grid md:grid-cols-2 gap-6 mb-12">
         {CERTIFICATIONS.map(cert => (
           <div
             key={cert.id}
@@ -118,6 +110,16 @@ export default function CertificationSelector() {
             </div>
           </div>
         ))}
+      </div>
+
+      {/* Page intro — below cards */}
+      <div className="mb-8">
+        <h1 className="font-display text-3xl font-bold text-foreground mb-2">
+          Choose Your <span className="text-gradient-amber">Certification</span>
+        </h1>
+        <p className="text-muted-foreground">
+          Select a CompTIA certification to begin studying. Each cert includes comprehensive domain coverage, AI-guided study sessions, flashcards, and practice tests.
+        </p>
       </div>
     </div>
   );

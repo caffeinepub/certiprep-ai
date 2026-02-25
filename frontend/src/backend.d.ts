@@ -7,6 +7,11 @@ export interface None {
     __kind__: "None";
 }
 export type Option<T> = Some<T> | None;
+export interface KeyTerm {
+    id: KeyTermId;
+    term: string;
+    definition: string;
+}
 export type Time = bigint;
 export type TestId = bigint;
 export type QuestionId = bigint;
@@ -24,7 +29,11 @@ export interface Domain {
     subdomains: Array<string>;
     description: string;
 }
-export type CertificationId = string;
+export interface PDFProgressRecord {
+    userId: Principal;
+    certificationId: CertificationId;
+    percentage: bigint;
+}
 export interface TestResult {
     certificationId: CertificationId;
     score: bigint;
@@ -36,6 +45,7 @@ export type KeyTermId = bigint;
 export type ProtocolId = bigint;
 export type ObjectiveId = bigint;
 export type FlashcardId = bigint;
+export type CertificationId = string;
 export type DomainId = bigint;
 export interface Flashcard {
     id: FlashcardId;
@@ -64,10 +74,13 @@ export interface Protocol {
     port?: bigint;
     description: string;
 }
-export interface KeyTerm {
-    id: KeyTermId;
-    term: string;
-    definition: string;
+export interface UserProfile {
+    name: string;
+}
+export enum UserRole {
+    admin = "admin",
+    user = "user",
+    guest = "guest"
 }
 export interface backendInterface {
     addDomain(certName: string, name: string, description: string, subdomains: Array<string>): Promise<DomainId>;
@@ -77,14 +90,23 @@ export interface backendInterface {
     addPort(portNumber: bigint, protocol: string, service: string, description: string): Promise<PortId>;
     addProtocol(name: string, description: string, port: bigint | null): Promise<ProtocolId>;
     addQuestion(certificationId: CertificationId, domain: string, questionText: string, correctAnswer: string): Promise<QuestionId>;
+    assignCallerUserRole(user: Principal, role: UserRole): Promise<void>;
+    getAllPdfProgressRecords(): Promise<Array<PDFProgressRecord>>;
+    getCallerUserProfile(): Promise<UserProfile | null>;
+    getCallerUserRole(): Promise<UserRole>;
     getCertifications(): Promise<Array<string>>;
     getDomains(certificationId: CertificationId): Promise<Array<Domain>>;
     getFlashcards(certificationId: CertificationId): Promise<Array<Flashcard>>;
     getKeyTerms(): Promise<Array<KeyTerm>>;
+    getMyPdfProgressRecords(): Promise<Array<PDFProgressRecord>>;
     getObjectives(domainId: DomainId): Promise<Array<Objective>>;
     getPorts(): Promise<Array<Port>>;
     getProtocols(): Promise<Array<Protocol>>;
     getQuestionsForCertification(certificationId: CertificationId): Promise<Array<Question>>;
     getTestResultsForCertification(certificationId: CertificationId): Promise<Array<TestResult>>;
+    getUserProfile(user: Principal): Promise<UserProfile | null>;
+    isCallerAdmin(): Promise<boolean>;
+    saveCallerUserProfile(profile: UserProfile): Promise<void>;
+    saveOrUpdateProgress(certificationId: CertificationId, percentage: bigint): Promise<void>;
     submitTestResult(certificationId: CertificationId, score: bigint, totalQuestions: bigint): Promise<TestId>;
 }

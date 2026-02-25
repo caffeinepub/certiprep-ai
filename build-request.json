@@ -1,87 +1,83 @@
 {
   "kind": "build_request",
-  "title": "Expand certification content library to exhaustive coverage and strengthen AI professor persona",
+  "title": "Move certification quick-access cards to top of Dashboard, Certification Selector, and Study Materials pages",
   "projectName": "CertiPrep AI",
-  "priority": "high",
+  "priority": "normal",
   "requirements": [
     {
-      "id": "REQ-12",
-      "text": "Expand the certification content data in `frontend/src/data/certifications.ts` to be fully exhaustive for all 8 CompTIA certifications (A+, Security+, Network+, Linux+, Cloud+, CySA+, PenTest+, CASP+). Every certification entry must include: all official exam domains and sub-domains, every exam objective and sub-objective as listed in the official CompTIA exam objectives documents, all relevant port numbers and their associated protocols/services, all CLI commands and tools students must know, all key protocols (OSI layer, function, exam context), all acronyms and their full definitions, all key concepts and technologies per domain, common exam scenario tips, and memory aids or mnemonics where applicable. The content must be thorough enough that a student using only this app can pass the real exam.",
+      "id": "REQ-30",
+      "text": "On the Dashboard page (`frontend/src/pages/Dashboard.tsx`), move the 8 CompTIA certification cards (showing difficulty badge, exam code, cert name, description, test score/progress info, and Study/Flashcards/Test quick-access icon buttons) so they appear as the very first content section immediately below the page header — before the 'Your Certifications' heading and any other statistics or informational content. The cards must retain their existing 4-column grid layout, dark card styles, amber/blue accent colors, and all interactive functionality.",
       "target": "frontend",
       "source": {
         "messageIds": [
-          "msg-4"
+          "msg-4",
+          "msg-5"
         ],
         "quotes": [
-          "it needs to be as complete as possible",
-          "a one stop web site that anyone can use to pass any comptia exam that we have listed",
-          "i need the AI to understand its the professor and that it needs to instruct the person asking with ALL information avalible for the ceritification test"
+          "these are the cardss that should be up top right under the header. the ones under 'your certifications' on the dashboard and the other two pages are good",
+          "full send it"
         ]
       },
       "acceptanceCriteria": [
-        "Each of the 8 certifications (A+, Security+, Network+, Linux+, Cloud+, CySA+, PenTest+, CASP+) has a complete list of all official exam domains and sub-domains matching CompTIA's published exam objectives",
-        "Every domain entry includes all sub-objectives, key terms, acronyms, and relevant exam tips",
-        "Port numbers data includes all ports commonly tested for that certification (e.g., 20/21 FTP, 22 SSH, 23 Telnet, 25 SMTP, 53 DNS, 80 HTTP, 110 POP3, 143 IMAP, 443 HTTPS, 3389 RDP, and all others relevant per cert)",
-        "Commands and tools section is populated for every applicable domain with syntax notes and use-case context",
-        "Protocols section covers OSI model context, function, and exam-specific details",
-        "Acronyms list is exhaustive per certification with full expansions and brief definitions",
-        "No placeholder or stub entries remain — all fields are populated with real content"
+        "The 8 certification cards (A+, Security+, Network+, Linux+, Cloud+, CySA+, PenTest+, CASP+) are the first visible content on the Dashboard page, directly below the header.",
+        "Each card displays: difficulty badge, exam code, certification name, brief description, latest test score or 'No tests taken yet', and Study/Flashcards/Test icon buttons.",
+        "The 'Your Certifications' heading and any stats/progress content that was previously above the cards remains intact but is now positioned below the certification card grid.",
+        "The 4-column grid layout, card styles, and all navigation links on the cards are preserved and functional."
       ]
     },
     {
-      "id": "REQ-13",
-      "text": "Update the AI instructor system prompt and response logic in `frontend/src/pages/StudyMode.tsx` (and anywhere else AI prompts are constructed, such as QAPractice and Flashcards) to explicitly establish the AI as an authoritative CompTIA professor. The system prompt must: (1) instruct the AI that its role is an expert CompTIA professor and exam instructor, (2) direct it to proactively teach ALL content for the selected domain/certification — not merely answer questions but deliver structured, comprehensive instruction as a professor would in a classroom, (3) require it to cite specific exam objectives, port numbers, commands, acronyms, protocols, and tools when relevant, (4) require it to provide exam tips, common pitfalls, and memory aids, (5) instruct it to use all available certification data as its knowledge base, and (6) instruct it to ensure the student is exam-ready by the end of any study session.",
+      "id": "REQ-31",
+      "text": "On the Certification Selector page (`frontend/src/pages/CertificationSelector.tsx`), move the 8 CompTIA certification cards (with difficulty badge, exam code, cert name, description, domain overview, and Study/Flashcards/Test quick-access buttons) so they appear as the very first content section immediately below the page header. Any introductory text, domain detail sections, or descriptive informational content must flow beneath the card grid.",
       "target": "frontend",
       "source": {
         "messageIds": [
-          "msg-4"
+          "msg-4",
+          "msg-5"
         ],
         "quotes": [
-          "i need the AI to understand its the professor",
-          "it needs to instruct the person asking with ALL information avalible for the ceritification test"
+          "these are the cardss that should be up top right under the header. the ones under 'your certifications' on the dashboard and the other two pages are good",
+          "full send it"
         ]
       },
       "acceptanceCriteria": [
-        "The AI system/context prompt in StudyMode explicitly states the professor role and instructs comprehensive teaching, not just Q&A answering",
-        "AI responses in Study Mode include structured explanations referencing exam objectives, ports, commands, acronyms, and protocols from the certification data",
-        "AI responses include exam tips and common pitfalls where relevant",
-        "QAPractice explanations for correct/incorrect answers are detailed and reference official exam objective context",
-        "Flashcard back-of-card explanations reference the specific domain objective and provide exam context",
-        "The AI prompt in PracticeTest review phase instructs comprehensive explanations tied to exam objectives"
+        "The 8 certification selector cards are the first visible content on the Certification Selector page, directly below the header.",
+        "Each card retains its difficulty badge, exam code, name, description, and Study/Flashcards/Test action buttons.",
+        "All descriptive text, domain overviews, and any non-interactive informational sections appear below the card grid.",
+        "Existing card styles, grid layout, and navigation behavior are unchanged."
       ]
     },
     {
-      "id": "REQ-14",
-      "text": "Audit and complete the backend data model in `backend/main.mo` to ensure it can store and retrieve the full expanded certification content (domains, sub-domains, objectives, key terms, ports, commands, protocols, acronyms, exam tips) as structured records. Ensure the backend can persist question attempts, flashcard decks, and test results with all required fields, and that any missing storage functions (add, get, update, delete) are implemented for all data types.",
-      "target": "backend",
+      "id": "REQ-32",
+      "text": "On the Study Materials page (`frontend/src/pages/StudyMaterials.tsx`), move the 8 CompTIA certification cards (with cert name, exam code, study guide links/open actions, and reading progress bar) so they appear as the very first content section immediately below the page header. Reading progress bars and '% read' labels may remain on each card but the cards themselves must lead the page layout.",
+      "target": "frontend",
       "source": {
         "messageIds": [
-          "msg-4"
+          "msg-4",
+          "msg-5"
         ],
         "quotes": [
-          "a one stop web site that anyone can use to pass any comptia exam that we have listed"
+          "these are the cardss that should be up top right under the header. the ones under 'your certifications' on the dashboard and the other two pages are good",
+          "full send it"
         ]
       },
       "acceptanceCriteria": [
-        "Backend actor exposes functions to store and retrieve question attempts keyed by certification and domain",
-        "Backend actor exposes functions to store and retrieve flashcard decks keyed by certification",
-        "Backend actor exposes functions to store and retrieve test results with per-question breakdown",
-        "All data types are stable and upgradeable (use stable variables or stable memory patterns)",
-        "No missing or stub functions for any of the documented data operations"
+        "The 8 certification study material cards are the first visible content on the Study Materials page, directly below the header.",
+        "Each card retains its certification name, exam code, available guide listings, open/download actions, reading progress bar, and '% read' label.",
+        "Any page-level introductory text or secondary informational content is positioned below the card grid.",
+        "Existing card styles, grid layout, PDFViewer open behavior, and reading progress functionality are unchanged."
       ]
     }
   ],
   "constraints": [
-    "Do not modify any files under frontend/src/hooks/useInternetIdentity.ts, frontend/src/hooks/useActor.ts, frontend/src/main.tsx, or frontend/src/components/ui",
-    "All Motoko logic must remain in the single backend/main.mo actor file",
-    "Certification content must reflect actual CompTIA official exam objectives — do not fabricate or approximate domain names or objective numbers"
+    "Do not alter the card designs, styles, animations, or interactive functionality on any of the three pages.",
+    "Do not remove or restructure the 'Your Certifications' section or any other existing content — only reorder so cards come first.",
+    "Do not modify any files listed in frontend.immutablePaths."
   ],
   "nonGoals": [
-    "Adding new certifications beyond the 8 already listed (A+, Security+, Network+, Linux+, Cloud+, CySA+, PenTest+, CASP+)",
-    "Changing the visual theme or layout",
-    "Adding new pages or navigation routes",
-    "Integrating external APIs or live CompTIA data feeds",
-    "Real-time collaboration or multi-user features"
+    "Changing card content, data, or backend queries.",
+    "Modifying any pages other than Dashboard, CertificationSelector, and StudyMaterials.",
+    "Altering the header, footer, or Layout.tsx structure.",
+    "Changing the Flashcards, PracticeTest, QAPractice, or StudyMode page layouts."
   ],
   "imageRequirements": {
     "required": [],

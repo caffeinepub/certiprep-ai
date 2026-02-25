@@ -1,5 +1,5 @@
 import { Link, useLocation } from '@tanstack/react-router';
-import { BookOpen, LayoutDashboard, Layers, FlaskConical, GraduationCap, Menu, X } from 'lucide-react';
+import { BookOpen, LayoutDashboard, GraduationCap, Menu, X, Library } from 'lucide-react';
 import { useState } from 'react';
 
 interface LayoutProps {
@@ -9,6 +9,7 @@ interface LayoutProps {
 const navItems = [
   { to: '/', label: 'Dashboard', icon: LayoutDashboard },
   { to: '/certifications', label: 'Certifications', icon: GraduationCap },
+  { to: '/study-materials', label: 'Study Materials', icon: Library },
 ];
 
 export default function Layout({ children }: LayoutProps) {

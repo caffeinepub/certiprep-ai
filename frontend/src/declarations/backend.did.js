@@ -15,6 +15,17 @@ export const ObjectiveId = IDL.Nat;
 export const PortId = IDL.Nat;
 export const ProtocolId = IDL.Nat;
 export const QuestionId = IDL.Nat;
+export const UserRole = IDL.Variant({
+  'admin' : IDL.Null,
+  'user' : IDL.Null,
+  'guest' : IDL.Null,
+});
+export const PDFProgressRecord = IDL.Record({
+  'userId' : IDL.Principal,
+  'certificationId' : CertificationId,
+  'percentage' : IDL.Nat,
+});
+export const UserProfile = IDL.Record({ 'name' : IDL.Text });
 export const Domain = IDL.Record({
   'domainId' : DomainId,
   'domainName' : IDL.Text,
@@ -72,6 +83,7 @@ export const TestResult = IDL.Record({
 });
 
 export const idlService = IDL.Service({
+  '_initializeAccessControlWithSecret' : IDL.Func([IDL.Text], [], []),
   'addDomain' : IDL.Func(
       [IDL.Text, IDL.Text, IDL.Text, IDL.Vec(IDL.Text)],
       [DomainId],
@@ -91,6 +103,14 @@ export const idlService = IDL.Service({
       [QuestionId],
       [],
     ),
+  'assignCallerUserRole' : IDL.Func([IDL.Principal, UserRole], [], []),
+  'getAllPdfProgressRecords' : IDL.Func(
+      [],
+      [IDL.Vec(PDFProgressRecord)],
+      ['query'],
+    ),
+  'getCallerUserProfile' : IDL.Func([], [IDL.Opt(UserProfile)], ['query']),
+  'getCallerUserRole' : IDL.Func([], [UserRole], ['query']),
   'getCertifications' : IDL.Func([], [IDL.Vec(IDL.Text)], ['query']),
   'getDomains' : IDL.Func([CertificationId], [IDL.Vec(Domain)], ['query']),
   'getFlashcards' : IDL.Func(
@@ -99,6 +119,11 @@ export const idlService = IDL.Service({
       ['query'],
     ),
   'getKeyTerms' : IDL.Func([], [IDL.Vec(KeyTerm)], ['query']),
+  'getMyPdfProgressRecords' : IDL.Func(
+      [],
+      [IDL.Vec(PDFProgressRecord)],
+      ['query'],
+    ),
   'getObjectives' : IDL.Func([DomainId], [IDL.Vec(Objective)], ['query']),
   'getPorts' : IDL.Func([], [IDL.Vec(Port)], ['query']),
   'getProtocols' : IDL.Func([], [IDL.Vec(Protocol)], ['query']),
@@ -112,6 +137,14 @@ export const idlService = IDL.Service({
       [IDL.Vec(TestResult)],
       ['query'],
     ),
+  'getUserProfile' : IDL.Func(
+      [IDL.Principal],
+      [IDL.Opt(UserProfile)],
+      ['query'],
+    ),
+  'isCallerAdmin' : IDL.Func([], [IDL.Bool], ['query']),
+  'saveCallerUserProfile' : IDL.Func([UserProfile], [], []),
+  'saveOrUpdateProgress' : IDL.Func([CertificationId, IDL.Nat], [], []),
   'submitTestResult' : IDL.Func(
       [CertificationId, IDL.Nat, IDL.Nat],
       [TestId],
@@ -129,6 +162,17 @@ export const idlFactory = ({ IDL }) => {
   const PortId = IDL.Nat;
   const ProtocolId = IDL.Nat;
   const QuestionId = IDL.Nat;
+  const UserRole = IDL.Variant({
+    'admin' : IDL.Null,
+    'user' : IDL.Null,
+    'guest' : IDL.Null,
+  });
+  const PDFProgressRecord = IDL.Record({
+    'userId' : IDL.Principal,
+    'certificationId' : CertificationId,
+    'percentage' : IDL.Nat,
+  });
+  const UserProfile = IDL.Record({ 'name' : IDL.Text });
   const Domain = IDL.Record({
     'domainId' : DomainId,
     'domainName' : IDL.Text,
@@ -186,6 +230,7 @@ export const idlFactory = ({ IDL }) => {
   });
   
   return IDL.Service({
+    '_initializeAccessControlWithSecret' : IDL.Func([IDL.Text], [], []),
     'addDomain' : IDL.Func(
         [IDL.Text, IDL.Text, IDL.Text, IDL.Vec(IDL.Text)],
         [DomainId],
@@ -205,6 +250,14 @@ export const idlFactory = ({ IDL }) => {
         [QuestionId],
         [],
       ),
+    'assignCallerUserRole' : IDL.Func([IDL.Principal, UserRole], [], []),
+    'getAllPdfProgressRecords' : IDL.Func(
+        [],
+        [IDL.Vec(PDFProgressRecord)],
+        ['query'],
+      ),
+    'getCallerUserProfile' : IDL.Func([], [IDL.Opt(UserProfile)], ['query']),
+    'getCallerUserRole' : IDL.Func([], [UserRole], ['query']),
     'getCertifications' : IDL.Func([], [IDL.Vec(IDL.Text)], ['query']),
     'getDomains' : IDL.Func([CertificationId], [IDL.Vec(Domain)], ['query']),
     'getFlashcards' : IDL.Func(
@@ -213,6 +266,11 @@ export const idlFactory = ({ IDL }) => {
         ['query'],
       ),
     'getKeyTerms' : IDL.Func([], [IDL.Vec(KeyTerm)], ['query']),
+    'getMyPdfProgressRecords' : IDL.Func(
+        [],
+        [IDL.Vec(PDFProgressRecord)],
+        ['query'],
+      ),
     'getObjectives' : IDL.Func([DomainId], [IDL.Vec(Objective)], ['query']),
     'getPorts' : IDL.Func([], [IDL.Vec(Port)], ['query']),
     'getProtocols' : IDL.Func([], [IDL.Vec(Protocol)], ['query']),
@@ -226,6 +284,14 @@ export const idlFactory = ({ IDL }) => {
         [IDL.Vec(TestResult)],
         ['query'],
       ),
+    'getUserProfile' : IDL.Func(
+        [IDL.Principal],
+        [IDL.Opt(UserProfile)],
+        ['query'],
+      ),
+    'isCallerAdmin' : IDL.Func([], [IDL.Bool], ['query']),
+    'saveCallerUserProfile' : IDL.Func([UserProfile], [], []),
+    'saveOrUpdateProgress' : IDL.Func([CertificationId, IDL.Nat], [], []),
     'submitTestResult' : IDL.Func(
         [CertificationId, IDL.Nat, IDL.Nat],
         [TestId],
