@@ -1,0 +1,43 @@
+{
+  "kind": "spec_vs_diff_report",
+  "version": "1.0",
+  "generatedAt": "2026-02-25T00:00:17.566Z",
+  "summary": "The diff shows modifications to backend/main.mo, addition of backend/migration.mo, and updates to project_state.json. REQ-14 (backend data model) is partially addressed. REQ-12 (frontend certification content expansion in certifications.ts) and REQ-13 (AI professor persona/system prompt updates in StudyMode.tsx, QAPractice, Flashcards) show no evidence of implementation in the diff.",
+  "missing_requirements": [
+    {
+      "id": "REQ-12",
+      "requirement": "Expand frontend/src/data/certifications.ts to be fully exhaustive for all 8 CompTIA certifications with all official exam domains, sub-domains, objectives, port numbers, CLI commands, protocols, acronyms, exam tips, and mnemonics.",
+      "reason": "The diff contains no changes to frontend/src/data/certifications.ts. The file is not listed as added or modified anywhere in the diff.",
+      "evidence": []
+    },
+    {
+      "id": "REQ-13",
+      "requirement": "Update AI instructor system prompt and response logic in StudyMode.tsx, QAPractice, and Flashcards to explicitly establish the AI as an authoritative CompTIA professor with structured teaching, exam objective citations, tips, and pitfalls.",
+      "reason": "No changes to frontend/src/pages/StudyMode.tsx, QAPractice, or Flashcards files appear in the diff. The AI system prompt updates are entirely absent.",
+      "evidence": []
+    },
+    {
+      "id": "REQ-14",
+      "requirement": "Backend must expose functions to store/retrieve question attempts keyed by certification and domain; flashcard decks keyed by certification; test results with per-question breakdown; all data types stable and upgradeable; no missing or stub functions.",
+      "reason": "The diff is truncated so it is unclear whether all required CRUD operations are fully implemented. The TestResult type visible in the truncated diff lacks per-question breakdown fields. Stable variable patterns are also not clearly confirmed as state variables use 'var' without explicit 'stable' keyword visible in the truncated content.",
+      "evidence": [
+        "backend/main.mo"
+      ]
+    }
+  ],
+  "hallucinated_features": [
+    {
+      "description": "A separate migration.mo module was added as a standalone file in the backend/ directory.",
+      "reason": "The build request explicitly states all Motoko logic must remain in the single backend/main.mo actor file. Adding a separate backend/migration.mo module violates this constraint.",
+      "evidence": [
+        "backend/migration.mo"
+      ]
+    }
+  ],
+  "confidence": 0.82,
+  "changed_files": [
+    "backend/main.mo",
+    "backend/migration.mo",
+    "project_state.json"
+  ]
+}

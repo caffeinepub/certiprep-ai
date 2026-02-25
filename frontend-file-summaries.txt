@@ -1,0 +1,7 @@
+{
+  "frontend/src/pages/QAPractice.tsx": "Q&A Practice page with setup, quiz, and review phases — generates questions from cert data, tracks pass/fail per answer, and shows detailed explanations for all questions in the review screen.",
+  "frontend/src/pages/Flashcards.tsx": "Flashcard study page with setup, study, and review phases — generates and saves flashcard decks to the backend, supports card flip interaction, tracks correct/incorrect per card, and shows a full review with filtering.",
+  "frontend/src/pages/PracticeTest.tsx": "Full mock exam page with setup, timed test, and results phases — generates 20+ questions, runs a countdown timer, saves test results to the backend, shows domain performance breakdown, and provides detailed per-question review with explanations.",
+  "frontend/src/index.css": "Global styles with OKLCH dark academia theme — fixes badge-green and badge-red to use plain CSS instead of @apply with custom color opacity modifiers, and adds --success/--success-foreground CSS variables so the success color works with Tailwind opacity utilities throughout the app.",
+  "frontend/tailwind.config.js": "Tailwind configuration with dark academia color system — updates success color to use CSS variable format (oklch(var(--success) / alpha)) so opacity modifier utilities like bg-success/10 and text-success work correctly in component files."
+}

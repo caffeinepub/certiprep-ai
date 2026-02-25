@@ -1,0 +1,152 @@
+{
+  "schemaVersion": "1.0.0",
+  "projectStateVersion": 5,
+  "summary": "CertiPrep AI is a hosted CompTIA certification study app with AI-driven Q&A, voice instruction (natural voice with picker, speed/pitch controls), flashcards, graded practice tests, and progress tracking. Features smart review of failed questions with explanations, and deep comprehensive content for 8 CompTIA certs (A+, Security+, Network+, Linux+, Cloud+, CySA+, PenTest+, CASP+) covering ALL domains, sub-topics, ports, commands, protocols, acronyms, and exam objectives. The AI acts as an authoritative professor instructing students with complete certification knowledge — the goal is a one-stop site where any student can pass any listed CompTIA exam.",
+  "architectural_notes": [
+    "Entities: Certification, StudySession, QuestionAttempt, FlashcardDeck, TestResult",
+    "8 CompTIA certs preloaded with comprehensive domain/sub-topic/objective/acronym content",
+    "Voice system uses smart voice selection (Google Neural > Microsoft Neural > macOS Samantha), speed/pitch sliders, markdown-stripped TTS output",
+    "AI instructor, flashcard generator, and practice test all pull from rich per-cert knowledge base",
+    "Design: dark academic theme — deep navy/slate backgrounds, electric blue accents, clean white cards",
+    "AI instructor must be prompted with a professor/expert persona and instructed to use ALL available cert content when teaching — proactive instruction, not just Q&A responses"
+  ],
+  "known_issues": [
+    "Certification content library completeness is unverified — needs audit to ensure all domains, objectives, ports, commands, acronyms, and exam tips are fully covered for all 8 certs"
+  ],
+  "isFixRequest": false,
+  "existing_features": [
+    {
+      "id": "feature-build-a-dashboard-page-showing-overall-progress-statistics-per-certification-total-questions-attempted-pass-rate-failed-questions-pending-review-flashcard-accuracy-and-test-scores-include-quick-access-buttons-to-study-flashcards-and-practice-test-modes",
+      "title": "Build a Dashboard page showing overall progress statistics per certification: total questions attempted, pass rate, failed questions pending review, flashcard accuracy, and test scores. Include quick-access buttons to Study, Flashcards, and Practice Test modes.",
+      "reqIds": [
+        "REQ-3"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-build-a-certification-selector-that-lists-all-available-comptia-certifications-with-their-exam-code-a-brief-description-and-domain-overview-allow-the-user-to-select-a-certification-to-begin-studying",
+      "title": "Build a Certification Selector that lists all available CompTIA certifications with their exam code, a brief description, and domain overview. Allow the user to select a certification to begin studying.",
+      "reqIds": [
+        "REQ-4"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-build-a-study-mode-page-where-the-ai-instructor-breaks-down-each-domain-section-of-the-selected-certification-teaches-the-material-in-depth-and-allows-the-student-to-ask-questions-via-text-input-the-ai-responds-with-detailed-exam-accurate-explanations-that-use-all-available-certification-content-as-context",
+      "title": "Build a Study Mode page where the AI instructor breaks down each domain/section of the selected certification, teaches the material in depth, and allows the student to ask questions via text input. The AI responds with detailed, exam-accurate explanations that use all available certification content as context.",
+      "reqIds": [
+        "REQ-5"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-integrate-browser-native-web-speech-api-for-text-to-speech-ai-instructor-voice-and-speech-recognition-student-voice-input-in-study-mode-provide-a-voice-picker-that-prioritizes-high-quality-voices-e-g-google-neural-microsoft-neural-macos-samantha-and-include-speed-and-pitch-sliders-strip-markdown-formatting-before-speaking-for-natural-output-show-an-animated-speaking-indicator-when-the-ai-is-speaking",
+      "title": "Integrate browser-native Web Speech API for text-to-speech (AI instructor voice) and speech recognition (student voice input) in Study Mode. Provide a voice picker that prioritizes high-quality voices (e.g., Google Neural, Microsoft Neural, macOS Samantha), and include speed and pitch sliders. Strip markdown formatting before speaking for natural output. Show an animated speaking indicator when the AI is speaking.",
+      "reqIds": [
+        "REQ-6"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-build-a-q-a-practice-mode-where-the-ai-generates-questions-for-the-selected-certification-and-domain-track-each-answer-as-passed-or-failed-after-completing-a-set-review-all-failed-questions-with-correct-answers-and-detailed-explanations-of-why-they-are-correct-also-review-passed-questions-with-reinforcement-of-why-the-answer-was-correct",
+      "title": "Build a Q&A Practice mode where the AI generates questions for the selected certification and domain. Track each answer as passed or failed. After completing a set, review all failed questions with correct answers and detailed explanations of why they are correct. Also review passed questions with reinforcement of why the answer was correct.",
+      "reqIds": [
+        "REQ-7"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-build-a-flashcards-page-where-the-student-selects-a-certification-and-presses-a-generate-flashcards-button-to-create-a-deck-of-flashcards-derived-from-that-certification-s-domain-content-cards-flip-to-reveal-the-answer-track-right-wrong-per-card-then-at-the-end-go-over-each-card-with-explanations-show-a-summary-of-right-vs-wrong-counts",
+      "title": "Build a Flashcards page where the student selects a certification and presses a 'Generate Flashcards' button to create a deck of flashcards derived from that certification's domain content. Cards flip to reveal the answer. Track right/wrong per card, then at the end go over each card with explanations. Show a summary of right vs. wrong counts.",
+      "reqIds": [
+        "REQ-8"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-build-a-practice-test-page-where-the-ai-generates-a-full-timed-mock-exam-at-least-20-questions-for-the-selected-certification-grade-the-completed-test-display-a-score-and-pass-fail-result-then-provide-a-detailed-per-question-review-showing-correct-answers-and-explanations-for-both-correct-and-incorrect-responses",
+      "title": "Build a Practice Test page where the AI generates a full timed mock exam (at least 20 questions) for the selected certification. Grade the completed test, display a score and pass/fail result, then provide a detailed per-question review showing correct answers and explanations for both correct and incorrect responses.",
+      "reqIds": [
+        "REQ-9"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-apply-a-dark-academia-meets-modern-tech-visual-theme-throughout-the-app-deep-navy-slate-backgrounds-warm-amber-and-electric-blue-accents-clean-readable-typography-smooth-card-animations-and-a-premium-polished-ui-use-consistent-spacing-clear-section-headings-and-responsive-layout-suitable-for-desktop-and-tablet-study-sessions",
+      "title": "Apply a dark academia meets modern tech visual theme throughout the app: deep navy/slate backgrounds, warm amber and electric blue accents, clean readable typography, smooth card animations, and a premium polished UI. Use consistent spacing, clear section headings, and responsive layout suitable for desktop and tablet study sessions.",
+      "reqIds": [
+        "REQ-10"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-render-the-generated-app-logo-as-a-static-asset-at-frontend-public-assets-generated-and-display-it-in-the-app-header-navigation",
+      "title": "Render the generated app logo as a static asset at frontend/public/assets/generated and display it in the app header/navigation.",
+      "reqIds": [
+        "REQ-11"
+      ],
+      "version": 1
+    }
+  ],
+  "new_feature_requests": [
+    {
+      "id": "AR-1",
+      "summary": "Create a backend data model and storage for certifications (name, domains, sub-topics, objectives, key terms, ports, commands, protocols), question attempts (certification, question text, user answer, correct answer, passed/failed, timestamp), flashcard decks (certification, cards with front/back), and test results (certification, score, total questions, per-question breakdown, timestamp).",
+      "reqIds": [
+        "REQ-1"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-2",
+      "summary": "Preload comprehensive study content for at least 8 CompTIA certifications (A+, Security+, Network+, Linux+, Cloud+, CySA+, PenTest+, CASP+) covering all exam domains, sub-topics, key objectives, port numbers, commands, tools, protocols, acronyms, and exam-specific details sufficient for a student to pass each certification exam.",
+      "reqIds": [
+        "REQ-2"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-3",
+      "summary": "Ensure AI instructor persona is explicitly set as an authoritative CompTIA professor with access to ALL available certification content. The AI must proactively teach, explain, and guide students through every topic needed to pass each exam — not just answer questions but instruct comprehensively.",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-4",
+      "summary": "Expand and complete the certification content library to be as exhaustive as possible for all 8 certs: every exam domain, objective, sub-objective, acronym, port number, protocol, command, tool, concept, and exam tip — sufficient for a student to pass the real exam using only this app.",
+      "reqIds": [
+        "REQ-1",
+        "REQ-2"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-5",
+      "summary": "Expand the certification content data in `frontend/src/data/certifications.ts` to be fully exhaustive for all 8 CompTIA certifications (A+, Security+, Network+, Linux+, Cloud+, CySA+, PenTest+, CASP+). Every certification entry must include: all official exam domains and sub-domains, every exam objective and sub-objective as listed in the official CompTIA exam objectives documents, all relevant port numbers and their associated protocols/services, all CLI commands and tools students must know, all key protocols (OSI layer, function, exam context), all acronyms and their full definitions, all key concepts and technologies per domain, common exam scenario tips, and memory aids or mnemonics where applicable. The content must be thorough enough that a student using only this app can pass the real exam.",
+      "reqIds": [
+        "REQ-12"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-6",
+      "summary": "Update the AI instructor system prompt and response logic in `frontend/src/pages/StudyMode.tsx` (and anywhere else AI prompts are constructed, such as QAPractice and Flashcards) to explicitly establish the AI as an authoritative CompTIA professor. The system prompt must: (1) instruct the AI that its role is an expert CompTIA professor and exam instructor, (2) direct it to proactively teach ALL content for the selected domain/certification — not merely answer questions but deliver structured, comprehensive instruction as a professor would in a classroom, (3) require it to cite specific exam objectives, port numbers, commands, acronyms, protocols, and tools when relevant, (4) require it to provide exam tips, common pitfalls, and memory aids, (5) instruct it to use all available certification data as its knowledge base, and (6) instruct it to ensure the student is exam-ready by the end of any study session.",
+      "reqIds": [
+        "REQ-13"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-7",
+      "summary": "Audit and complete the backend data model in `backend/main.mo` to ensure it can store and retrieve the full expanded certification content (domains, sub-domains, objectives, key terms, ports, commands, protocols, acronyms, exam tips) as structured records. Ensure the backend can persist question attempts, flashcard decks, and test results with all required fields, and that any missing storage functions (add, get, update, delete) are implemented for all data types.",
+      "reqIds": [
+        "REQ-14"
+      ],
+      "status": "pending"
+    }
+  ],
+  "gameProjectType": "none",
+  "projectName": "CertiPrep AI",
+  "clarification_mode": "instant",
+  "clarification_rounds": 0
+}

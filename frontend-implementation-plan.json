@@ -1,0 +1,61 @@
+{
+  "kind": "implementation_plan",
+  "version": "1.0",
+  "title": "Expand certification content library to exhaustive coverage and strengthen AI professor persona",
+  "requirements": [
+    {
+      "id": "REQ-12",
+      "summary": "Expand certification content data in certifications.ts to exhaustive coverage for all 8 CompTIA certifications with complete exam domains, objectives, ports, commands, protocols, acronyms, concepts, and study aids",
+      "acceptanceCriteria": [
+        "Each of the 8 certifications (A+, Security+, Network+, Linux+, Cloud+, CySA+, PenTest+, CASP+) has a complete list of all official exam domains and sub-domains matching CompTIA's published exam objectives",
+        "Every domain entry includes all sub-objectives, key terms, acronyms, and relevant exam tips",
+        "Port numbers data includes all ports commonly tested for that certification (e.g., 20/21 FTP, 22 SSH, 23 Telnet, 25 SMTP, 53 DNS, 80 HTTP, 110 POP3, 143 IMAP, 443 HTTPS, 3389 RDP, and all others relevant per cert)",
+        "Commands and tools section is populated for every applicable domain with syntax notes and use-case context",
+        "Protocols section covers OSI model context, function, and exam-specific details",
+        "Acronyms list is exhaustive per certification with full expansions and brief definitions",
+        "No placeholder or stub entries remain — all fields are populated with real content"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/data/certifications.ts",
+          "operation": "modify",
+          "description": "Expand all 8 CompTIA certification entries (A+, Security+, Network+, Linux+, Cloud+, CySA+, PenTest+, CASP+) to include exhaustive exam content. For each certification, populate all official exam domains and sub-domains per CompTIA exam objectives. For each domain, include: all exam objectives and sub-objectives with full descriptions, comprehensive key terms and concepts with definitions, all relevant port numbers with protocol/service/exam context (e.g., 20/21 FTP, 22 SSH, 23 Telnet, 25 SMTP, 53 DNS, 67/68 DHCP, 80 HTTP, 110 POP3, 123 NTP, 143 IMAP, 161/162 SNMP, 389 LDAP, 443 HTTPS, 445 SMB, 514 Syslog, 636 LDAPS, 993 IMAPS, 995 POP3S, 1433 SQL Server, 1521 Oracle, 3306 MySQL, 3389 RDP, and all others applicable per certification), all CLI commands and tools with syntax examples and use-case notes (e.g., ipconfig, ping, tracert, nslookup, netstat, route, arp for A+/Network+; chmod, chown, ls, cd, grep, find, ps, top, systemctl, apt/yum for Linux+; nmap, Wireshark, Metasploit, Burp Suite, Nessus for CySA+/PenTest+; AWS/Azure CLI commands for Cloud+), all protocols with OSI layer context and function (e.g., TCP, UDP, IP, ICMP, ARP, DNS, DHCP, FTP, SFTP, SSH, Telnet, HTTP, HTTPS, SMTP, POP3, IMAP, SNMP, LDAP, NTP, RDP, TLS/SSL), exhaustive acronyms with full expansions and brief definitions per certification, exam scenario tips and common pitfalls for each domain, and memory aids or mnemonics where applicable. Ensure no placeholder or stub content remains; all fields must contain real, exam-relevant information sourced from official CompTIA exam objectives documents."
+        }
+      ]
+    },
+    {
+      "id": "REQ-13",
+      "summary": "Update AI instructor system prompts across StudyMode, QAPractice, Flashcards, and PracticeTest to establish authoritative CompTIA professor persona that proactively teaches all content with exam objectives, tips, and comprehensive instruction",
+      "acceptanceCriteria": [
+        "The AI system/context prompt in StudyMode explicitly states the professor role and instructs comprehensive teaching, not just Q&A answering",
+        "AI responses in Study Mode include structured explanations referencing exam objectives, ports, commands, acronyms, and protocols from the certification data",
+        "AI responses include exam tips and common pitfalls where relevant",
+        "QAPractice explanations for correct/incorrect answers are detailed and reference official exam objective context",
+        "Flashcard back-of-card explanations reference the specific domain objective and provide exam context",
+        "The AI prompt in PracticeTest review phase instructs comprehensive explanations tied to exam objectives"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/pages/StudyMode.tsx",
+          "operation": "modify",
+          "description": "Update the AI system prompt (used in the fetch call to OpenAI API) to establish the AI as an authoritative CompTIA professor and exam instructor. The system prompt must: (1) explicitly state 'You are an expert CompTIA professor and exam instructor', (2) direct the AI to proactively teach ALL content for the selected domain/certification with structured, comprehensive instruction as a professor would deliver in a classroom (not merely answering questions), (3) require the AI to cite specific exam objectives, port numbers, commands, acronyms, protocols, and tools from the provided certification data when relevant, (4) require the AI to provide exam tips, common pitfalls, and memory aids in responses, (5) instruct the AI to use all available certification data (domains, objectives, ports, commands, protocols, acronyms, key concepts, study notes) as its knowledge base and reference it explicitly, and (6) instruct the AI to ensure the student is exam-ready by the end of any study session. Update the user message construction to include full domain context (objectives, ports, commands, protocols, acronyms, key terms, study notes) from the selected domain in certifications.ts so the AI has complete information to teach from."
+        },
+        {
+          "path": "frontend/src/pages/QAPractice.tsx",
+          "operation": "modify",
+          "description": "Update the AI explanation generation logic (when displaying correct/incorrect answer feedback) to use a professor-focused system prompt that instructs the AI to: (1) act as an expert CompTIA professor, (2) provide detailed explanations referencing the specific exam objective and domain context from the certification data, (3) explain why the correct answer is right and why incorrect answers are wrong with exam-relevant reasoning, (4) include exam tips and common pitfalls students should know, and (5) reference relevant ports, commands, protocols, or acronyms from the certification data when applicable to the question. Ensure the explanation fetch includes the full question context, selected domain data, and correct answer."
+        },
+        {
+          "path": "frontend/src/pages/Flashcards.tsx",
+          "operation": "modify",
+          "description": "Update the flashcard generation logic (AI-powered card creation) to use a professor-focused system prompt that instructs the AI to: (1) act as an expert CompTIA professor creating study materials, (2) generate flashcard backs (answers/explanations) that reference the specific domain objective and exam context from the certification data, (3) include exam tips, memory aids, and practical exam scenarios on the back of cards where relevant, (4) ensure front questions cover all key exam content (objectives, ports, commands, protocols, acronyms) for the selected domain, and (5) use all available certification data for the domain as the knowledge base. Update the card generation fetch to include full domain context (objectives, ports, commands, protocols, acronyms, key terms) from certifications.ts."
+        },
+        {
+          "path": "frontend/src/pages/PracticeTest.tsx",
+          "operation": "modify",
+          "description": "Update the review phase explanation generation (when showing correct/incorrect answers after test submission) to use a professor-focused system prompt that instructs the AI to: (1) act as an expert CompTIA professor reviewing exam performance, (2) provide comprehensive explanations tied to specific exam objectives and domain context from the certification data, (3) explain the reasoning behind correct and incorrect answers with exam-relevant details, (4) include exam tips and common mistakes students make on similar questions, and (5) reference relevant ports, commands, protocols, or acronyms from the certification data when applicable. Ensure the explanation fetch includes the question, user's answer, correct answer, and full domain context from certifications.ts."
+        }
+      ]
+    }
+  ]
+}
