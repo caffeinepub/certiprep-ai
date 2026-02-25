@@ -1,58 +1,106 @@
 {
   "kind": "coverage_report",
   "version": "1.0",
-  "generatedAt": "2026-02-25T01:53:25.039Z",
+  "generatedAt": "2026-02-25T20:34:28.872Z",
   "sources": {
     "buildRequest": true,
     "implementationPlan": true
   },
   "requirements": {
-    "total": 3,
-    "implemented": 3,
+    "total": 6,
+    "implemented": 0,
     "items": [
       {
-        "id": "REQ-30",
-        "summary": "On the Dashboard page (`frontend/src/pages/Dashboard.tsx`), move the 8 CompTIA certification cards (showing difficulty badge, exam code, cert name, description, test score/progress info, and Study/Flashcards/Test quick-access icon buttons) so they appear as the very first content section immediately below the page header — before the 'Your Certifications' heading and any other statistics or informational content. The cards must retain their existing 4-column grid layout, dark card styles, amber/blue accent colors, and all interactive functionality.",
-        "status": "implemented",
+        "id": "REQ-1",
+        "summary": "Add a visible border/outline to all dashboard cards in Dashboard.tsx so each card is clearly delineated. Use a consistent border style (e.g., 1px solid using the app's border color token) that works in both light and dark mode.",
+        "status": "missing",
         "plannedFiles": [
           "frontend/src/pages/Dashboard.tsx"
         ],
-        "matchedFiles": [
-          "frontend/src/pages/Dashboard.tsx"
-        ]
+        "matchedFiles": []
       },
       {
-        "id": "REQ-31",
-        "summary": "On the Certification Selector page (`frontend/src/pages/CertificationSelector.tsx`), move the 8 CompTIA certification cards (with difficulty badge, exam code, cert name, description, domain overview, and Study/Flashcards/Test quick-access buttons) so they appear as the very first content section immediately below the page header. Any introductory text, domain detail sections, or descriptive informational content must flow beneath the card grid.",
-        "status": "implemented",
+        "id": "REQ-2",
+        "summary": "Replace the existing dark/light mode toggle in Layout.tsx with a sun ☀️ / moon 🌙 icon switcher. In light mode display the moon icon (clicking switches to dark); in dark mode display the sun icon (clicking switches to light). The icon must be accessible with an aria-label.",
+        "status": "missing",
         "plannedFiles": [
-          "frontend/src/pages/CertificationSelector.tsx"
+          "frontend/src/components/Layout.tsx"
         ],
-        "matchedFiles": [
-          "frontend/src/pages/CertificationSelector.tsx"
-        ]
+        "matchedFiles": []
       },
       {
-        "id": "REQ-32",
-        "summary": "On the Study Materials page (`frontend/src/pages/StudyMaterials.tsx`), move the 8 CompTIA certification cards (with cert name, exam code, study guide links/open actions, and reading progress bar) so they appear as the very first content section immediately below the page header. Reading progress bars and '% read' labels may remain on each card but the cards themselves must lead the page layout.",
-        "status": "implemented",
+        "id": "REQ-3",
+        "summary": "Standardize card dimensions across all pages (Dashboard, CertificationSelector, StudyMaterials, Flashcards, PracticeTest, QAPractice). Identify the largest card footprint used anywhere in the app and apply that fixed width and minimum height to every card across all pages, so navigating between pages changes only the card content, not the card size.",
+        "status": "missing",
         "plannedFiles": [
-          "frontend/src/pages/StudyMaterials.tsx"
+          "frontend/src/pages/Dashboard.tsx",
+          "frontend/src/pages/CertificationSelector.tsx",
+          "frontend/src/pages/StudyMaterials.tsx",
+          "frontend/src/pages/Flashcards.tsx",
+          "frontend/src/pages/PracticeTest.tsx",
+          "frontend/src/pages/QAPractice.tsx",
+          "frontend/src/index.css"
         ],
-        "matchedFiles": [
-          "frontend/src/pages/StudyMaterials.tsx"
-        ]
+        "matchedFiles": []
+      },
+      {
+        "id": "REQ-4",
+        "summary": "Perform a thorough security audit of backend/main.mo. Check for: missing or insufficient access control on state-mutating functions, unguarded caller validation, potential for unauthorized data reads/writes across users, integer overflow risks, and any public API surface that should be restricted. Apply all necessary fixes.",
+        "status": "unknown",
+        "plannedFiles": [],
+        "matchedFiles": []
+      },
+      {
+        "id": "REQ-5",
+        "summary": "Perform a frontend code review and security audit covering: input sanitization before any data is sent to the backend, safe rendering of user-supplied or AI-generated content (no dangerouslySetInnerHTML without sanitization), consistent error handling in all React Query hooks in useQueries.ts, and removal of any console.log statements exposing sensitive data. Apply all necessary fixes.",
+        "status": "missing",
+        "plannedFiles": [
+          "frontend/src/hooks/useQueries.ts",
+          "frontend/src/pages/Flashcards.tsx",
+          "frontend/src/pages/QAPractice.tsx",
+          "frontend/src/pages/PracticeTest.tsx",
+          "frontend/src/pages/StudyMode.tsx",
+          "frontend/src/pages/Dashboard.tsx",
+          "frontend/src/pages/CertificationSelector.tsx",
+          "frontend/src/pages/StudyMaterials.tsx",
+          "frontend/src/components/PDFViewer.tsx",
+          "frontend/src/components/Layout.tsx",
+          "frontend/src/App.tsx"
+        ],
+        "matchedFiles": []
+      },
+      {
+        "id": "REQ-6",
+        "summary": "Conduct a GUI consistency audit across all pages. Ensure: typography scale (headings, body, labels) is uniform, spacing/padding is consistent using Tailwind spacing tokens, button styles are consistent across pages, color usage adheres to the defined light/dark theme tokens, and no orphaned or broken layout elements exist. Fix all inconsistencies found.",
+        "status": "missing",
+        "plannedFiles": [
+          "frontend/src/pages/Dashboard.tsx",
+          "frontend/src/pages/CertificationSelector.tsx",
+          "frontend/src/pages/StudyMaterials.tsx",
+          "frontend/src/pages/Flashcards.tsx",
+          "frontend/src/pages/PracticeTest.tsx",
+          "frontend/src/pages/QAPractice.tsx",
+          "frontend/src/pages/StudyMode.tsx",
+          "frontend/src/components/Layout.tsx",
+          "frontend/src/components/FlashcardDeck.tsx",
+          "frontend/src/components/PDFViewer.tsx",
+          "frontend/src/components/VoiceControls.tsx",
+          "frontend/src/index.css",
+          "frontend/tailwind.config.js"
+        ],
+        "matchedFiles": []
       }
     ]
   },
   "changedFiles": [
+    "backend/main.mo",
     "build-request.json",
     "feature_evidence.json",
-    "frontend-file-summaries.txt",
     "frontend-implementation-plan.json",
-    "frontend/src/pages/CertificationSelector.tsx",
-    "frontend/src/pages/Dashboard.tsx",
-    "frontend/src/pages/StudyMaterials.tsx",
+    "frontend/src/backend.d.ts",
+    "frontend/src/backend.ts",
+    "frontend/src/declarations/backend.did.d.ts",
+    "frontend/src/declarations/backend.did.js",
     "project_state.json",
     "scratch/component-selection.json",
     "spec.md",

@@ -1,83 +1,134 @@
 {
   "kind": "build_request",
-  "title": "Move certification quick-access cards to top of Dashboard, Certification Selector, and Study Materials pages",
+  "title": "Card outlines, sun/moon toggle, uniform card sizes, code review & security audit",
   "projectName": "CertiPrep AI",
-  "priority": "normal",
+  "priority": "high",
   "requirements": [
     {
-      "id": "REQ-30",
-      "text": "On the Dashboard page (`frontend/src/pages/Dashboard.tsx`), move the 8 CompTIA certification cards (showing difficulty badge, exam code, cert name, description, test score/progress info, and Study/Flashcards/Test quick-access icon buttons) so they appear as the very first content section immediately below the page header — before the 'Your Certifications' heading and any other statistics or informational content. The cards must retain their existing 4-column grid layout, dark card styles, amber/blue accent colors, and all interactive functionality.",
+      "id": "REQ-1",
+      "text": "Add a visible border/outline to all dashboard cards in Dashboard.tsx so each card is clearly delineated. Use a consistent border style (e.g., 1px solid using the app's border color token) that works in both light and dark mode.",
       "target": "frontend",
       "source": {
         "messageIds": [
-          "msg-4",
+          "msg-3",
           "msg-5"
         ],
         "quotes": [
-          "these are the cardss that should be up top right under the header. the ones under 'your certifications' on the dashboard and the other two pages are good",
-          "full send it"
+          "dashboard page the card ui doesnt have an outline so they look like cards"
         ]
       },
       "acceptanceCriteria": [
-        "The 8 certification cards (A+, Security+, Network+, Linux+, Cloud+, CySA+, PenTest+, CASP+) are the first visible content on the Dashboard page, directly below the header.",
-        "Each card displays: difficulty badge, exam code, certification name, brief description, latest test score or 'No tests taken yet', and Study/Flashcards/Test icon buttons.",
-        "The 'Your Certifications' heading and any stats/progress content that was previously above the cards remains intact but is now positioned below the certification card grid.",
-        "The 4-column grid layout, card styles, and all navigation links on the cards are preserved and functional."
+        "All cards on the Dashboard page have a visible border/outline in both light and dark mode.",
+        "The border uses a design token consistent with the app's color palette."
       ]
     },
     {
-      "id": "REQ-31",
-      "text": "On the Certification Selector page (`frontend/src/pages/CertificationSelector.tsx`), move the 8 CompTIA certification cards (with difficulty badge, exam code, cert name, description, domain overview, and Study/Flashcards/Test quick-access buttons) so they appear as the very first content section immediately below the page header. Any introductory text, domain detail sections, or descriptive informational content must flow beneath the card grid.",
+      "id": "REQ-2",
+      "text": "Replace the existing dark/light mode toggle in Layout.tsx with a sun ☀️ / moon 🌙 icon switcher. In light mode display the moon icon (clicking switches to dark); in dark mode display the sun icon (clicking switches to light). The icon must be accessible with an aria-label.",
       "target": "frontend",
       "source": {
         "messageIds": [
-          "msg-4",
+          "msg-3",
           "msg-5"
         ],
         "quotes": [
-          "these are the cardss that should be up top right under the header. the ones under 'your certifications' on the dashboard and the other two pages are good",
-          "full send it"
+          "there should be a moon and sun to go between light and dark"
         ]
       },
       "acceptanceCriteria": [
-        "The 8 certification selector cards are the first visible content on the Certification Selector page, directly below the header.",
-        "Each card retains its difficulty badge, exam code, name, description, and Study/Flashcards/Test action buttons.",
-        "All descriptive text, domain overviews, and any non-interactive informational sections appear below the card grid.",
-        "Existing card styles, grid layout, and navigation behavior are unchanged."
+        "A sun icon is shown when the app is in dark mode; clicking it switches to light mode.",
+        "A moon icon is shown when the app is in light mode; clicking it switches to dark mode.",
+        "The toggle has an appropriate aria-label for accessibility.",
+        "Theme preference persists across page reloads."
       ]
     },
     {
-      "id": "REQ-32",
-      "text": "On the Study Materials page (`frontend/src/pages/StudyMaterials.tsx`), move the 8 CompTIA certification cards (with cert name, exam code, study guide links/open actions, and reading progress bar) so they appear as the very first content section immediately below the page header. Reading progress bars and '% read' labels may remain on each card but the cards themselves must lead the page layout.",
+      "id": "REQ-3",
+      "text": "Standardize card dimensions across all pages (Dashboard, CertificationSelector, StudyMaterials, Flashcards, PracticeTest, QAPractice). Identify the largest card footprint used anywhere in the app and apply that fixed width and minimum height to every card across all pages, so navigating between pages changes only the card content, not the card size.",
       "target": "frontend",
       "source": {
         "messageIds": [
-          "msg-4",
+          "msg-3",
           "msg-5"
         ],
         "quotes": [
-          "these are the cardss that should be up top right under the header. the ones under 'your certifications' on the dashboard and the other two pages are good",
-          "full send it"
+          "all the cards on the whole website should be uniform in size so as i go across pages only the information on them change not the size of the cards. take the largest card and thats the size they should be"
         ]
       },
       "acceptanceCriteria": [
-        "The 8 certification study material cards are the first visible content on the Study Materials page, directly below the header.",
-        "Each card retains its certification name, exam code, available guide listings, open/download actions, reading progress bar, and '% read' label.",
-        "Any page-level introductory text or secondary informational content is positioned below the card grid.",
-        "Existing card styles, grid layout, PDFViewer open behavior, and reading progress functionality are unchanged."
+        "Cards on Dashboard, CertificationSelector, StudyMaterials, and other pages share the same fixed dimensions.",
+        "Card size does not visually change when navigating between pages.",
+        "Content inside smaller cards uses internal spacing/alignment rather than resizing the card."
+      ]
+    },
+    {
+      "id": "REQ-4",
+      "text": "Perform a thorough security audit of backend/main.mo. Check for: missing or insufficient access control on state-mutating functions, unguarded caller validation, potential for unauthorized data reads/writes across users, integer overflow risks, and any public API surface that should be restricted. Apply all necessary fixes.",
+      "target": "backend",
+      "source": {
+        "messageIds": [
+          "msg-5"
+        ],
+        "quotes": [
+          "code review and audit it, look for security flaws"
+        ]
+      },
+      "acceptanceCriteria": [
+        "All state-mutating update functions validate the caller's identity before proceeding.",
+        "Users cannot read or modify other users' data (flashcards, test results, progress).",
+        "No public functions expose sensitive admin or cross-user state without authorization.",
+        "Arithmetic operations that could overflow are guarded appropriately."
+      ]
+    },
+    {
+      "id": "REQ-5",
+      "text": "Perform a frontend code review and security audit covering: input sanitization before any data is sent to the backend, safe rendering of user-supplied or AI-generated content (no dangerouslySetInnerHTML without sanitization), consistent error handling in all React Query hooks in useQueries.ts, and removal of any console.log statements exposing sensitive data. Apply all necessary fixes.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-5"
+        ],
+        "quotes": [
+          "code review and audit it, look for security flaws"
+        ]
+      },
+      "acceptanceCriteria": [
+        "No unsanitized user input is rendered as raw HTML.",
+        "All React Query error states are handled gracefully with user-facing feedback.",
+        "No console.log statements leak authentication tokens, principal IDs, or raw backend responses.",
+        "Input fields that submit to the backend perform length/type validation before submission."
+      ]
+    },
+    {
+      "id": "REQ-6",
+      "text": "Conduct a GUI consistency audit across all pages. Ensure: typography scale (headings, body, labels) is uniform, spacing/padding is consistent using Tailwind spacing tokens, button styles are consistent across pages, color usage adheres to the defined light/dark theme tokens, and no orphaned or broken layout elements exist. Fix all inconsistencies found.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-5"
+        ],
+        "quotes": [
+          "double check the gui"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Heading and body text sizes are consistent across Dashboard, CertificationSelector, StudyMaterials, Flashcards, PracticeTest, QAPractice, and StudyMode pages.",
+        "Buttons use the same variant styles (primary, secondary, ghost) site-wide.",
+        "No layout elements overflow or appear broken in light or dark mode.",
+        "Spacing between cards and page sections is uniform across all pages."
       ]
     }
   ],
   "constraints": [
-    "Do not alter the card designs, styles, animations, or interactive functionality on any of the three pages.",
-    "Do not remove or restructure the 'Your Certifications' section or any other existing content — only reorder so cards come first.",
-    "Do not modify any files listed in frontend.immutablePaths."
+    "Do not modify files under frontend/src/hooks/useInternetIdentity.ts, frontend/src/hooks/useActor.ts, frontend/src/main.tsx, or frontend/src/components/ui.",
+    "All card size standardization must be done via shared Tailwind classes or a shared component — do not hardcode pixel values inconsistently across files.",
+    "Theme (dark/light) persistence must use the existing mechanism already in place (localStorage or CSS class on root)."
   ],
   "nonGoals": [
-    "Changing card content, data, or backend queries.",
-    "Modifying any pages other than Dashboard, CertificationSelector, and StudyMaterials.",
-    "Altering the header, footer, or Layout.tsx structure.",
-    "Changing the Flashcards, PracticeTest, QAPractice, or StudyMode page layouts."
+    "Adding new certification content or study materials.",
+    "Changing the overall navigation structure or routing.",
+    "Integrating any new third-party services.",
+    "Redesigning the visual theme or color palette."
   ],
   "imageRequirements": {
     "required": [],

@@ -1,16 +1,63 @@
 {
   "kind": "spec_vs_diff_report",
   "version": "1.0",
-  "generatedAt": "2026-02-25T01:53:25.036Z",
-  "summary": "All three requirements (REQ-30, REQ-31, REQ-32) appear to be implemented. Dashboard.tsx now renders certification cards first before stats/welcome content, CertificationSelector.tsx moves cards to the top with descriptive content below, and StudyMaterials.tsx places the certification card grid at the top followed by an info section. The file summaries and truncated diffs confirm this reordering was performed without altering card designs or removing existing content.",
-  "missing_requirements": [],
+  "generatedAt": "2026-02-25T20:34:28.869Z",
+  "summary": "The diff shows only two files modified: backend/main.mo (partially, with truncation) and project_state.json. The project_state.json only tracks feature request statuses (all still 'pending'), and the backend/main.mo shows structural changes with access control imports and helpers. However, the vast majority of requirements — especially all frontend requirements (REQ-1, REQ-2, REQ-3, REQ-5, REQ-6) — show no evidence of implementation. REQ-4 (backend security audit) has partial evidence in main.mo but the diff is truncated and all items in project_state.json remain 'pending'.",
+  "missing_requirements": [
+    {
+      "id": "REQ-1",
+      "requirement": "Add a visible border/outline to all dashboard cards in Dashboard.tsx so each card is clearly delineated, using a consistent border style in both light and dark mode.",
+      "reason": "No changes to Dashboard.tsx are present in the diff. The project_state.json lists this as 'pending'.",
+      "evidence": [
+        "project_state.json"
+      ]
+    },
+    {
+      "id": "REQ-2",
+      "requirement": "Replace the existing dark/light mode toggle in Layout.tsx with a sun/moon icon switcher with aria-label and persistent theme preference.",
+      "reason": "No changes to Layout.tsx are present in the diff. The project_state.json lists this as 'pending'.",
+      "evidence": [
+        "project_state.json"
+      ]
+    },
+    {
+      "id": "REQ-3",
+      "requirement": "Standardize card dimensions across all pages (Dashboard, CertificationSelector, StudyMaterials, Flashcards, PracticeTest, QAPractice) using the largest card footprint as the standard.",
+      "reason": "No frontend page files are modified in the diff. The project_state.json lists this as 'pending'.",
+      "evidence": [
+        "project_state.json"
+      ]
+    },
+    {
+      "id": "REQ-4",
+      "requirement": "Perform a thorough security audit of backend/main.mo covering access control, caller validation, cross-user data protection, integer overflow guards, and restricted public API surface.",
+      "reason": "While backend/main.mo was modified and includes access control imports and helpers, the diff is heavily truncated. It is unclear whether all required fixes were fully applied. The project_state.json still lists this as 'pending'.",
+      "evidence": [
+        "backend/main.mo",
+        "project_state.json"
+      ]
+    },
+    {
+      "id": "REQ-5",
+      "requirement": "Frontend code review and security audit: input sanitization, safe rendering of user/AI content, consistent React Query error handling in useQueries.ts, and removal of sensitive console.log statements.",
+      "reason": "No frontend files such as useQueries.ts or any component files are modified in the diff. The project_state.json lists this as 'pending'.",
+      "evidence": [
+        "project_state.json"
+      ]
+    },
+    {
+      "id": "REQ-6",
+      "requirement": "GUI consistency audit across all pages: uniform typography, consistent spacing/padding, uniform button styles, adherence to light/dark theme tokens, and no broken layout elements.",
+      "reason": "No frontend page or component files are modified in the diff. The project_state.json lists this as 'pending'.",
+      "evidence": [
+        "project_state.json"
+      ]
+    }
+  ],
   "hallucinated_features": [],
-  "confidence": 0.88,
+  "confidence": 0.82,
   "changed_files": [
-    "frontend-file-summaries.txt",
-    "frontend/src/pages/CertificationSelector.tsx",
-    "frontend/src/pages/Dashboard.tsx",
-    "frontend/src/pages/StudyMaterials.tsx",
+    "backend/main.mo",
     "project_state.json"
   ]
 }

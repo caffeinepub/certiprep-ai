@@ -42,10 +42,13 @@ export interface TestResult {
     testId: TestId;
 }
 export type KeyTermId = bigint;
+export interface UserApprovalInfo {
+    status: ApprovalStatus;
+    principal: Principal;
+}
 export type ProtocolId = bigint;
 export type ObjectiveId = bigint;
 export type FlashcardId = bigint;
-export type CertificationId = string;
 export type DomainId = bigint;
 export interface Flashcard {
     id: FlashcardId;
@@ -55,6 +58,7 @@ export interface Flashcard {
     timesCorrect: bigint;
 }
 export type PortId = bigint;
+export type CertificationId = string;
 export interface Question {
     id: QuestionId;
     domain: string;
@@ -77,6 +81,11 @@ export interface Protocol {
 export interface UserProfile {
     name: string;
 }
+export enum ApprovalStatus {
+    pending = "pending",
+    approved = "approved",
+    rejected = "rejected"
+}
 export enum UserRole {
     admin = "admin",
     user = "user",
@@ -92,6 +101,7 @@ export interface backendInterface {
     addQuestion(certificationId: CertificationId, domain: string, questionText: string, correctAnswer: string): Promise<QuestionId>;
     assignCallerUserRole(user: Principal, role: UserRole): Promise<void>;
     getAllPdfProgressRecords(): Promise<Array<PDFProgressRecord>>;
+    getAllTestResultsForCertification(certificationId: CertificationId): Promise<Array<TestResult>>;
     getCallerUserProfile(): Promise<UserProfile | null>;
     getCallerUserRole(): Promise<UserRole>;
     getCertifications(): Promise<Array<string>>;
@@ -106,7 +116,12 @@ export interface backendInterface {
     getTestResultsForCertification(certificationId: CertificationId): Promise<Array<TestResult>>;
     getUserProfile(user: Principal): Promise<UserProfile | null>;
     isCallerAdmin(): Promise<boolean>;
+    isCallerApproved(): Promise<boolean>;
+    listApprovals(): Promise<Array<UserApprovalInfo>>;
+    overwriteTestResults(_payload: string): Promise<void>;
+    requestApproval(): Promise<void>;
     saveCallerUserProfile(profile: UserProfile): Promise<void>;
     saveOrUpdateProgress(certificationId: CertificationId, percentage: bigint): Promise<void>;
+    setApproval(user: Principal, status: ApprovalStatus): Promise<void>;
     submitTestResult(certificationId: CertificationId, score: bigint, totalQuestions: bigint): Promise<TestId>;
 }

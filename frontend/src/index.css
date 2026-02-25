@@ -1,206 +1,175 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;1,400&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap');
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --background: oklch(0.13 0.03 240);
+  --foreground: oklch(0.92 0.02 80);
+  --card: oklch(0.17 0.03 240);
+  --card-foreground: oklch(0.92 0.02 80);
+  --popover: oklch(0.17 0.03 240);
+  --popover-foreground: oklch(0.92 0.02 80);
+  --primary: oklch(0.75 0.15 60);
+  --primary-foreground: oklch(0.13 0.03 240);
+  --secondary: oklch(0.22 0.04 240);
+  --secondary-foreground: oklch(0.85 0.03 80);
+  --muted: oklch(0.22 0.04 240);
+  --muted-foreground: oklch(0.60 0.03 240);
+  --accent: oklch(0.65 0.18 220);
+  --accent-foreground: oklch(0.13 0.03 240);
+  --destructive: oklch(0.55 0.22 25);
+  --destructive-foreground: oklch(0.95 0.01 80);
+  --border: oklch(0.28 0.04 240);
+  --input: oklch(0.22 0.04 240);
+  --ring: oklch(0.75 0.15 60);
+  --radius: 0.5rem;
+  --success: 0.65 0.18 145;
+  --success-foreground: oklch(0.13 0.03 240);
+  --chart-1: oklch(0.75 0.15 60);
+  --chart-2: oklch(0.65 0.18 220);
+  --chart-3: oklch(0.65 0.18 145);
+  --chart-4: oklch(0.65 0.18 300);
+  --chart-5: oklch(0.65 0.18 25);
+}
+
+.light {
+  --background: oklch(0.97 0.01 80);
+  --foreground: oklch(0.18 0.03 240);
+  --card: oklch(1.0 0.0 0);
+  --card-foreground: oklch(0.18 0.03 240);
+  --popover: oklch(1.0 0.0 0);
+  --popover-foreground: oklch(0.18 0.03 240);
+  --primary: oklch(0.60 0.15 60);
+  --primary-foreground: oklch(0.97 0.01 80);
+  --secondary: oklch(0.92 0.02 80);
+  --secondary-foreground: oklch(0.18 0.03 240);
+  --muted: oklch(0.92 0.02 80);
+  --muted-foreground: oklch(0.50 0.03 240);
+  --accent: oklch(0.55 0.18 220);
+  --accent-foreground: oklch(0.97 0.01 80);
+  --destructive: oklch(0.55 0.22 25);
+  --destructive-foreground: oklch(0.97 0.01 80);
+  --border: oklch(0.85 0.02 80);
+  --input: oklch(0.92 0.02 80);
+  --ring: oklch(0.60 0.15 60);
+  --success: 0.55 0.18 145;
+  --success-foreground: oklch(0.97 0.01 80);
+}
+
 @layer base {
-  :root {
-    --radius: 0.5rem;
-
-    /* Dark academia meets modern tech - deep navy/slate palette */
-    --background: 0.13 0.02 250;
-    --foreground: 0.92 0.01 240;
-
-    --card: 0.17 0.025 250;
-    --card-foreground: 0.92 0.01 240;
-
-    --popover: 0.19 0.03 250;
-    --popover-foreground: 0.92 0.01 240;
-
-    /* Amber accent as primary */
-    --primary: 0.78 0.16 70;
-    --primary-foreground: 0.12 0.02 250;
-
-    --secondary: 0.22 0.03 250;
-    --secondary-foreground: 0.85 0.01 240;
-
-    --muted: 0.20 0.025 250;
-    --muted-foreground: 0.58 0.02 240;
-
-    /* Electric blue accent */
-    --accent: 0.55 0.18 240;
-    --accent-foreground: 0.98 0 0;
-
-    --destructive: 0.62 0.22 25;
-    --destructive-foreground: 0.98 0 0;
-
-    --border: 0.28 0.03 250;
-    --input: 0.22 0.03 250;
-    --ring: 0.78 0.16 70;
-
-    /* Success color as CSS variable for opacity modifier support */
-    --success: 0.65 0.15 160;
-    --success-foreground: 0.12 0.02 250;
-
-    --chart-1: 0.78 0.16 70;
-    --chart-2: 0.55 0.18 240;
-    --chart-3: 0.62 0.22 25;
-    --chart-4: 0.65 0.15 160;
-    --chart-5: 0.70 0.14 300;
-
-    --sidebar: 0.15 0.025 250;
-    --sidebar-foreground: 0.92 0.01 240;
-    --sidebar-primary: 0.78 0.16 70;
-    --sidebar-primary-foreground: 0.12 0.02 250;
-    --sidebar-accent: 0.22 0.03 250;
-    --sidebar-accent-foreground: 0.85 0.01 240;
-    --sidebar-border: 0.28 0.03 250;
-    --sidebar-ring: 0.78 0.16 70;
-  }
-
   * {
     @apply border-border;
   }
-
   body {
     @apply bg-background text-foreground;
-    font-family: 'Inter', sans-serif;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
+    font-family: 'EB Garamond', 'Crimson Text', Georgia, serif;
   }
-
-  h1, h2, h3, h4, h5, h6 {
-    font-family: 'Space Grotesk', sans-serif;
+  code, pre, kbd, samp {
+    font-family: 'JetBrains Mono', 'Courier New', monospace;
   }
 }
 
-@layer utilities {
-  .card-flip {
-    perspective: 1000px;
-  }
-
-  .card-flip-inner {
-    position: relative;
-    width: 100%;
-    height: 100%;
-    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-    transform-style: preserve-3d;
-  }
-
-  .card-flip-inner.flipped {
-    transform: rotateY(180deg);
-  }
-
-  .card-face {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    backface-visibility: hidden;
-    -webkit-backface-visibility: hidden;
-  }
-
-  .card-face-back {
-    transform: rotateY(180deg);
-  }
-
-  .speaking-pulse {
-    animation: speakingPulse 1.2s ease-in-out infinite;
-  }
-
-  @keyframes speakingPulse {
-    0%, 100% { opacity: 1; transform: scale(1); }
-    50% { opacity: 0.6; transform: scale(1.05); }
-  }
-
-  .wave-bar {
-    animation: waveAnim 1s ease-in-out infinite;
-  }
-
-  .wave-bar:nth-child(2) { animation-delay: 0.1s; }
-  .wave-bar:nth-child(3) { animation-delay: 0.2s; }
-  .wave-bar:nth-child(4) { animation-delay: 0.3s; }
-  .wave-bar:nth-child(5) { animation-delay: 0.4s; }
-
-  @keyframes waveAnim {
-    0%, 100% { height: 4px; }
-    50% { height: 20px; }
-  }
-
-  .gradient-amber {
-    background: linear-gradient(135deg, oklch(0.78 0.16 70), oklch(0.70 0.18 55));
-  }
-
-  .gradient-blue {
-    background: linear-gradient(135deg, oklch(0.55 0.18 240), oklch(0.48 0.20 260));
-  }
-
-  .glow-amber {
-    box-shadow: 0 0 20px oklch(0.78 0.16 70 / 0.3);
-  }
-
-  .glow-blue {
-    box-shadow: 0 0 20px oklch(0.55 0.18 240 / 0.3);
-  }
-
-  .text-gradient-amber {
-    background: linear-gradient(135deg, oklch(0.85 0.16 70), oklch(0.78 0.18 55));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-  }
-
-  .text-gradient-blue {
-    background: linear-gradient(135deg, oklch(0.70 0.18 240), oklch(0.60 0.20 260));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-  }
-
-  .nav-link {
-    @apply text-muted-foreground hover:text-foreground transition-colors duration-200 text-sm font-medium;
-  }
-
-  .nav-link.active {
-    @apply text-primary;
-  }
-
-  .section-card {
-    @apply bg-card border border-border rounded-xl p-6 hover:border-primary/40 transition-all duration-200;
-  }
-
-  .badge-amber {
-    @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-primary/20 text-primary border border-primary/30;
-  }
-
-  .badge-blue {
-    @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-accent/20 text-accent border border-accent/30;
-  }
-
-  /* badge-green and badge-red use plain CSS to avoid @apply opacity issues with custom colors */
+@layer components {
   .badge-green {
     display: inline-flex;
     align-items: center;
-    padding: 0.125rem 0.625rem;
     border-radius: 9999px;
+    padding: 0.125rem 0.625rem;
     font-size: 0.75rem;
-    line-height: 1rem;
     font-weight: 500;
-    background-color: oklch(0.65 0.15 160 / 0.2);
-    color: oklch(0.65 0.15 160);
-    border: 1px solid oklch(0.65 0.15 160 / 0.3);
+    background-color: oklch(0.65 0.18 145 / 0.15);
+    color: oklch(0.65 0.18 145);
+    border: 1px solid oklch(0.65 0.18 145 / 0.3);
   }
-
   .badge-red {
     display: inline-flex;
     align-items: center;
-    padding: 0.125rem 0.625rem;
     border-radius: 9999px;
+    padding: 0.125rem 0.625rem;
     font-size: 0.75rem;
-    line-height: 1rem;
     font-weight: 500;
-    background-color: oklch(0.62 0.22 25 / 0.2);
-    color: oklch(0.62 0.22 25);
-    border: 1px solid oklch(0.62 0.22 25 / 0.3);
+    background-color: oklch(0.55 0.22 25 / 0.15);
+    color: oklch(0.65 0.18 25);
+    border: 1px solid oklch(0.55 0.22 25 / 0.3);
   }
+}
+
+/* ============================================================
+   STUDY GUIDE HTML CONTENT STYLES
+   Applied to content rendered inside the PDFViewer iframe
+   ============================================================ */
+
+/* These styles are injected into the study guide HTML files directly */
+
+/* Global study guide body styles */
+body.study-guide {
+  background-color: #0a1628;
+  color: #e8dcc8;
+  font-family: 'EB Garamond', 'Crimson Text', Georgia, serif;
+  font-size: 16px;
+  line-height: 1.7;
+  margin: 0;
+  padding: 0;
+}
+
+/* Exam tip callout box */
+.exam-tip {
+  border-left: 4px solid #f59e0b;
+  background-color: rgba(245, 158, 11, 0.08);
+  padding: 1rem 1.25rem;
+  margin: 1.25rem 0;
+  border-radius: 0 6px 6px 0;
+}
+
+.exam-tip::before {
+  content: "📝 Exam Tip";
+  display: block;
+  font-weight: 700;
+  color: #f59e0b;
+  margin-bottom: 0.5rem;
+  font-size: 0.9rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+/* Memory aid callout box */
+.memory-aid {
+  border-left: 4px solid #3b82f6;
+  background-color: rgba(59, 130, 246, 0.08);
+  padding: 1rem 1.25rem;
+  margin: 1.25rem 0;
+  border-radius: 0 6px 6px 0;
+}
+
+.memory-aid::before {
+  content: "🧠 Memory Aid";
+  display: block;
+  font-weight: 700;
+  color: #3b82f6;
+  margin-bottom: 0.5rem;
+  font-size: 0.9rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+/* Warning/note callout */
+.note {
+  border-left: 4px solid #8b5cf6;
+  background-color: rgba(139, 92, 246, 0.08);
+  padding: 1rem 1.25rem;
+  margin: 1.25rem 0;
+  border-radius: 0 6px 6px 0;
+}
+
+.note::before {
+  content: "ℹ️ Note";
+  display: block;
+  font-weight: 700;
+  color: #8b5cf6;
+  margin-bottom: 0.5rem;
+  font-size: 0.9rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
 }

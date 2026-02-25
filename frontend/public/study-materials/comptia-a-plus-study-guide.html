@@ -1,0 +1,822 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>CompTIA A+ Study Guide</title>
+<style>
+  body { background:#0a1628; color:#e8dcc8; font-family:'Georgia',serif; font-size:16px; line-height:1.7; margin:0; padding:2rem; }
+  h1 { color:#f59e0b; font-size:2.2rem; border-bottom:3px solid #f59e0b; padding-bottom:0.5rem; margin-bottom:1rem; }
+  h2 { color:#f59e0b; font-size:1.6rem; border-bottom:2px solid rgba(245,158,11,0.4); padding-bottom:0.3rem; margin-top:2.5rem; }
+  h3 { color:#93c5fd; font-size:1.2rem; margin-top:1.5rem; }
+  h4 { color:#a78bfa; font-size:1rem; margin-top:1rem; }
+  a { color:#60a5fa; text-decoration:none; }
+  a:hover { text-decoration:underline; }
+  table { width:100%; border-collapse:collapse; margin:1rem 0; font-size:0.9rem; }
+  th { background:#1e3a5f; color:#f59e0b; padding:0.6rem 0.8rem; text-align:left; border:1px solid #2d4a6e; }
+  td { padding:0.5rem 0.8rem; border:1px solid #1e3a5f; vertical-align:top; }
+  tr:nth-child(even) td { background:rgba(30,58,95,0.3); }
+  pre { background:#0d1f35; border:1px solid #2d4a6e; border-radius:6px; padding:1rem; overflow-x:auto; font-family:'Courier New',monospace; font-size:0.85rem; color:#a5f3fc; }
+  code { font-family:'Courier New',monospace; background:#0d1f35; padding:0.1rem 0.3rem; border-radius:3px; font-size:0.85rem; color:#a5f3fc; }
+  .exam-tip { border-left:4px solid #f59e0b; background:rgba(245,158,11,0.08); padding:1rem 1.25rem; margin:1.25rem 0; border-radius:0 6px 6px 0; }
+  .exam-tip::before { content:"📝 Exam Tip"; display:block; font-weight:700; color:#f59e0b; margin-bottom:0.5rem; font-size:0.85rem; letter-spacing:0.05em; text-transform:uppercase; }
+  .memory-aid { border-left:4px solid #3b82f6; background:rgba(59,130,246,0.08); padding:1rem 1.25rem; margin:1.25rem 0; border-radius:0 6px 6px 0; }
+  .memory-aid::before { content:"🧠 Memory Aid"; display:block; font-weight:700; color:#3b82f6; margin-bottom:0.5rem; font-size:0.85rem; letter-spacing:0.05em; text-transform:uppercase; }
+  .note { border-left:4px solid #8b5cf6; background:rgba(139,92,246,0.08); padding:1rem 1.25rem; margin:1.25rem 0; border-radius:0 6px 6px 0; }
+  .toc { background:#0d1f35; border:1px solid #2d4a6e; border-radius:8px; padding:1.5rem; margin-bottom:2rem; }
+  .toc h2 { margin-top:0; font-size:1.3rem; }
+  .toc ol { margin:0; padding-left:1.5rem; }
+  .toc li { margin:0.3rem 0; }
+  ul, ol { padding-left:1.5rem; }
+  li { margin:0.3rem 0; }
+  dl { margin:0.5rem 0; }
+  dt { color:#f59e0b; font-weight:700; margin-top:0.8rem; }
+  dd { margin-left:1.5rem; color:#cbd5e1; }
+  .domain-badge { display:inline-block; background:#1e3a5f; color:#93c5fd; padding:0.2rem 0.6rem; border-radius:4px; font-size:0.8rem; margin-bottom:0.5rem; }
+</style>
+</head>
+<body>
+<h1>CompTIA A+ Study Guide</h1>
+<p><strong>Exams:</strong> Core 1 (220-1101) &amp; Core 2 (220-1102) &nbsp;|&nbsp; <strong>Format:</strong> 90 questions each, 90 minutes, passing score 675/900</p>
+
+<div class="toc">
+  <h2>📚 Table of Contents</h2>
+  <ol>
+    <li><a href="#core1">Core 1 (220-1101) Domains</a>
+      <ol>
+        <li><a href="#mobile-devices">Mobile Devices</a></li>
+        <li><a href="#networking">Networking</a></li>
+        <li><a href="#hardware">Hardware</a></li>
+        <li><a href="#virtualization-cloud">Virtualization &amp; Cloud Computing</a></li>
+        <li><a href="#hardware-network-troubleshooting">Hardware &amp; Network Troubleshooting</a></li>
+      </ol>
+    </li>
+    <li><a href="#core2">Core 2 (220-1102) Domains</a>
+      <ol>
+        <li><a href="#operating-systems">Operating Systems</a></li>
+        <li><a href="#security">Security</a></li>
+        <li><a href="#software-troubleshooting">Software Troubleshooting</a></li>
+        <li><a href="#operational-procedures">Operational Procedures</a></li>
+      </ol>
+    </li>
+    <li><a href="#ports-table">Port Number Reference</a></li>
+    <li><a href="#cli-commands">CLI Command Reference</a></li>
+    <li><a href="#acronym-glossary">Acronym Glossary</a></li>
+  </ol>
+</div>
+
+<!-- ==================== CORE 1 ==================== -->
+<h2 id="core1">Core 1 (220-1101) — Hardware &amp; Networking</h2>
+<p><span class="domain-badge">15% Mobile Devices</span> <span class="domain-badge">20% Networking</span> <span class="domain-badge">25% Hardware</span> <span class="domain-badge">11% Virtualization &amp; Cloud</span> <span class="domain-badge">29% Hardware &amp; Network Troubleshooting</span></p>
+
+<!-- DOMAIN 1: MOBILE DEVICES -->
+<h2 id="mobile-devices">1. Mobile Devices</h2>
+
+<h3>1.1 Laptop Hardware Components</h3>
+<ul>
+  <li><strong>Display types:</strong> TN (fast, poor angles), IPS (best color/angles), VA (high contrast), OLED (perfect blacks, power efficient)</li>
+  <li><strong>Inverter:</strong> Powers CCFL backlights (older laptops); LED backlights do NOT use inverters</li>
+  <li><strong>Digitizer:</strong> Touch-sensitive layer over display; separate from LCD panel</li>
+  <li><strong>Webcam:</strong> Integrated above display; connects via internal USB or proprietary connector</li>
+  <li><strong>Keyboard:</strong> Connects via ribbon cable to motherboard; function keys (Fn) toggle secondary functions</li>
+  <li><strong>Touchpad:</strong> Capacitive surface; drivers control gestures; can be disabled via Fn key</li>
+  <li><strong>Battery:</strong> Li-Ion or Li-Polymer; measured in mAh or Wh; calibrate by full discharge/charge cycle</li>
+  <li><strong>DC jack:</strong> Power input connector; common failure point from physical stress</li>
+  <li><strong>RAM:</strong> SO-DIMM form factor (laptop); DDR4 or DDR5; some soldered (not upgradeable)</li>
+  <li><strong>Storage:</strong> 2.5" SATA SSD/HDD or M.2 NVMe/SATA SSD</li>
+  <li><strong>Wireless card:</strong> Mini PCIe or M.2 (A/E key); 802.11 Wi-Fi + Bluetooth combo cards common</li>
+  <li><strong>Speakers:</strong> Connected via audio header; stereo pair typically under keyboard or at base</li>
+  <li><strong>Optical drive:</strong> Slim SATA; increasingly rare; external USB alternatives common</li>
+  <li><strong>CPU:</strong> Soldered BGA package in most modern laptops; not user-replaceable</li>
+  <li><strong>Thermal paste:</strong> Between CPU/GPU die and heatsink; dries out over time causing overheating</li>
+</ul>
+
+<h3>1.2 Laptop Display Components</h3>
+<ul>
+  <li><strong>LCD panel:</strong> Liquid crystal display; requires backlight (LED or CCFL)</li>
+  <li><strong>LED backlight:</strong> Edge-lit or direct-lit; more efficient than CCFL; no inverter needed</li>
+  <li><strong>CCFL backlight:</strong> Cold cathode fluorescent lamp; older technology; requires inverter</li>
+  <li><strong>Backlight failure:</strong> Screen appears very dim; use flashlight test to confirm image still present</li>
+  <li><strong>Broken screen:</strong> Cracks, dead pixels, lines; replace entire LCD assembly</li>
+  <li><strong>Video cable:</strong> Connects motherboard GPU to display; runs through hinge; can fray</li>
+  <li><strong>Wi-Fi antenna:</strong> Routed around display bezel for maximum signal; connects to wireless card</li>
+</ul>
+
+<h3>1.3 Mobile Device Accessories &amp; Ports</h3>
+<table>
+  <tr><th>Port/Connector</th><th>Description</th><th>Notes</th></tr>
+  <tr><td>USB-C</td><td>Reversible, supports USB 3.x, Thunderbolt 3/4, DisplayPort, Power Delivery</td><td>Up to 100W charging, 40Gbps (TB4)</td></tr>
+  <tr><td>Thunderbolt 3/4</td><td>Intel protocol over USB-C; daisy-chain up to 6 devices</td><td>TB3: 40Gbps; TB4: same speed, stricter requirements</td></tr>
+  <tr><td>Lightning</td><td>Apple proprietary; iPhone/iPad pre-USB-C</td><td>Replaced by USB-C in iPhone 15+</td></tr>
+  <tr><td>microUSB</td><td>Older Android/accessories; USB 2.0 speeds</td><td>Being replaced by USB-C</td></tr>
+  <tr><td>HDMI</td><td>Full-size, mini, micro variants; video+audio</td><td>Mini HDMI common on tablets</td></tr>
+  <tr><td>DisplayPort</td><td>PC monitors; also via USB-C alt mode</td><td>Supports daisy-chaining</td></tr>
+  <tr><td>SD/microSD</td><td>Removable storage; SDXC up to 2TB</td><td>microSD common in Android phones</td></tr>
+  <tr><td>3.5mm audio</td><td>Headphone/mic combo (TRRS) or separate</td><td>Disappearing from flagship phones</td></tr>
+  <tr><td>NFC</td><td>Near Field Communication; 13.56 MHz; &lt;4cm range</td><td>Used for contactless payments, pairing</td></tr>
+  <tr><td>Bluetooth</td><td>Short-range wireless; 2.4 GHz; up to ~100m (Class 1)</td><td>BT 5.0+ supports 2Mbps, longer range</td></tr>
+  <tr><td>IR blaster</td><td>Infrared transmitter; remote control functionality</td><td>Rare in modern phones</td></tr>
+</table>
+
+<h3>1.4 Mobile Device Synchronization</h3>
+<ul>
+  <li><strong>iCloud:</strong> Apple cloud sync; contacts, calendar, photos, iMessage, iCloud Drive</li>
+  <li><strong>Google Account:</strong> Android sync; Gmail, Contacts, Calendar, Drive, Photos</li>
+  <li><strong>Microsoft Exchange:</strong> Enterprise email/calendar/contacts; ActiveSync protocol</li>
+  <li><strong>MDM (Mobile Device Management):</strong> Enterprise management; enforce policies, remote wipe, app deployment</li>
+  <li><strong>USB sync:</strong> Direct cable connection; iTunes (iOS), Android File Transfer (macOS), Windows Explorer</li>
+  <li><strong>Bluetooth sync:</strong> Wireless pairing; slower than USB; used for accessories</li>
+</ul>
+
+<div class="exam-tip">
+  Mobile device questions often ask about synchronization methods. Remember: iOS uses iCloud and iTunes; Android uses Google Account. MDM is the enterprise solution for both platforms. USB-C is the universal standard replacing all proprietary connectors.
+</div>
+
+<!-- DOMAIN 2: NETWORKING -->
+<h2 id="networking">2. Networking</h2>
+
+<h3>2.1 TCP/IP Basics</h3>
+<ul>
+  <li><strong>IPv4:</strong> 32-bit address; dotted decimal notation (e.g., 192.168.1.1); ~4.3 billion addresses</li>
+  <li><strong>IPv6:</strong> 128-bit address; hexadecimal colon notation; 340 undecillion addresses</li>
+  <li><strong>Subnet mask:</strong> Defines network vs. host portion; /24 = 255.255.255.0</li>
+  <li><strong>Default gateway:</strong> Router IP; used to reach other networks</li>
+  <li><strong>DNS server:</strong> Resolves hostnames to IP addresses</li>
+  <li><strong>DHCP:</strong> Automatically assigns IP, subnet mask, gateway, DNS to clients</li>
+  <li><strong>APIPA:</strong> 169.254.x.x; self-assigned when DHCP fails; indicates connectivity problem</li>
+  <li><strong>Loopback:</strong> 127.0.0.1 (IPv4) or ::1 (IPv6); tests local TCP/IP stack</li>
+</ul>
+
+<h3>2.2 Private IP Address Ranges (RFC 1918)</h3>
+<table>
+  <tr><th>Class</th><th>Range</th><th>CIDR</th><th>Hosts</th></tr>
+  <tr><td>A</td><td>10.0.0.0 – 10.255.255.255</td><td>/8</td><td>16,777,214</td></tr>
+  <tr><td>B</td><td>172.16.0.0 – 172.31.255.255</td><td>/12</td><td>1,048,574</td></tr>
+  <tr><td>C</td><td>192.168.0.0 – 192.168.255.255</td><td>/16</td><td>65,534</td></tr>
+</table>
+
+<h3>2.3 Network Protocols &amp; Services</h3>
+<table>
+  <tr><th>Protocol</th><th>Description</th><th>Port(s)</th></tr>
+  <tr><td>DHCP</td><td>Dynamic Host Configuration Protocol; auto-assigns IP config</td><td>67 (server), 68 (client)</td></tr>
+  <tr><td>DNS</td><td>Domain Name System; hostname to IP resolution</td><td>53 (TCP/UDP)</td></tr>
+  <tr><td>HTTP</td><td>HyperText Transfer Protocol; web browsing</td><td>80</td></tr>
+  <tr><td>HTTPS</td><td>HTTP Secure; encrypted web traffic via TLS</td><td>443</td></tr>
+  <tr><td>FTP</td><td>File Transfer Protocol; file upload/download</td><td>20 (data), 21 (control)</td></tr>
+  <tr><td>SFTP</td><td>SSH File Transfer Protocol; encrypted FTP</td><td>22</td></tr>
+  <tr><td>SSH</td><td>Secure Shell; encrypted remote terminal</td><td>22</td></tr>
+  <tr><td>Telnet</td><td>Unencrypted remote terminal; legacy</td><td>23</td></tr>
+  <tr><td>SMTP</td><td>Simple Mail Transfer Protocol; send email</td><td>25</td></tr>
+  <tr><td>POP3</td><td>Post Office Protocol v3; retrieve email (downloads)</td><td>110</td></tr>
+  <tr><td>IMAP</td><td>Internet Message Access Protocol; retrieve email (server-side)</td><td>143</td></tr>
+  <tr><td>RDP</td><td>Remote Desktop Protocol; Windows remote GUI</td><td>3389</td></tr>
+  <tr><td>SMB</td><td>Server Message Block; Windows file/printer sharing</td><td>445</td></tr>
+  <tr><td>SNMP</td><td>Simple Network Management Protocol; network monitoring</td><td>161 (agent), 162 (trap)</td></tr>
+  <tr><td>LDAP</td><td>Lightweight Directory Access Protocol; directory services</td><td>389</td></tr>
+  <tr><td>LDAPS</td><td>LDAP over SSL/TLS</td><td>636</td></tr>
+  <tr><td>NTP</td><td>Network Time Protocol; time synchronization</td><td>123</td></tr>
+  <tr><td>TFTP</td><td>Trivial FTP; simple file transfer, no auth</td><td>69</td></tr>
+  <tr><td>NetBIOS</td><td>Legacy Windows name resolution</td><td>137-139</td></tr>
+  <tr><td>SIP</td><td>Session Initiation Protocol; VoIP signaling</td><td>5060/5061</td></tr>
+</table>
+
+<h3>2.4 Network Hardware</h3>
+<ul>
+  <li><strong>Hub:</strong> Layer 1; broadcasts to all ports; creates collision domain; obsolete</li>
+  <li><strong>Switch:</strong> Layer 2; forwards based on MAC address table; creates separate collision domains</li>
+  <li><strong>Router:</strong> Layer 3; routes between networks using IP addresses; connects LAN to WAN</li>
+  <li><strong>Wireless Access Point (WAP):</strong> Extends wired network wirelessly; connects to switch via Ethernet</li>
+  <li><strong>Modem:</strong> Modulates/demodulates signal; converts digital to analog (DSL/cable)</li>
+  <li><strong>Firewall:</strong> Filters traffic based on rules; hardware or software</li>
+  <li><strong>PoE switch:</strong> Power over Ethernet; delivers power via Cat cable to WAPs, IP cameras, phones</li>
+  <li><strong>Patch panel:</strong> Organizes cable runs in rack; connects to switch via patch cables</li>
+  <li><strong>Managed switch:</strong> Configurable VLANs, QoS, port mirroring, SNMP monitoring</li>
+  <li><strong>Unmanaged switch:</strong> Plug-and-play; no configuration; home/small office use</li>
+</ul>
+
+<h3>2.5 Wireless Networking Standards</h3>
+<table>
+  <tr><th>Standard</th><th>Frequency</th><th>Max Speed</th><th>Range</th><th>Notes</th></tr>
+  <tr><td>802.11a</td><td>5 GHz</td><td>54 Mbps</td><td>~35m indoor</td><td>Less interference; shorter range</td></tr>
+  <tr><td>802.11b</td><td>2.4 GHz</td><td>11 Mbps</td><td>~38m indoor</td><td>First widely adopted; slow</td></tr>
+  <tr><td>802.11g</td><td>2.4 GHz</td><td>54 Mbps</td><td>~38m indoor</td><td>Backward compatible with b</td></tr>
+  <tr><td>802.11n (Wi-Fi 4)</td><td>2.4/5 GHz</td><td>600 Mbps</td><td>~70m indoor</td><td>MIMO; dual-band</td></tr>
+  <tr><td>802.11ac (Wi-Fi 5)</td><td>5 GHz</td><td>3.5 Gbps</td><td>~35m indoor</td><td>MU-MIMO; beamforming</td></tr>
+  <tr><td>802.11ax (Wi-Fi 6/6E)</td><td>2.4/5/6 GHz</td><td>9.6 Gbps</td><td>~30m indoor</td><td>OFDMA; best for dense environments</td></tr>
+</table>
+
+<div class="memory-aid">
+  <strong>Wireless channels (2.4 GHz):</strong> Only channels 1, 6, and 11 are non-overlapping. Use these to avoid interference between neighboring APs. The 5 GHz band has many more non-overlapping channels (36, 40, 44, 48, etc.).
+</div>
+
+<h3>2.6 Network Cabling</h3>
+<table>
+  <tr><th>Cable Type</th><th>Max Speed</th><th>Max Distance</th><th>Notes</th></tr>
+  <tr><td>Cat 5e</td><td>1 Gbps</td><td>100m</td><td>Minimum for Gigabit Ethernet</td></tr>
+  <tr><td>Cat 6</td><td>10 Gbps</td><td>55m (10G) / 100m (1G)</td><td>Reduced crosstalk; spline separator</td></tr>
+  <tr><td>Cat 6a</td><td>10 Gbps</td><td>100m</td><td>Augmented; shielded options</td></tr>
+  <tr><td>Cat 7</td><td>10 Gbps</td><td>100m</td><td>Fully shielded; GG45/TERA connectors</td></tr>
+  <tr><td>Fiber (SMF)</td><td>100 Gbps+</td><td>40km+</td><td>Single-mode; long distance; yellow jacket</td></tr>
+  <tr><td>Fiber (MMF)</td><td>10 Gbps</td><td>550m</td><td>Multi-mode; short distance; orange/aqua jacket</td></tr>
+  <tr><td>Coaxial (RG-6)</td><td>—</td><td>—</td><td>Cable TV, satellite; F-type connector</td></tr>
+</table>
+
+<h3>2.7 Network Connector Types</h3>
+<ul>
+  <li><strong>RJ-45:</strong> 8-pin; Ethernet (Cat 5e/6/6a); T568A or T568B wiring standard</li>
+  <li><strong>RJ-11:</strong> 6-pin (4 used); telephone/DSL</li>
+  <li><strong>LC:</strong> Small form-factor fiber; push-pull latch; common in data centers</li>
+  <li><strong>SC:</strong> Square fiber connector; push-pull; older installations</li>
+  <li><strong>ST:</strong> Bayonet fiber connector; twist-lock; older multimode</li>
+  <li><strong>F-type:</strong> Coaxial; screw-on; cable TV/satellite</li>
+  <li><strong>BNC:</strong> Coaxial; bayonet; older 10Base2 Ethernet, video</li>
+</ul>
+
+<div class="exam-tip">
+  T568B is the most common wiring standard in the US. Straight-through cables (both ends T568B) connect different device types (PC to switch). Crossover cables (one end T568A, one T568B) connect same device types (switch to switch) — though modern switches use Auto-MDIX to handle this automatically.
+</div>
+
+<!-- DOMAIN 3: HARDWARE -->
+<h2 id="hardware">3. Hardware</h2>
+
+<h3>3.1 Motherboard Form Factors</h3>
+<table>
+  <tr><th>Form Factor</th><th>Size</th><th>Expansion Slots</th><th>Use Case</th></tr>
+  <tr><td>ATX</td><td>305 × 244mm</td><td>7 slots</td><td>Full desktop tower; most expandable</td></tr>
+  <tr><td>Micro-ATX</td><td>244 × 244mm</td><td>4 slots</td><td>Mid-tower; good balance</td></tr>
+  <tr><td>Mini-ITX</td><td>170 × 170mm</td><td>1 slot</td><td>Small form factor; HTPCs</td></tr>
+  <tr><td>E-ATX</td><td>305 × 330mm</td><td>8+ slots</td><td>Workstation/server; HEDT platforms</td></tr>
+</table>
+
+<h3>3.2 CPU Sockets</h3>
+<table>
+  <tr><th>Socket</th><th>Manufacturer</th><th>Pin Type</th><th>Compatible CPUs</th></tr>
+  <tr><td>LGA 1700</td><td>Intel</td><td>LGA (pins on motherboard)</td><td>12th/13th/14th Gen Core (Alder/Raptor Lake)</td></tr>
+  <tr><td>LGA 1200</td><td>Intel</td><td>LGA</td><td>10th/11th Gen Core (Comet/Rocket Lake)</td></tr>
+  <tr><td>AM5</td><td>AMD</td><td>LGA (AMD switched to LGA)</td><td>Ryzen 7000 series (Zen 4)</td></tr>
+  <tr><td>AM4</td><td>AMD</td><td>PGA (pins on CPU)</td><td>Ryzen 1000–5000 series (Zen–Zen 3)</td></tr>
+  <tr><td>TR4/TRX40</td><td>AMD</td><td>LGA</td><td>Threadripper (HEDT)</td></tr>
+</table>
+
+<div class="memory-aid">
+  <strong>LGA vs PGA:</strong> LGA = Land Grid Array (pins on motherboard socket). PGA = Pin Grid Array (pins on CPU). Intel historically used LGA; AMD used PGA but switched to LGA with AM5. Bending pins on LGA damages the motherboard (expensive); bending pins on PGA damages the CPU (cheaper to replace).
+</div>
+
+<h3>3.3 RAM Types</h3>
+<table>
+  <tr><th>Type</th><th>Speed Range</th><th>Voltage</th><th>Pins (DIMM)</th><th>Notes</th></tr>
+  <tr><td>DDR3</td><td>800–2133 MHz</td><td>1.5V</td><td>240</td><td>Legacy; still in older systems</td></tr>
+  <tr><td>DDR4</td><td>2133–5333 MHz</td><td>1.2V</td><td>288</td><td>Most common current standard</td></tr>
+  <tr><td>DDR5</td><td>4800–8400+ MHz</td><td>1.1V</td><td>288 (different notch)</td><td>Latest; higher bandwidth, on-die ECC</td></tr>
+  <tr><td>SO-DIMM DDR4</td><td>2133–5333 MHz</td><td>1.2V</td><td>260</td><td>Laptop form factor</td></tr>
+  <tr><td>ECC RAM</td><td>Various</td><td>Various</td><td>Various</td><td>Error-correcting; servers/workstations</td></tr>
+</table>
+
+<ul>
+  <li><strong>Dual-channel:</strong> Install RAM in matching pairs (same slots, same capacity/speed) for ~15% bandwidth increase</li>
+  <li><strong>XMP/EXPO:</strong> Intel XMP / AMD EXPO profiles; enable in BIOS to run RAM at rated speed (default is JEDEC)</li>
+  <li><strong>RAM is NOT backward compatible:</strong> DDR4 will not fit in DDR3 slot (different notch position)</li>
+</ul>
+
+<h3>3.4 Storage Technologies</h3>
+<table>
+  <tr><th>Interface</th><th>Max Speed</th><th>Form Factor</th><th>Notes</th></tr>
+  <tr><td>SATA III</td><td>600 MB/s</td><td>2.5", 3.5", M.2</td><td>Most common; HDDs and SSDs</td></tr>
+  <tr><td>NVMe (PCIe 3.0)</td><td>3,500 MB/s</td><td>M.2, PCIe card</td><td>Much faster than SATA; uses PCIe lanes</td></tr>
+  <tr><td>NVMe (PCIe 4.0)</td><td>7,000 MB/s</td><td>M.2</td><td>Latest mainstream; 2x PCIe 3.0</td></tr>
+  <tr><td>NVMe (PCIe 5.0)</td><td>14,000 MB/s</td><td>M.2</td><td>Cutting edge; high heat output</td></tr>
+  <tr><td>M.2 SATA</td><td>600 MB/s</td><td>M.2 (B+M key)</td><td>SATA speed in M.2 form factor</td></tr>
+  <tr><td>USB 3.2 Gen 2</td><td>10 Gbps</td><td>External</td><td>External drives; portable storage</td></tr>
+</table>
+
+<h4>M.2 Key Types</h4>
+<ul>
+  <li><strong>M key:</strong> NVMe SSDs (PCIe x4)</li>
+  <li><strong>B+M key:</strong> SATA SSDs or NVMe (PCIe x2)</li>
+  <li><strong>A+E key:</strong> Wi-Fi/Bluetooth cards</li>
+  <li><strong>M.2 sizes:</strong> 2242, 2260, 2280 (most common), 22110 — first two digits = width (22mm), last digits = length</li>
+</ul>
+
+<h3>3.5 Expansion Slots</h3>
+<table>
+  <tr><th>Slot</th><th>Lanes</th><th>Bandwidth (PCIe 4.0)</th><th>Common Use</th></tr>
+  <tr><td>PCIe x1</td><td>1</td><td>2 GB/s</td><td>Sound cards, USB/SATA controllers</td></tr>
+  <tr><td>PCIe x4</td><td>4</td><td>8 GB/s</td><td>NVMe SSDs, some GPUs</td></tr>
+  <tr><td>PCIe x8</td><td>8</td><td>16 GB/s</td><td>GPUs, RAID controllers</td></tr>
+  <tr><td>PCIe x16</td><td>16</td><td>32 GB/s</td><td>Primary GPU slot</td></tr>
+</table>
+
+<h3>3.6 Power Supply Units (PSU)</h3>
+<ul>
+  <li><strong>Form factors:</strong> ATX (standard), SFX (small form factor), TFX (thin form factor)</li>
+  <li><strong>80 Plus ratings:</strong> 80 Plus (80%), Bronze (82%), Silver (85%), Gold (87%), Platinum (90%), Titanium (92%) efficiency</li>
+  <li><strong>Connectors:</strong> 24-pin ATX main, 8-pin CPU (EPS), 6/8-pin PCIe (GPU), SATA power, Molex (legacy)</li>
+  <li><strong>Modular:</strong> Fully modular (all cables detachable), semi-modular (main cables fixed), non-modular (all fixed)</li>
+  <li><strong>Wattage:</strong> Calculate total system TDP + 20% headroom; gaming PC typically 650–850W</li>
+  <li><strong>Rails:</strong> +12V (main power), +5V (legacy devices), +3.3V (RAM, PCIe), -12V (serial ports), +5VSB (standby)</li>
+</ul>
+
+<h3>3.7 Cooling Solutions</h3>
+<ul>
+  <li><strong>Air cooling:</strong> Heatsink + fan; thermal paste required; tower coolers for high TDP CPUs</li>
+  <li><strong>AIO liquid cooling:</strong> All-in-one; pump, radiator, fans; 120mm, 240mm, 360mm radiators</li>
+  <li><strong>Custom loop:</strong> Separate pump, reservoir, radiator, water blocks; maximum cooling</li>
+  <li><strong>Thermal paste:</strong> Fills microscopic gaps between CPU and heatsink; replace every 3–5 years</li>
+  <li><strong>Case fans:</strong> Intake (front/bottom) and exhaust (rear/top) for positive/negative pressure airflow</li>
+  <li><strong>Fan headers:</strong> 3-pin (voltage control) or 4-pin PWM (pulse width modulation, quieter)</li>
+</ul>
+
+<h3>3.8 Printer Types</h3>
+<table>
+  <tr><th>Type</th><th>Technology</th><th>Pros</th><th>Cons</th><th>Consumables</th></tr>
+  <tr><td>Laser</td><td>Toner + drum + fuser</td><td>Fast, sharp text, low cost/page</td><td>High upfront cost, ozone</td><td>Toner cartridge, drum unit, fuser</td></tr>
+  <tr><td>Inkjet</td><td>Liquid ink sprayed</td><td>Photo quality, low upfront cost</td><td>Slow, ink dries out, high cost/page</td><td>Ink cartridges (CMYK)</td></tr>
+  <tr><td>Thermal</td><td>Heat-sensitive paper</td><td>No ink/toner, quiet, fast</td><td>Fades over time, special paper</td><td>Thermal paper rolls</td></tr>
+  <tr><td>Impact/Dot Matrix</td><td>Pins strike ribbon</td><td>Multi-part forms, durable</td><td>Noisy, low quality</td><td>Ribbon cartridge</td></tr>
+  <tr><td>3D Printer</td><td>FDM/SLA/SLS</td><td>Creates 3D objects</td><td>Slow, expensive materials</td><td>Filament (PLA/ABS) or resin</td></tr>
+</table>
+
+<h4>Laser Printer Process (in order):</h4>
+<ol>
+  <li><strong>Processing:</strong> RIP (Raster Image Processor) converts data to bitmap</li>
+  <li><strong>Charging:</strong> Primary corona wire/charge roller applies uniform negative charge to drum</li>
+  <li><strong>Exposing:</strong> Laser beam neutralizes charge in image areas on drum</li>
+  <li><strong>Developing:</strong> Toner (negatively charged) attracted to neutralized (positive) areas on drum</li>
+  <li><strong>Transferring:</strong> Transfer corona wire/belt transfers toner from drum to paper</li>
+  <li><strong>Fusing:</strong> Fuser assembly (heat + pressure) melts toner permanently onto paper</li>
+  <li><strong>Cleaning:</strong> Cleaning blade removes residual toner from drum</li>
+</ol>
+
+<div class="memory-aid">
+  <strong>Laser printer steps mnemonic:</strong> "Please Create Every Document Through Fusing Carefully" — Processing, Charging, Exposing, Developing, Transferring, Fusing, Cleaning
+</div>
+
+<!-- DOMAIN 4: VIRTUALIZATION & CLOUD -->
+<h2 id="virtualization-cloud">4. Virtualization &amp; Cloud Computing</h2>
+
+<h3>4.1 Virtualization Concepts</h3>
+<ul>
+  <li><strong>Hypervisor Type 1 (bare-metal):</strong> Runs directly on hardware; no host OS; VMware ESXi, Microsoft Hyper-V, Xen, KVM</li>
+  <li><strong>Hypervisor Type 2 (hosted):</strong> Runs on top of host OS; VMware Workstation, VirtualBox, Parallels</li>
+  <li><strong>VM (Virtual Machine):</strong> Complete virtualized computer with virtual CPU, RAM, storage, NIC</li>
+  <li><strong>Snapshot:</strong> Point-in-time copy of VM state; allows rollback; not a backup</li>
+  <li><strong>Template:</strong> Master VM image for rapid deployment of identical VMs</li>
+  <li><strong>vCPU:</strong> Virtual CPU; mapped to physical CPU cores/threads</li>
+  <li><strong>vRAM:</strong> Virtual RAM; allocated from host physical RAM</li>
+  <li><strong>Virtual NIC:</strong> Emulated network adapter; connects to virtual switch</li>
+  <li><strong>Virtual switch:</strong> Software switch connecting VMs to each other and physical network</li>
+  <li><strong>Resource pooling:</strong> Multiple VMs share physical resources dynamically</li>
+  <li><strong>Live migration:</strong> Move running VM between hosts without downtime (vMotion, Live Migration)</li>
+</ul>
+
+<h3>4.2 Cloud Service Models</h3>
+<table>
+  <tr><th>Model</th><th>Full Name</th><th>Customer Manages</th><th>Examples</th></tr>
+  <tr><td>IaaS</td><td>Infrastructure as a Service</td><td>OS, apps, data, runtime</td><td>AWS EC2, Azure VMs, GCP Compute Engine</td></tr>
+  <tr><td>PaaS</td><td>Platform as a Service</td><td>Apps and data only</td><td>AWS Elastic Beanstalk, Azure App Service, Heroku</td></tr>
+  <tr><td>SaaS</td><td>Software as a Service</td><td>Data and user settings only</td><td>Microsoft 365, Google Workspace, Salesforce</td></tr>
+</table>
+
+<h3>4.3 Cloud Deployment Models</h3>
+<ul>
+  <li><strong>Public cloud:</strong> Shared infrastructure; owned by provider (AWS, Azure, GCP); pay-per-use</li>
+  <li><strong>Private cloud:</strong> Dedicated infrastructure; owned/operated by organization; on-premises or hosted</li>
+  <li><strong>Hybrid cloud:</strong> Combination of public and private; data/apps can move between them</li>
+  <li><strong>Community cloud:</strong> Shared by organizations with common interests (government, healthcare)</li>
+</ul>
+
+<h3>4.4 Cloud Characteristics (NIST Definition)</h3>
+<ul>
+  <li><strong>On-demand self-service:</strong> Provision resources without human interaction with provider</li>
+  <li><strong>Broad network access:</strong> Available over network via standard mechanisms</li>
+  <li><strong>Resource pooling:</strong> Provider resources pooled to serve multiple consumers</li>
+  <li><strong>Rapid elasticity:</strong> Scale up/down quickly; appears unlimited to consumer</li>
+  <li><strong>Measured service:</strong> Usage monitored, controlled, reported; pay for what you use</li>
+</ul>
+
+<!-- DOMAIN 5: HARDWARE & NETWORK TROUBLESHOOTING -->
+<h2 id="hardware-network-troubleshooting">5. Hardware &amp; Network Troubleshooting</h2>
+
+<h3>5.1 Troubleshooting Methodology (CompTIA 7-Step)</h3>
+<ol>
+  <li><strong>Identify the problem:</strong> Gather information, question users, identify symptoms, duplicate if possible, check recent changes</li>
+  <li><strong>Establish a theory of probable cause:</strong> Consider obvious causes first; question the obvious</li>
+  <li><strong>Test the theory:</strong> Confirm or deny theory; if confirmed, determine next steps; if not confirmed, establish new theory</li>
+  <li><strong>Establish a plan of action:</strong> Resolve the problem; identify potential effects</li>
+  <li><strong>Implement the solution:</strong> Apply fix; escalate if necessary</li>
+  <li><strong>Verify full system functionality:</strong> Confirm fix works; implement preventive measures</li>
+  <li><strong>Document findings:</strong> Record problem, cause, solution, and outcome</li>
+</ol>
+
+<h3>5.2 POST Codes &amp; BIOS/UEFI</h3>
+<ul>
+  <li><strong>POST:</strong> Power-On Self-Test; hardware check during boot; beep codes indicate failures</li>
+  <li><strong>BIOS:</strong> Basic Input/Output System; legacy firmware; MBR partition table; 16-bit; 1MB limit</li>
+  <li><strong>UEFI:</strong> Unified Extensible Firmware Interface; modern replacement; GPT partition table; 64-bit; Secure Boot</li>
+  <li><strong>Secure Boot:</strong> UEFI feature; verifies bootloader signature; prevents rootkits/bootkits</li>
+  <li><strong>TPM:</strong> Trusted Platform Module; hardware security chip; stores encryption keys; required for Windows 11</li>
+  <li><strong>CMOS battery:</strong> CR2032 coin cell; maintains BIOS settings and clock when powered off; replace if settings reset</li>
+  <li><strong>Common beep codes (AMI BIOS):</strong> 1 beep = POST OK; 3 beeps = RAM error; 5 beeps = CPU error; 8 beeps = GPU error</li>
+</ul>
+
+<h3>5.3 Common Hardware Problems &amp; Solutions</h3>
+<table>
+  <tr><th>Symptom</th><th>Likely Cause</th><th>Solution</th></tr>
+  <tr><td>No POST, no beeps, no display</td><td>PSU failure, dead motherboard, unseated CPU</td><td>Test PSU, reseat components, check power connections</td></tr>
+  <tr><td>Continuous beeping</td><td>RAM failure or not seated</td><td>Reseat RAM; test individual sticks; replace if faulty</td></tr>
+  <tr><td>System overheating/shutting down</td><td>Clogged heatsink, dried thermal paste, failed fan</td><td>Clean heatsink, replace thermal paste, replace fan</td></tr>
+  <tr><td>Blue Screen of Death (BSOD)</td><td>Driver issue, RAM error, hardware failure</td><td>Check event logs, run memtest, update/rollback drivers</td></tr>
+  <tr><td>Hard drive clicking</td><td>Mechanical HDD failure (head crash)</td><td>Backup immediately; replace drive</td></tr>
+  <tr><td>Slow performance</td><td>Malware, full HDD, insufficient RAM, overheating</td><td>Scan for malware, free disk space, add RAM, clean cooling</td></tr>
+  <tr><td>No display (POST OK)</td><td>Bad cable, wrong input, GPU failure</td><td>Check cable/input, test with different monitor/GPU</td></tr>
+  <tr><td>Capacitor bulge on motherboard</td><td>Failed capacitors (electrolytic)</td><td>Replace motherboard</td></tr>
+</table>
+
+<h3>5.4 Network Troubleshooting Tools</h3>
+<table>
+  <tr><th>Tool</th><th>Purpose</th><th>Example</th></tr>
+  <tr><td>ping</td><td>Test connectivity; ICMP echo request/reply</td><td><code>ping 8.8.8.8</code></td></tr>
+  <tr><td>tracert/traceroute</td><td>Trace packet path; show each hop</td><td><code>tracert google.com</code></td></tr>
+  <tr><td>ipconfig</td><td>Show/release/renew IP configuration (Windows)</td><td><code>ipconfig /all</code></td></tr>
+  <tr><td>ifconfig</td><td>Show/configure network interfaces (Linux/macOS)</td><td><code>ifconfig eth0</code></td></tr>
+  <tr><td>nslookup</td><td>DNS query tool; resolve hostnames</td><td><code>nslookup google.com</code></td></tr>
+  <tr><td>netstat</td><td>Show active connections, listening ports</td><td><code>netstat -an</code></td></tr>
+  <tr><td>arp</td><td>View/modify ARP cache; IP-to-MAC mapping</td><td><code>arp -a</code></td></tr>
+  <tr><td>net</td><td>Windows network commands; shares, users, services</td><td><code>net use</code>, <code>net view</code></td></tr>
+  <tr><td>Cable tester</td><td>Verify cable continuity and wiring</td><td>Test all 8 wires in RJ-45</td></tr>
+  <tr><td>Loopback plug</td><td>Test NIC without network connection</td><td>Plug into NIC port</td></tr>
+  <tr><td>Wi-Fi analyzer</td><td>Scan wireless channels, signal strength</td><td>inSSIDer, NetSpot</td></tr>
+  <tr><td>Toner probe</td><td>Trace cable runs through walls</td><td>Tone generator + probe</td></tr>
+</table>
+
+<!-- ==================== CORE 2 ==================== -->
+<h2 id="core2">Core 2 (220-1102) — Software, Security &amp; Operations</h2>
+<p><span class="domain-badge">31% Operating Systems</span> <span class="domain-badge">25% Security</span> <span class="domain-badge">22% Software Troubleshooting</span> <span class="domain-badge">22% Operational Procedures</span></p>
+
+<!-- DOMAIN 6: OPERATING SYSTEMS -->
+<h2 id="operating-systems">6. Operating Systems</h2>
+
+<h3>6.1 Windows Versions</h3>
+<table>
+  <tr><th>Version</th><th>Release</th><th>Key Features</th><th>Support Status</th></tr>
+  <tr><td>Windows 10</td><td>2015</td><td>Start menu return, Edge browser, WSL, virtual desktops</td><td>EOL Oct 2025</td></tr>
+  <tr><td>Windows 11</td><td>2021</td><td>Redesigned UI, TPM 2.0 required, Android app support, Teams integration</td><td>Current</td></tr>
+  <tr><td>Windows Server 2019</td><td>2018</td><td>Hyper-V, Storage Spaces Direct, Windows Admin Center</td><td>Mainstream support ends 2024</td></tr>
+  <tr><td>Windows Server 2022</td><td>2021</td><td>Secured-core server, Azure hybrid integration</td><td>Current</td></tr>
+</table>
+
+<h3>6.2 Windows File Systems</h3>
+<table>
+  <tr><th>File System</th><th>Max Volume</th><th>Max File Size</th><th>Features</th></tr>
+  <tr><td>FAT32</td><td>32 GB (Windows format) / 2 TB</td><td>4 GB</td><td>Universal compatibility; no permissions; USB drives</td></tr>
+  <tr><td>exFAT</td><td>128 PB</td><td>16 EB</td><td>Flash drives; large files; cross-platform</td></tr>
+  <tr><td>NTFS</td><td>256 TB</td><td>16 TB</td><td>Permissions, encryption (EFS), compression, journaling, quotas</td></tr>
+  <tr><td>ReFS</td><td>35 PB</td><td>35 PB</td><td>Resilient; checksums; auto-repair; Server/Storage Spaces</td></tr>
+</table>
+
+<h3>6.3 Windows Administrative Tools</h3>
+<table>
+  <tr><th>Tool</th><th>Purpose</th><th>Access</th></tr>
+  <tr><td>Task Manager</td><td>Processes, performance, startup, users</td><td>Ctrl+Shift+Esc or right-click taskbar</td></tr>
+  <tr><td>Device Manager</td><td>Hardware drivers; enable/disable/update</td><td>devmgmt.msc</td></tr>
+  <tr><td>Disk Management</td><td>Partition, format, assign drive letters</td><td>diskmgmt.msc</td></tr>
+  <tr><td>Event Viewer</td><td>System, application, security logs</td><td>eventvwr.msc</td></tr>
+  <tr><td>Registry Editor</td><td>Edit Windows registry</td><td>regedit</td></tr>
+  <tr><td>Group Policy Editor</td><td>Configure policies (Pro/Enterprise)</td><td>gpedit.msc</td></tr>
+  <tr><td>Services</td><td>Start/stop/configure Windows services</td><td>services.msc</td></tr>
+  <tr><td>Computer Management</td><td>Combined admin console</td><td>compmgmt.msc</td></tr>
+  <tr><td>System Configuration</td><td>Boot options, startup programs</td><td>msconfig</td></tr>
+  <tr><td>Resource Monitor</td><td>Detailed CPU/RAM/disk/network usage</td><td>resmon</td></tr>
+  <tr><td>Performance Monitor</td><td>Performance counters and data collector sets</td><td>perfmon</td></tr>
+  <tr><td>Local Users and Groups</td><td>Manage local accounts and groups</td><td>lusrmgr.msc</td></tr>
+</table>
+
+<h3>6.4 Windows Registry</h3>
+<ul>
+  <li><strong>HKEY_LOCAL_MACHINE (HKLM):</strong> System-wide settings; hardware, software, security</li>
+  <li><strong>HKEY_CURRENT_USER (HKCU):</strong> Settings for currently logged-in user</li>
+  <li><strong>HKEY_USERS (HKU):</strong> All user profiles on system</li>
+  <li><strong>HKEY_CLASSES_ROOT (HKCR):</strong> File associations and COM objects</li>
+  <li><strong>HKEY_CURRENT_CONFIG (HKCC):</strong> Current hardware profile</li>
+  <li><strong>Run keys:</strong> HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Run — programs that start with Windows</li>
+</ul>
+
+<h3>6.5 macOS Features</h3>
+<ul>
+  <li><strong>Finder:</strong> File manager; equivalent to Windows Explorer</li>
+  <li><strong>Spotlight:</strong> System-wide search; Cmd+Space</li>
+  <li><strong>Time Machine:</strong> Automatic backup to external drive or NAS</li>
+  <li><strong>FileVault:</strong> Full-disk encryption; XTS-AES-128</li>
+  <li><strong>Gatekeeper:</strong> Controls which apps can run; App Store, identified developers, or anywhere</li>
+  <li><strong>Terminal:</strong> Command-line interface; bash or zsh</li>
+  <li><strong>Activity Monitor:</strong> Task Manager equivalent</li>
+  <li><strong>Disk Utility:</strong> Disk management; format, partition, repair</li>
+  <li><strong>System Preferences/Settings:</strong> Control Panel equivalent</li>
+  <li><strong>iCloud:</strong> Cloud sync for files, photos, contacts, calendar</li>
+  <li><strong>Homebrew:</strong> Package manager for macOS (third-party)</li>
+</ul>
+
+<h3>6.6 Linux Basics</h3>
+<ul>
+  <li><strong>Distributions:</strong> Ubuntu (Debian-based), CentOS/RHEL (RPM-based), Fedora, Debian, Kali Linux</li>
+  <li><strong>Package managers:</strong> apt (Debian/Ubuntu), yum/dnf (RHEL/CentOS/Fedora), pacman (Arch)</li>
+  <li><strong>File system:</strong> / (root), /home (users), /etc (config), /var (variable data), /tmp (temporary), /usr (programs)</li>
+  <li><strong>Permissions:</strong> rwx for owner, group, others; chmod, chown, chgrp</li>
+  <li><strong>sudo:</strong> Execute commands as superuser</li>
+  <li><strong>Shell:</strong> bash (default most distros), zsh (macOS default), sh (POSIX)</li>
+</ul>
+
+<!-- DOMAIN 7: SECURITY -->
+<h2 id="security">7. Security</h2>
+
+<h3>7.1 Security Threats</h3>
+<table>
+  <tr><th>Threat Type</th><th>Description</th><th>Prevention</th></tr>
+  <tr><td>Virus</td><td>Self-replicating code; attaches to files; requires user action to spread</td><td>Antivirus, user education</td></tr>
+  <tr><td>Worm</td><td>Self-replicating; spreads automatically over network without user action</td><td>Firewall, patch management</td></tr>
+  <tr><td>Trojan</td><td>Disguised as legitimate software; creates backdoor</td><td>Antivirus, download from trusted sources</td></tr>
+  <tr><td>Ransomware</td><td>Encrypts files; demands payment for decryption key</td><td>Backups, email filtering, user training</td></tr>
+  <tr><td>Spyware</td><td>Secretly monitors user activity; keyloggers, screen capture</td><td>Antispyware, browser security</td></tr>
+  <tr><td>Adware</td><td>Displays unwanted advertisements; often bundled with free software</td><td>Antimalware, careful downloads</td></tr>
+  <tr><td>Rootkit</td><td>Hides malware presence; modifies OS; very difficult to detect/remove</td><td>Secure Boot, rootkit scanners, OS reinstall</td></tr>
+  <tr><td>Botnet</td><td>Network of infected computers controlled by attacker (C&amp;C server)</td><td>Antivirus, firewall, patch management</td></tr>
+  <tr><td>Keylogger</td><td>Records keystrokes; captures passwords and sensitive data</td><td>Antimalware, virtual keyboards, MFA</td></tr>
+  <tr><td>Cryptominer</td><td>Uses victim's CPU/GPU to mine cryptocurrency</td><td>Antimalware, monitor CPU usage</td></tr>
+</table>
+
+<h3>7.2 Social Engineering Attacks</h3>
+<table>
+  <tr><th>Attack</th><th>Description</th><th>Example</th></tr>
+  <tr><td>Phishing</td><td>Fraudulent email mimicking legitimate source; steal credentials</td><td>Fake bank email with malicious link</td></tr>
+  <tr><td>Spear phishing</td><td>Targeted phishing; personalized to specific individual/organization</td><td>Email appearing to be from CEO</td></tr>
+  <tr><td>Whaling</td><td>Spear phishing targeting executives (C-level)</td><td>Fake legal notice to CFO</td></tr>
+  <tr><td>Vishing</td><td>Voice phishing; phone calls to extract information</td><td>Fake IT support call</td></tr>
+  <tr><td>Smishing</td><td>SMS phishing; malicious text messages</td><td>Fake package delivery text with link</td></tr>
+  <tr><td>Tailgating/Piggybacking</td><td>Following authorized person through secure door</td><td>Walking in behind badge holder</td></tr>
+  <tr><td>Shoulder surfing</td><td>Observing someone entering credentials</td><td>Looking over shoulder at ATM</td></tr>
+  <tr><td>Dumpster diving</td><td>Searching trash for sensitive information</td><td>Finding discarded documents with passwords</td></tr>
+  <tr><td>Impersonation</td><td>Pretending to be someone else (IT support, vendor)</td><td>Calling as "IT department" to get password</td></tr>
+  <tr><td>Pretexting</td><td>Creating fabricated scenario to extract information</td><td>Claiming to be auditor needing access</td></tr>
+</table>
+
+<h3>7.3 Security Best Practices</h3>
+<ul>
+  <li><strong>Principle of least privilege:</strong> Grant minimum permissions needed to perform job function</li>
+  <li><strong>MFA (Multi-Factor Authentication):</strong> Something you know + something you have + something you are</li>
+  <li><strong>Strong passwords:</strong> 12+ characters; uppercase, lowercase, numbers, symbols; no dictionary words</li>
+  <li><strong>Password manager:</strong> Securely store unique passwords for each account</li>
+  <li><strong>Account lockout:</strong> Lock account after N failed login attempts; prevents brute force</li>
+  <li><strong>Screen lock:</strong> Auto-lock after inactivity; require password to unlock</li>
+  <li><strong>Encryption:</strong> BitLocker (Windows), FileVault (macOS), LUKS (Linux) for full-disk encryption</li>
+  <li><strong>Patch management:</strong> Keep OS and applications updated; close known vulnerabilities</li>
+  <li><strong>Antivirus/EDR:</strong> Real-time protection; scheduled scans; keep definitions updated</li>
+  <li><strong>Firewall:</strong> Block unauthorized inbound/outbound connections</li>
+  <li><strong>VPN:</strong> Encrypt traffic on untrusted networks (public Wi-Fi)</li>
+  <li><strong>Data destruction:</strong> Shred documents; wipe drives (DoD 5220.22-M, Gutmann); degauss magnetic media; physically destroy SSDs</li>
+</ul>
+
+<h3>7.4 Windows Security Features</h3>
+<ul>
+  <li><strong>Windows Defender:</strong> Built-in antivirus/antimalware; real-time protection</li>
+  <li><strong>Windows Firewall:</strong> Built-in host-based firewall; inbound/outbound rules</li>
+  <li><strong>BitLocker:</strong> Full-disk encryption; requires TPM; recovery key backup essential</li>
+  <li><strong>EFS (Encrypting File System):</strong> File/folder level encryption; NTFS only; tied to user account</li>
+  <li><strong>UAC (User Account Control):</strong> Prompts for elevation when admin rights needed; prevents silent installs</li>
+  <li><strong>Windows Hello:</strong> Biometric authentication; fingerprint, face recognition, PIN</li>
+  <li><strong>Secure Boot:</strong> UEFI feature; verifies bootloader; prevents boot-level malware</li>
+  <li><strong>Windows Sandbox:</strong> Isolated desktop environment; test suspicious software safely</li>
+</ul>
+
+<!-- DOMAIN 8: SOFTWARE TROUBLESHOOTING -->
+<h2 id="software-troubleshooting">8. Software Troubleshooting</h2>
+
+<h3>8.1 Windows Troubleshooting Tools</h3>
+<table>
+  <tr><th>Tool</th><th>Purpose</th><th>Usage</th></tr>
+  <tr><td>sfc /scannow</td><td>System File Checker; repairs corrupted Windows files</td><td>Run as admin in CMD</td></tr>
+  <tr><td>DISM</td><td>Deployment Image Servicing; repair Windows image</td><td><code>DISM /Online /Cleanup-Image /RestoreHealth</code></td></tr>
+  <tr><td>chkdsk</td><td>Check disk for errors; repair file system</td><td><code>chkdsk C: /f /r</code></td></tr>
+  <tr><td>diskpart</td><td>Disk partitioning utility; command-line</td><td>list disk, select disk, clean, create partition</td></tr>
+  <tr><td>msconfig</td><td>System Configuration; boot options, safe mode, startup</td><td>Run → msconfig</td></tr>
+  <tr><td>Task Manager</td><td>Kill processes, check startup impact, performance</td><td>Ctrl+Shift+Esc</td></tr>
+  <tr><td>Event Viewer</td><td>System/application/security event logs</td><td>eventvwr.msc</td></tr>
+  <tr><td>Safe Mode</td><td>Boot with minimal drivers; troubleshoot driver issues</td><td>F8 or msconfig → Boot → Safe boot</td></tr>
+  <tr><td>System Restore</td><td>Roll back system to previous restore point</td><td>rstrui.exe</td></tr>
+  <tr><td>Windows Recovery Environment (WinRE)</td><td>Repair startup, restore, reset</td><td>Boot from USB or Shift+Restart</td></tr>
+</table>
+
+<h3>8.2 Common Windows Errors</h3>
+<ul>
+  <li><strong>BSOD (Blue Screen of Death):</strong> Stop error; hardware/driver failure; note stop code (e.g., IRQL_NOT_LESS_OR_EQUAL, PAGE_FAULT_IN_NONPAGED_AREA)</li>
+  <li><strong>Boot failure:</strong> "BOOTMGR is missing" — repair with Windows installation media; bootrec /fixmbr, /fixboot, /rebuildbcd</li>
+  <li><strong>Application crash:</strong> Check Event Viewer Application log; update or reinstall application</li>
+  <li><strong>Slow performance:</strong> Check Task Manager for high CPU/RAM/disk usage; scan for malware; check startup programs</li>
+  <li><strong>Missing DLL:</strong> Reinstall application; run sfc /scannow; download from trusted source</li>
+  <li><strong>Profile corruption:</strong> Create new user profile; copy data; delete old profile</li>
+</ul>
+
+<!-- DOMAIN 9: OPERATIONAL PROCEDURES -->
+<h2 id="operational-procedures">9. Operational Procedures</h2>
+
+<h3>9.1 Documentation &amp; Change Management</h3>
+<ul>
+  <li><strong>Network diagram:</strong> Visual map of network topology; physical and logical</li>
+  <li><strong>Asset inventory:</strong> Hardware/software inventory; serial numbers, licenses, locations</li>
+  <li><strong>Knowledge base:</strong> Documented solutions to common problems</li>
+  <li><strong>Change management:</strong> Formal process for making changes; request, approval, testing, implementation, rollback plan</li>
+  <li><strong>Incident report:</strong> Document security incidents; what happened, impact, response, lessons learned</li>
+  <li><strong>SLA (Service Level Agreement):</strong> Defines expected service levels; response times, uptime guarantees</li>
+</ul>
+
+<h3>9.2 Backup Strategies</h3>
+<table>
+  <tr><th>Backup Type</th><th>What It Backs Up</th><th>Restore Time</th><th>Storage Used</th></tr>
+  <tr><td>Full</td><td>Everything</td><td>Fastest (single set)</td><td>Most</td></tr>
+  <tr><td>Incremental</td><td>Changes since last backup (any type)</td><td>Slowest (need full + all incrementals)</td><td>Least</td></tr>
+  <tr><td>Differential</td><td>Changes since last full backup</td><td>Medium (need full + latest differential)</td><td>Medium</td></tr>
+  <tr><td>Synthetic full</td><td>Combines full + incrementals into new full</td><td>Fast</td><td>Medium</td></tr>
+</table>
+
+<div class="memory-aid">
+  <strong>3-2-1 Backup Rule:</strong> Keep 3 copies of data, on 2 different media types, with 1 copy offsite. This protects against hardware failure, local disaster, and theft.
+</div>
+
+<h3>9.3 Environmental Controls</h3>
+<ul>
+  <li><strong>Temperature:</strong> Servers: 64–80°F (18–27°C); ASHRAE A1 class: 59–89.6°F</li>
+  <li><strong>Humidity:</strong> 40–60% relative humidity; too low = static; too high = condensation</li>
+  <li><strong>UPS (Uninterruptible Power Supply):</strong> Battery backup; protects against power outages and surges</li>
+  <li><strong>Surge protector:</strong> Protects against voltage spikes; MOV (Metal Oxide Varistor) absorbs surges</li>
+  <li><strong>ESD (Electrostatic Discharge):</strong> Can damage components; use anti-static wrist strap, mat, bags</li>
+  <li><strong>Fire suppression:</strong> Halon alternatives (FM-200, Novec 1230) for server rooms; water damages equipment</li>
+  <li><strong>Cable management:</strong> Organize cables; improve airflow; reduce tripping hazards</li>
+</ul>
+
+<h3>9.4 Professionalism &amp; Communication</h3>
+<ul>
+  <li>Use proper language; avoid jargon with non-technical users</li>
+  <li>Listen actively; let users finish explaining before responding</li>
+  <li>Set realistic expectations; communicate timelines</li>
+  <li>Follow up to ensure satisfaction</li>
+  <li>Maintain confidentiality; do not share user data</li>
+  <li>Respect user privacy; do not access personal files unnecessarily</li>
+  <li>Document all work performed in ticketing system</li>
+</ul>
+
+<!-- PORT TABLE -->
+<h2 id="ports-table">Port Number Reference</h2>
+<table>
+  <tr><th>Port</th><th>Protocol</th><th>Service</th><th>Notes</th></tr>
+  <tr><td>20</td><td>TCP</td><td>FTP Data</td><td>Active mode data transfer</td></tr>
+  <tr><td>21</td><td>TCP</td><td>FTP Control</td><td>Commands and authentication</td></tr>
+  <tr><td>22</td><td>TCP</td><td>SSH / SFTP</td><td>Encrypted remote access and file transfer</td></tr>
+  <tr><td>23</td><td>TCP</td><td>Telnet</td><td>Unencrypted remote access; avoid</td></tr>
+  <tr><td>25</td><td>TCP</td><td>SMTP</td><td>Send email between servers</td></tr>
+  <tr><td>53</td><td>TCP/UDP</td><td>DNS</td><td>UDP for queries; TCP for zone transfers</td></tr>
+  <tr><td>67</td><td>UDP</td><td>DHCP Server</td><td>Server listens for client requests</td></tr>
+  <tr><td>68</td><td>UDP</td><td>DHCP Client</td><td>Client receives IP configuration</td></tr>
+  <tr><td>69</td><td>UDP</td><td>TFTP</td><td>Trivial FTP; no authentication; PXE boot</td></tr>
+  <tr><td>80</td><td>TCP</td><td>HTTP</td><td>Unencrypted web traffic</td></tr>
+  <tr><td>110</td><td>TCP</td><td>POP3</td><td>Download email from server</td></tr>
+  <tr><td>123</td><td>UDP</td><td>NTP</td><td>Network time synchronization</td></tr>
+  <tr><td>137-139</td><td>TCP/UDP</td><td>NetBIOS</td><td>Legacy Windows name resolution</td></tr>
+  <tr><td>143</td><td>TCP</td><td>IMAP</td><td>Access email on server (keeps on server)</td></tr>
+  <tr><td>161</td><td>UDP</td><td>SNMP</td><td>Network device monitoring queries</td></tr>
+  <tr><td>162</td><td>UDP</td><td>SNMP Trap</td><td>Device sends alerts to management station</td></tr>
+  <tr><td>389</td><td>TCP</td><td>LDAP</td><td>Directory services; Active Directory</td></tr>
+  <tr><td>443</td><td>TCP</td><td>HTTPS</td><td>Encrypted web traffic via TLS</td></tr>
+  <tr><td>445</td><td>TCP</td><td>SMB</td><td>Windows file/printer sharing</td></tr>
+  <tr><td>636</td><td>TCP</td><td>LDAPS</td><td>LDAP over SSL/TLS</td></tr>
+  <tr><td>993</td><td>TCP</td><td>IMAPS</td><td>IMAP over SSL/TLS</td></tr>
+  <tr><td>995</td><td>TCP</td><td>POP3S</td><td>POP3 over SSL/TLS</td></tr>
+  <tr><td>3389</td><td>TCP</td><td>RDP</td><td>Windows Remote Desktop Protocol</td></tr>
+  <tr><td>5060</td><td>TCP/UDP</td><td>SIP</td><td>VoIP signaling (unencrypted)</td></tr>
+  <tr><td>5061</td><td>TCP</td><td>SIP TLS</td><td>VoIP signaling (encrypted)</td></tr>
+</table>
+
+<!-- CLI COMMANDS -->
+<h2 id="cli-commands">CLI Command Reference</h2>
+
+<h3>Windows Commands</h3>
+<table>
+  <tr><th>Command</th><th>Syntax</th><th>Description</th><th>Example</th></tr>
+  <tr><td>ipconfig</td><td>ipconfig [/all] [/release] [/renew] [/flushdns]</td><td>Display/manage IP configuration</td><td><code>ipconfig /all</code></td></tr>
+  <tr><td>ping</td><td>ping [-t] [-n count] target</td><td>Test connectivity; ICMP echo</td><td><code>ping -t 192.168.1.1</code></td></tr>
+  <tr><td>tracert</td><td>tracert target</td><td>Trace route to destination</td><td><code>tracert google.com</code></td></tr>
+  <tr><td>netstat</td><td>netstat [-a] [-n] [-o] [-b]</td><td>Network connections and statistics</td><td><code>netstat -ano</code></td></tr>
+  <tr><td>nslookup</td><td>nslookup [hostname] [server]</td><td>DNS query tool</td><td><code>nslookup google.com 8.8.8.8</code></td></tr>
+  <tr><td>arp</td><td>arp [-a] [-d] [-s]</td><td>ARP cache management</td><td><code>arp -a</code></td></tr>
+  <tr><td>net</td><td>net [use/view/user/share/start/stop]</td><td>Network and service management</td><td><code>net use Z: \\server\share</code></td></tr>
+  <tr><td>sfc</td><td>sfc /scannow</td><td>System File Checker; repair Windows files</td><td><code>sfc /scannow</code></td></tr>
+  <tr><td>chkdsk</td><td>chkdsk [drive:] [/f] [/r]</td><td>Check and repair disk errors</td><td><code>chkdsk C: /f /r</code></td></tr>
+  <tr><td>diskpart</td><td>diskpart (interactive)</td><td>Disk partitioning</td><td>list disk → select disk 0 → clean</td></tr>
+  <tr><td>format</td><td>format [drive:] [/fs:filesystem]</td><td>Format a drive</td><td><code>format D: /fs:NTFS</code></td></tr>
+  <tr><td>xcopy</td><td>xcopy source dest [/s] [/e] [/h]</td><td>Copy files and directories</td><td><code>xcopy C:\data D:\backup /s /e</code></td></tr>
+  <tr><td>robocopy</td><td>robocopy source dest [/mir] [/z]</td><td>Robust file copy; mirror directories</td><td><code>robocopy C:\data D:\backup /mir</code></td></tr>
+  <tr><td>shutdown</td><td>shutdown [/s] [/r] [/t seconds]</td><td>Shutdown or restart system</td><td><code>shutdown /r /t 0</code></td></tr>
+  <tr><td>tasklist</td><td>tasklist [/fi filter]</td><td>List running processes</td><td><code>tasklist /fi "imagename eq chrome.exe"</code></td></tr>
+  <tr><td>taskkill</td><td>taskkill /pid PID [/f]</td><td>Kill a process</td><td><code>taskkill /pid 1234 /f</code></td></tr>
+  <tr><td>gpupdate</td><td>gpupdate [/force]</td><td>Refresh Group Policy</td><td><code>gpupdate /force</code></td></tr>
+  <tr><td>gpresult</td><td>gpresult [/r] [/h file]</td><td>Display applied Group Policy</td><td><code>gpresult /r</code></td></tr>
+  <tr><td>bootrec</td><td>bootrec [/fixmbr] [/fixboot] [/rebuildbcd]</td><td>Repair boot configuration</td><td><code>bootrec /rebuildbcd</code></td></tr>
+  <tr><td>DISM</td><td>DISM /Online /Cleanup-Image /RestoreHealth</td><td>Repair Windows image</td><td>Run as admin</td></tr>
+  <tr><td>winver</td><td>winver</td><td>Display Windows version</td><td>Run → winver</td></tr>
+  <tr><td>msinfo32</td><td>msinfo32</td><td>System information</td><td>Run → msinfo32</td></tr>
+</table>
+
+<!-- ACRONYM GLOSSARY -->
+<h2 id="acronym-glossary">Acronym Glossary</h2>
+<dl>
+  <dt>ACL</dt><dd>Access Control List — rules defining who can access what resources</dd>
+  <dt>ACPI</dt><dd>Advanced Configuration and Power Interface — power management standard</dd>
+  <dt>AES</dt><dd>Advanced Encryption Standard — symmetric encryption algorithm (128/192/256-bit)</dd>
+  <dt>APIPA</dt><dd>Automatic Private IP Addressing — 169.254.x.x self-assigned when DHCP fails</dd>
+  <dt>ARP</dt><dd>Address Resolution Protocol — maps IP addresses to MAC addresses</dd>
+  <dt>ATX</dt><dd>Advanced Technology eXtended — standard motherboard/PSU form factor</dd>
+  <dt>BIOS</dt><dd>Basic Input/Output System — legacy firmware; initializes hardware at boot</dd>
+  <dt>BSOD</dt><dd>Blue Screen of Death — Windows stop error; critical system failure</dd>
+  <dt>BYOD</dt><dd>Bring Your Own Device — policy allowing personal devices for work</dd>
+  <dt>CCFL</dt><dd>Cold Cathode Fluorescent Lamp — older LCD backlight technology</dd>
+  <dt>CIDR</dt><dd>Classless Inter-Domain Routing — IP addressing notation (e.g., /24)</dd>
+  <dt>CMOS</dt><dd>Complementary Metal-Oxide Semiconductor — stores BIOS settings; battery-backed</dd>
+  <dt>CPU</dt><dd>Central Processing Unit — main processor; executes instructions</dd>
+  <dt>DDR</dt><dd>Double Data Rate — RAM type; transfers data on both clock edges</dd>
+  <dt>DHCP</dt><dd>Dynamic Host Configuration Protocol — auto-assigns IP configuration</dd>
+  <dt>DIMM</dt><dd>Dual Inline Memory Module — desktop RAM form factor</dd>
+  <dt>DNS</dt><dd>Domain Name System — resolves hostnames to IP addresses</dd>
+  <dt>EFS</dt><dd>Encrypting File System — NTFS file/folder encryption feature</dd>
+  <dt>ESD</dt><dd>Electrostatic Discharge — static electricity that can damage components</dd>
+  <dt>FTP</dt><dd>File Transfer Protocol — transfers files between systems (ports 20/21)</dd>
+  <dt>GPU</dt><dd>Graphics Processing Unit — dedicated processor for rendering graphics</dd>
+  <dt>HDD</dt><dd>Hard Disk Drive — magnetic spinning storage device</dd>
+  <dt>HTTP</dt><dd>HyperText Transfer Protocol — web communication protocol (port 80)</dd>
+  <dt>HTTPS</dt><dd>HTTP Secure — HTTP encrypted with TLS (port 443)</dd>
+  <dt>IaaS</dt><dd>Infrastructure as a Service — cloud model; customer manages OS and above</dd>
+  <dt>IMAP</dt><dd>Internet Message Access Protocol — email retrieval; keeps mail on server (port 143)</dd>
+  <dt>IoT</dt><dd>Internet of Things — network-connected physical devices</dd>
+  <dt>IP</dt><dd>Internet Protocol — network layer protocol; addressing and routing</dd>
+  <dt>LDAP</dt><dd>Lightweight Directory Access Protocol — directory services protocol (port 389)</dd>
+  <dt>LGA</dt><dd>Land Grid Array — CPU socket type with pins on motherboard</dd>
+  <dt>MAC</dt><dd>Media Access Control — unique hardware address of network interface</dd>
+  <dt>MDM</dt><dd>Mobile Device Management — enterprise management of mobile devices</dd>
+  <dt>MFA</dt><dd>Multi-Factor Authentication — two or more authentication factors</dd>
+  <dt>MTBF</dt><dd>Mean Time Between Failures — average time between hardware failures</dd>
+  <dt>MTTR</dt><dd>Mean Time To Repair — average time to restore after failure</dd>
+  <dt>NAT</dt><dd>Network Address Translation — maps private IPs to public IP</dd>
+  <dt>NFC</dt><dd>Near Field Communication — short-range wireless (13.56 MHz, &lt;4cm)</dd>
+  <dt>NIC</dt><dd>Network Interface Card — hardware for network connectivity</dd>
+  <dt>NTFS</dt><dd>New Technology File System — Windows file system with permissions and encryption</dd>
+  <dt>NTP</dt><dd>Network Time Protocol — synchronizes clocks over network (port 123)</dd>
+  <dt>NVMe</dt><dd>Non-Volatile Memory Express — fast SSD interface over PCIe</dd>
+  <dt>OS</dt><dd>Operating System — software managing hardware and providing user interface</dd>
+  <dt>PaaS</dt><dd>Platform as a Service — cloud model; customer manages apps and data only</dd>
+  <dt>PCIe</dt><dd>Peripheral Component Interconnect Express — high-speed expansion bus</dd>
+  <dt>PGA</dt><dd>Pin Grid Array — CPU socket type with pins on CPU</dd>
+  <dt>PoE</dt><dd>Power over Ethernet — delivers electrical power via network cable</dd>
+  <dt>POP3</dt><dd>Post Office Protocol v3 — downloads email from server (port 110)</dd>
+  <dt>POST</dt><dd>Power-On Self-Test — hardware check performed at boot</dd>
+  <dt>PSU</dt><dd>Power Supply Unit — converts AC to DC power for components</dd>
+  <dt>RAID</dt><dd>Redundant Array of Independent Disks — combines drives for performance/redundancy</dd>
+  <dt>RAM</dt><dd>Random Access Memory — volatile working memory</dd>
+  <dt>RDP</dt><dd>Remote Desktop Protocol — Windows remote GUI access (port 3389)</dd>
+  <dt>RPO</dt><dd>Recovery Point Objective — maximum acceptable data loss (time)</dd>
+  <dt>RTO</dt><dd>Recovery Time Objective — maximum acceptable downtime</dd>
+  <dt>SaaS</dt><dd>Software as a Service — cloud model; customer manages data only</dd>
+  <dt>SATA</dt><dd>Serial ATA — storage interface; up to 600 MB/s</dd>
+  <dt>SMB</dt><dd>Server Message Block — Windows file/printer sharing protocol (port 445)</dd>
+  <dt>SMTP</dt><dd>Simple Mail Transfer Protocol — sends email (port 25)</dd>
+  <dt>SNMP</dt><dd>Simple Network Management Protocol — network monitoring (ports 161/162)</dd>
+  <dt>SO-DIMM</dt><dd>Small Outline DIMM — laptop RAM form factor</dd>
+  <dt>SSD</dt><dd>Solid State Drive — flash-based storage; no moving parts</dd>
+  <dt>SSH</dt><dd>Secure Shell — encrypted remote terminal access (port 22)</dd>
+  <dt>TCP</dt><dd>Transmission Control Protocol — reliable, connection-oriented transport</dd>
+  <dt>TLS</dt><dd>Transport Layer Security — cryptographic protocol for secure communications</dd>
+  <dt>TPM</dt><dd>Trusted Platform Module — hardware security chip; stores encryption keys</dd>
+  <dt>UAC</dt><dd>User Account Control — Windows elevation prompt for admin actions</dd>
+  <dt>UDP</dt><dd>User Datagram Protocol — fast, connectionless transport; no guarantee</dd>
+  <dt>UEFI</dt><dd>Unified Extensible Firmware Interface — modern BIOS replacement</dd>
+  <dt>UPS</dt><dd>Uninterruptible Power Supply — battery backup for power outages</dd>
+  <dt>URL</dt><dd>Uniform Resource Locator — web address</dd>
+  <dt>USB</dt><dd>Universal Serial Bus — standard interface for peripherals</dd>
+  <dt>VPN</dt><dd>Virtual Private Network — encrypted tunnel over public network</dd>
+  <dt>WAP</dt><dd>Wireless Access Point — extends wired network wirelessly</dd>
+  <dt>WPA2</dt><dd>Wi-Fi Protected Access 2 — wireless security standard using AES</dd>
+  <dt>WPA3</dt><dd>Wi-Fi Protected Access 3 — latest wireless security; SAE handshake</dd>
+</dl>
+
+<div class="exam-tip">
+  <strong>Final Exam Tips for A+:</strong>
+  <ul>
+    <li>Know the laser printer process in order: Processing → Charging → Exposing → Developing → Transferring → Fusing → Cleaning</li>
+    <li>APIPA (169.254.x.x) always means DHCP failure</li>
+    <li>RDP uses port 3389; SSH uses port 22; HTTPS uses port 443</li>
+    <li>DDR4 and DDR5 are NOT interchangeable — different notch positions</li>
+    <li>Type 1 hypervisors run on bare metal; Type 2 run on a host OS</li>
+    <li>The 7-step troubleshooting methodology: always document at the end</li>
+    <li>3-2-1 backup rule: 3 copies, 2 media types, 1 offsite</li>
+    <li>Secure Boot requires UEFI (not BIOS); Windows 11 requires TPM 2.0</li>
+  </ul>
+</div>
+
+</body>
+</html>

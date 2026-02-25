@@ -8,6 +8,17 @@
 
 import { IDL } from '@icp-sdk/core/candid';
 
+export const _CaffeineStorageCreateCertificateResult = IDL.Record({
+  'method' : IDL.Text,
+  'blob_hash' : IDL.Text,
+});
+export const _CaffeineStorageRefillInformation = IDL.Record({
+  'proposed_top_up_amount' : IDL.Opt(IDL.Nat),
+});
+export const _CaffeineStorageRefillResult = IDL.Record({
+  'success' : IDL.Opt(IDL.Bool),
+  'topped_up_amount' : IDL.Opt(IDL.Nat),
+});
 export const DomainId = IDL.Nat;
 export const CertificationId = IDL.Text;
 export const KeyTermId = IDL.Nat;
@@ -24,6 +35,15 @@ export const PDFProgressRecord = IDL.Record({
   'userId' : IDL.Principal,
   'certificationId' : CertificationId,
   'percentage' : IDL.Nat,
+});
+export const Time = IDL.Int;
+export const TestId = IDL.Nat;
+export const TestResult = IDL.Record({
+  'certificationId' : CertificationId,
+  'score' : IDL.Nat,
+  'totalQuestions' : IDL.Nat,
+  'timestamp' : Time,
+  'testId' : TestId,
 });
 export const UserProfile = IDL.Record({ 'name' : IDL.Text });
 export const Domain = IDL.Record({
@@ -72,17 +92,43 @@ export const Question = IDL.Record({
   'correctAnswer' : IDL.Text,
   'questionText' : IDL.Text,
 });
-export const Time = IDL.Int;
-export const TestId = IDL.Nat;
-export const TestResult = IDL.Record({
-  'certificationId' : CertificationId,
-  'score' : IDL.Nat,
-  'totalQuestions' : IDL.Nat,
-  'timestamp' : Time,
-  'testId' : TestId,
+export const ApprovalStatus = IDL.Variant({
+  'pending' : IDL.Null,
+  'approved' : IDL.Null,
+  'rejected' : IDL.Null,
+});
+export const UserApprovalInfo = IDL.Record({
+  'status' : ApprovalStatus,
+  'principal' : IDL.Principal,
 });
 
 export const idlService = IDL.Service({
+  '_caffeineStorageBlobIsLive' : IDL.Func(
+      [IDL.Vec(IDL.Nat8)],
+      [IDL.Bool],
+      ['query'],
+    ),
+  '_caffeineStorageBlobsToDelete' : IDL.Func(
+      [],
+      [IDL.Vec(IDL.Vec(IDL.Nat8))],
+      ['query'],
+    ),
+  '_caffeineStorageConfirmBlobDeletion' : IDL.Func(
+      [IDL.Vec(IDL.Vec(IDL.Nat8))],
+      [],
+      [],
+    ),
+  '_caffeineStorageCreateCertificate' : IDL.Func(
+      [IDL.Text],
+      [_CaffeineStorageCreateCertificateResult],
+      [],
+    ),
+  '_caffeineStorageRefillCashier' : IDL.Func(
+      [IDL.Opt(_CaffeineStorageRefillInformation)],
+      [_CaffeineStorageRefillResult],
+      [],
+    ),
+  '_caffeineStorageUpdateGatewayPrincipals' : IDL.Func([], [], []),
   '_initializeAccessControlWithSecret' : IDL.Func([IDL.Text], [], []),
   'addDomain' : IDL.Func(
       [IDL.Text, IDL.Text, IDL.Text, IDL.Vec(IDL.Text)],
@@ -107,6 +153,11 @@ export const idlService = IDL.Service({
   'getAllPdfProgressRecords' : IDL.Func(
       [],
       [IDL.Vec(PDFProgressRecord)],
+      ['query'],
+    ),
+  'getAllTestResultsForCertification' : IDL.Func(
+      [CertificationId],
+      [IDL.Vec(TestResult)],
       ['query'],
     ),
   'getCallerUserProfile' : IDL.Func([], [IDL.Opt(UserProfile)], ['query']),
@@ -143,8 +194,13 @@ export const idlService = IDL.Service({
       ['query'],
     ),
   'isCallerAdmin' : IDL.Func([], [IDL.Bool], ['query']),
+  'isCallerApproved' : IDL.Func([], [IDL.Bool], ['query']),
+  'listApprovals' : IDL.Func([], [IDL.Vec(UserApprovalInfo)], ['query']),
+  'overwriteTestResults' : IDL.Func([IDL.Text], [], []),
+  'requestApproval' : IDL.Func([], [], []),
   'saveCallerUserProfile' : IDL.Func([UserProfile], [], []),
   'saveOrUpdateProgress' : IDL.Func([CertificationId, IDL.Nat], [], []),
+  'setApproval' : IDL.Func([IDL.Principal, ApprovalStatus], [], []),
   'submitTestResult' : IDL.Func(
       [CertificationId, IDL.Nat, IDL.Nat],
       [TestId],
@@ -155,6 +211,17 @@ export const idlService = IDL.Service({
 export const idlInitArgs = [];
 
 export const idlFactory = ({ IDL }) => {
+  const _CaffeineStorageCreateCertificateResult = IDL.Record({
+    'method' : IDL.Text,
+    'blob_hash' : IDL.Text,
+  });
+  const _CaffeineStorageRefillInformation = IDL.Record({
+    'proposed_top_up_amount' : IDL.Opt(IDL.Nat),
+  });
+  const _CaffeineStorageRefillResult = IDL.Record({
+    'success' : IDL.Opt(IDL.Bool),
+    'topped_up_amount' : IDL.Opt(IDL.Nat),
+  });
   const DomainId = IDL.Nat;
   const CertificationId = IDL.Text;
   const KeyTermId = IDL.Nat;
@@ -171,6 +238,15 @@ export const idlFactory = ({ IDL }) => {
     'userId' : IDL.Principal,
     'certificationId' : CertificationId,
     'percentage' : IDL.Nat,
+  });
+  const Time = IDL.Int;
+  const TestId = IDL.Nat;
+  const TestResult = IDL.Record({
+    'certificationId' : CertificationId,
+    'score' : IDL.Nat,
+    'totalQuestions' : IDL.Nat,
+    'timestamp' : Time,
+    'testId' : TestId,
   });
   const UserProfile = IDL.Record({ 'name' : IDL.Text });
   const Domain = IDL.Record({
@@ -219,17 +295,43 @@ export const idlFactory = ({ IDL }) => {
     'correctAnswer' : IDL.Text,
     'questionText' : IDL.Text,
   });
-  const Time = IDL.Int;
-  const TestId = IDL.Nat;
-  const TestResult = IDL.Record({
-    'certificationId' : CertificationId,
-    'score' : IDL.Nat,
-    'totalQuestions' : IDL.Nat,
-    'timestamp' : Time,
-    'testId' : TestId,
+  const ApprovalStatus = IDL.Variant({
+    'pending' : IDL.Null,
+    'approved' : IDL.Null,
+    'rejected' : IDL.Null,
+  });
+  const UserApprovalInfo = IDL.Record({
+    'status' : ApprovalStatus,
+    'principal' : IDL.Principal,
   });
   
   return IDL.Service({
+    '_caffeineStorageBlobIsLive' : IDL.Func(
+        [IDL.Vec(IDL.Nat8)],
+        [IDL.Bool],
+        ['query'],
+      ),
+    '_caffeineStorageBlobsToDelete' : IDL.Func(
+        [],
+        [IDL.Vec(IDL.Vec(IDL.Nat8))],
+        ['query'],
+      ),
+    '_caffeineStorageConfirmBlobDeletion' : IDL.Func(
+        [IDL.Vec(IDL.Vec(IDL.Nat8))],
+        [],
+        [],
+      ),
+    '_caffeineStorageCreateCertificate' : IDL.Func(
+        [IDL.Text],
+        [_CaffeineStorageCreateCertificateResult],
+        [],
+      ),
+    '_caffeineStorageRefillCashier' : IDL.Func(
+        [IDL.Opt(_CaffeineStorageRefillInformation)],
+        [_CaffeineStorageRefillResult],
+        [],
+      ),
+    '_caffeineStorageUpdateGatewayPrincipals' : IDL.Func([], [], []),
     '_initializeAccessControlWithSecret' : IDL.Func([IDL.Text], [], []),
     'addDomain' : IDL.Func(
         [IDL.Text, IDL.Text, IDL.Text, IDL.Vec(IDL.Text)],
@@ -254,6 +356,11 @@ export const idlFactory = ({ IDL }) => {
     'getAllPdfProgressRecords' : IDL.Func(
         [],
         [IDL.Vec(PDFProgressRecord)],
+        ['query'],
+      ),
+    'getAllTestResultsForCertification' : IDL.Func(
+        [CertificationId],
+        [IDL.Vec(TestResult)],
         ['query'],
       ),
     'getCallerUserProfile' : IDL.Func([], [IDL.Opt(UserProfile)], ['query']),
@@ -290,8 +397,13 @@ export const idlFactory = ({ IDL }) => {
         ['query'],
       ),
     'isCallerAdmin' : IDL.Func([], [IDL.Bool], ['query']),
+    'isCallerApproved' : IDL.Func([], [IDL.Bool], ['query']),
+    'listApprovals' : IDL.Func([], [IDL.Vec(UserApprovalInfo)], ['query']),
+    'overwriteTestResults' : IDL.Func([IDL.Text], [], []),
+    'requestApproval' : IDL.Func([], [], []),
     'saveCallerUserProfile' : IDL.Func([UserProfile], [], []),
     'saveOrUpdateProgress' : IDL.Func([CertificationId, IDL.Nat], [], []),
+    'setApproval' : IDL.Func([IDL.Principal, ApprovalStatus], [], []),
     'submitTestResult' : IDL.Func(
         [CertificationId, IDL.Nat, IDL.Nat],
         [TestId],
